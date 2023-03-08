@@ -1,6 +1,6 @@
 /////////// IMPORTS
 ///
-import { useLocation, useNavigate, Link } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 // components
 import {
   Sidebar,
@@ -9,15 +9,25 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar"
+import { useIsRTL } from "../../hooks/useIsRTL"
+import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi"
 // helpers
 import { useTranslation } from "react-i18next"
 import { MenuItem_TP, sideBarItems } from "../../data/sidebar"
+import { useState, useEffect, useMemo } from "react"
+
+type OpenMenus_TP = {
+  [key: string]: boolean
+}
 
 export const SideBar = () => {
   /////////// CUSTOM HOOKS
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const isRTL = useIsRTL()
+  const [opened, setOpened] = useState<OpenMenus_TP>({})
+  const { collapseSidebar, collapsed } = useProSidebar()
 
   const path = location.pathname
 
@@ -37,14 +47,13 @@ export const SideBar = () => {
     }
   }
 
-  var openMenus: MenuItem_TP[] = []
-
   const findPathParentMenu = (path: string) => {
-    sideBarItems.forEach((item) => {
+    var opened: OpenMenus_TP = {}
+    sideBarItems.forEach((item: MenuItem_TP) => {
       // check if item has link
       if (item.link) {
         if (item.link === path) {
-          openMenus.push(item)
+          opened[item.id] = true
         }
       }
       // check if item has items
@@ -52,14 +61,14 @@ export const SideBar = () => {
         item.items.forEach((innerItem) => {
           if (innerItem.link) {
             if (innerItem.link === path) {
-              openMenus.push(item)
+              opened[item.id] = true
             }
           } else if (innerItem.items) {
             innerItem.items.forEach((innerInnerItem) => {
               if (innerInnerItem.link) {
                 if (innerInnerItem.link === path) {
-                  openMenus.push(item)
-                  openMenus.push(innerItem)
+                  opened[item.id] = true
+                  opened[innerItem.id] = true
                 }
               }
             })
@@ -67,18 +76,23 @@ export const SideBar = () => {
         })
       }
     })
+    return opened
   }
 
-  findPathParentMenu(path)
+  useEffect(() => {
+    setOpened(findPathParentMenu(path))
+  }, [path])
 
+  const isOpen = (id: string) => {
+    if (collapsed) return false
+    return opened[id]
+  }
   // find path parent menu
 
   const generateItem = (Item: MenuItem_TP) => {
     return Item.items ? (
       <SubMenu
-        // TODO: defaultOpen
-        // defaultOpen={}
-        defaultOpen={openMenus.includes(Item)}
+        defaultOpen={isOpen(Item.id)}
         className={
           location.pathname === Item.link
             ? "bg-mainGreen font-bold text-white"
@@ -104,7 +118,6 @@ export const SideBar = () => {
         icon={<Item.icon size={20} />}
         active={location.pathname === Item.link}
       >
-        {/* <Link to={Item.link!}>{t(Item.label)}</Link> */}
         {t(Item.label)}
       </MenuItem>
     )
@@ -112,12 +125,24 @@ export const SideBar = () => {
 
   ///
   return (
-    <Sidebar rtl className="sidebar">
-      <Menu className=" ">
+    <Sidebar
+      rtl={isRTL}
+      className="col-start-1 col-end-2 row-start-2 row-end-3"
+      transitionDuration={0}
+      onMouseEnter={(e) => {
+        e.preventDefault()
+        collapseSidebar(false)
+      }}
+      onMouseLeave={(e) => {
+        e.preventDefault()
+        collapseSidebar(true)
+      }}
+    >
+      <Menu>
         {sideBarItems.map((Item) =>
           Item.items ? (
             <SubMenu
-              defaultOpen={openMenus.includes(Item)}
+              defaultOpen={isOpen(Item.id)}
               className={
                 location.pathname === Item.link
                   ? "bg-LightGreen font-bold text-mainOrange"

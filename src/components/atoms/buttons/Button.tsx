@@ -17,6 +17,23 @@ type ButtonProps_TP = {
 }
 /// version === 'primary' | 'blank'
 /// version === 'primary' | 'blank'
+
+type Styles_TP = {
+  [key: string]: string
+}
+
+const BASE_STYLE: string =
+  "relative active:top-[1px] py-2 px-8 font-bold rounded-md"
+
+const STYLES: Styles_TP = {
+  primary: BASE_STYLE + " bg-mainGreen text-white",
+  system:
+    BASE_STYLE +
+    " w-full bg-white border border-lightBlack !text-lightBlack flex items-center justify-center gap-2",
+  bordered: BASE_STYLE + " bg-white text-mainGreen border-2 border-mainGreen",
+  disabled: BASE_STYLE + " bg-lightGreen active:top-0 cursor-not-allowed",
+}
+
 export const Button = ({
   version = "primary",
   type = "button",
@@ -29,24 +46,8 @@ export const Button = ({
   /////////// VARIABLES
   ///
 
-  let styling = "relative active:top-[1px] py-2 px-8 font-bold rounded-md"
-  let plusStyling
-  if (version === "primary") {
-    plusStyling = "bg-mainGreen text-white"
-  }
-  if (version === "system") {
-    plusStyling =
-      "w-full bg-white border border-lightBlack !text-lightBlack flex items-center justify-center gap-2"
-  }
-  if (version === "bordered") {
-    plusStyling = "bg-white text-mainGreen border-2 border-mainGreen"
-  }
-  if (disabled) {
-    plusStyling = "bg-lightGreen active:top-0 cursor-not-allowed"
-  }
-
-  styling =
-    styling + ` ${plusStyling ? plusStyling : ''} ${customStyles ? customStyles : ''}`
+  var styling = STYLES[version]
+  if (disabled) styling += ` ${STYLES.disabled}`
   ///
   /////////// CUSTOM HOOKS
   ///

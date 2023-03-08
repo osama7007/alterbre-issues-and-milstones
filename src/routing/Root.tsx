@@ -13,9 +13,8 @@ export const Root = () => {
         <NavBar />
       </nav>
 
-      <aside className="col-start-1 col-end-2 row-start-2 row-end-3">
       <SideBar />
-      </aside>
+      
       
       <main className="col-start-2 col-end-3 row-start-2 row-end-3 overflow-y-auto p-10">
         <Outlet />
