@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { createContext, ReactNode, useState, Context } from "react"
 import { useFetch } from "../../hooks/useFetch"
 import { mutateData } from "../../utils/mutateData"
+import { notify } from "../../utils/toast"
 
 type numberFormatter_TP = {
   digits_count: number
@@ -61,7 +62,10 @@ export const NumberFormatterProvider = ({
   } = useMutation({
     mutationFn: mutateData,
     onError: (err) => console.log(err),
-    onSuccess: (data) => refetch(),
+    onSuccess: (data) => {
+      refetch()
+      notify()
+    },
   })
 
   const changeDigitsCount = (digit: number) => {
