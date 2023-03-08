@@ -2,7 +2,11 @@
 ///
 //import classes from './Home.module.css'
 import { Helmet } from "react-helmet-async"
-import { AddClassComp } from "../components/AddClassComp"
+import { Button } from "../components/atoms/buttons/Button"
+import { BaseInputField } from "../components/formik-fields/BaseInputField"
+import { Formik, Form, ErrorMessage, Field } from "formik"
+import { CheckBoxField } from "../components/formik-fields/CheckBoxField"
+
 ///
 /////////// Types
 ///
@@ -47,8 +51,43 @@ export const Home = ({ title }: HomeProps_TP) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <h1>لوحة التحكم</h1>
-      
+      <div className="flex flex-col items-center justify-center h-screen gap-3">
+        <h1 className="text-4xl font-bold">Home</h1>
+        <Formik
+          initialValues={{ email: "", password: "", name: "", remember: false }}
+          onSubmit={(values) => {
+            console.log(values)
+          }}
+        >
+          <Form>
+            <BaseInputField
+              id="email"
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="Email"
+            />
+            <BaseInputField
+              id="name"
+              label="Name"
+              name="name"
+              type="text"
+              placeholder="Name"
+            />
+            <BaseInputField
+              id="password"
+              label="Password"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <CheckBoxField label="Remember me" name="remember" id="remember" />
+            <Button type="submit" version="primary">
+              Submit
+            </Button>
+          </Form>
+        </Formik>
+      </div>
     </>
   )
 }
