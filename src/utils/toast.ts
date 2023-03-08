@@ -1,6 +1,6 @@
-import { toast, ToastOptions } from "react-toastify"
+import { toast, ToastOptions as ToastOptions_TP, ToastPosition } from "react-toastify"
 
-const toastOptions: ToastOptions = {
+const toastOptions: ToastOptions_TP = {
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: true,
@@ -11,10 +11,10 @@ const toastOptions: ToastOptions = {
     theme: "light",
 }
 
-export const notify = (type: 'success' | 'error' = 'success', msg?: string) => {
+export const notify = (type: 'success' | 'error' = 'success', msg?: string, position: ToastPosition = "top-right") => {
     let message = msg || "تمت العملية بنجاح"
     let className = "bg-mainGreen text-white"
-    
+
     if (type === 'error' && !!!msg) {
         message = "حدث خطأ ما ، حاول لاحقاً"
         className = "bg-mainRed text-white"
@@ -25,6 +25,7 @@ export const notify = (type: 'success' | 'error' = 'success', msg?: string) => {
 
     toast[type](message, {
         ...toastOptions,
-        className
+        className,
+        position
     })
 }
