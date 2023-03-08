@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next"
 import { Button } from "../components/atoms/buttons/Button"
 import { Spinner } from "../components/atoms/UI/Spinner"
 import { numberFormatterCtx } from "../context/settings/number-formatter"
-import { useFetch } from "../hooks/useFetch"
 import { useIsRTL } from "../hooks/useIsRTL"
 import { notify } from "../utils/toast"
 ///
@@ -66,14 +65,11 @@ export const Settings = ({ title }: SettingsProps_TP) => {
   }
 
   const confirmDigitsCount = () => {
-    console.log("digitsCount", digitsCount)
-    
     if (digitsCount === digits_count) {
       notify("error", "ادخل قيمة مختلفة")
       return
     }
     changeDigitsCount(digitsCount)
-    // TODO: POST
   }
   const changeDigitsCountHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setDigitsCount(+e.target.value)

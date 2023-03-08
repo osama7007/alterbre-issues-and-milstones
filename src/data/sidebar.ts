@@ -67,7 +67,6 @@ export const sideBarItems: MenuItem_TP[] = [
                     },
                 ],
             },
-            // TODO: edit these dummy data
             {
                 id: crypto.randomUUID(),
                 label: "السداد ",
