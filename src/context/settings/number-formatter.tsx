@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query"
-import { createContext, ReactNode, useState, Context } from "react"
+import { createContext, ReactNode, useState } from "react"
 import { useFetch } from "../../hooks/useFetch"
-import { mutateData } from "../../utils/mutateData"
+import { mutateData, MutateDataParameters_TP } from "../../utils/mutateData"
 import { notify } from "../../utils/toast"
 
 type numberFormatter_TP = {
@@ -54,15 +54,22 @@ export const NumberFormatterProvider = ({
     },
   })
 
+  type ResponseData_TP = {
+    id: number
+    value: number
+  }
+
   const {
     mutate,
     isLoading: digits_countLoading,
     isSuccess: digits_countPostSuccess,
     error: errorQuery,
   } = useMutation({
-    mutationFn: mutateData,
+    mutationFn: (data: MutateDataParameters_TP) =>
+      mutateData<ResponseData_TP>(data),
     onError: (err) => console.log(err),
     onSuccess: (data) => {
+      console.log(`data:`, data)
       refetch()
       notify()
     },

@@ -1,0 +1,1 @@
+export type permessionsRule = 'OR' | "AND"
