@@ -1,5 +1,5 @@
 import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { Checkbox } from "../molecules/Checkbox"
+import { Checkbox } from "../Checkbox"
 
 // props type
 type Props_TP = {
@@ -8,6 +8,7 @@ type Props_TP = {
 
 export const CheckBoxField = ({
   label,
+  id,
   ...props
 }: { label: string } & Props_TP) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
@@ -15,14 +16,16 @@ export const CheckBoxField = ({
     <div className="mb-2">
       <Checkbox
         label={label}
-        id={field.name}
-        className={`form-control shadow-none ${
-          meta.touched && meta.error && "is-invalid"
-        }`}
+        id={id}
+        className={`${meta.error && "border-2 border-mainRed"}`}
         {...field}
         {...props}
       />
-      <ErrorMessage component="p" className="error" name={field.name} />
+      <ErrorMessage
+        component="p"
+        className="text-mainRed mt-1"
+        name={field.name}
+      />
     </div>
   )
 }

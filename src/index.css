@@ -76,7 +76,7 @@
 /* coustom styles */
 /*input radio  */
 
-input[type="radio"] {
+/* input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -102,7 +102,7 @@ input[type="radio"]::before {
 }
 input[type="radio"]:checked::before {
   transform: scale(1);
-}
+} */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

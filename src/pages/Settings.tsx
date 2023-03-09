@@ -9,6 +9,8 @@ import { Spinner } from "../components/atoms/UI/Spinner"
 import { numberFormatterCtx } from "../context/settings/number-formatter"
 import { useIsRTL } from "../hooks/useIsRTL"
 import { notify } from "../utils/toast"
+import { BaseInput } from "../components/atoms/inputs/Base"
+import { Label } from "../components/atoms/Label"
 ///
 /////////// Types
 ///
@@ -29,7 +31,7 @@ export const Settings = ({ title }: SettingsProps_TP) => {
   const isRTL = useIsRTL()
 
   const { digits_count, changeDigitsCount, digits_countLoading } =
-  useContext(numberFormatterCtx)
+    useContext(numberFormatterCtx)
   ///
   /////////// STATES
   ///
@@ -44,7 +46,7 @@ export const Settings = ({ title }: SettingsProps_TP) => {
   }, [isRTL])
 
   useEffect(() => {
-    if(!!digits_count){
+    if (!!digits_count) {
       setDigitsCount(digits_count)
     }
   }, [digits_count])
@@ -82,16 +84,24 @@ export const Settings = ({ title }: SettingsProps_TP) => {
       <button type="button" onClick={toggleLang}>
         change Language
       </button>
-      <div>
-        <label htmlFor="digitsCount">عدد الأرقام العشرية</label>
-        <input
+      <div className="flex items-center gap-2 w-[50rem]">
+        <Label
+          htmlFor="digitsCount"
+          label="عدد الأرقام العشرية"
+          className="text-lg"
+        />
+        <BaseInput
           id="digitsCount"
           type="number"
-          value={digitsCount}
+          value={digitsCount.toString()}
           onChange={changeDigitsCountHandler}
         />
-        <Button disabled={digits_countLoading} action={confirmDigitsCount}>
-          {digits_countLoading ? <Spinner /> :" تغيير الأرقام"}
+        <Button
+          disabled={digits_countLoading}
+          action={confirmDigitsCount}
+          customStyles="h-auto w-auto"
+        >
+          {digits_countLoading ? <Spinner /> : " تغيير الأرقام"}
         </Button>
       </div>
     </>
