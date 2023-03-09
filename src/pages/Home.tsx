@@ -3,9 +3,10 @@
 //import classes from './Home.module.css'
 import { Helmet } from "react-helmet-async"
 import { Button } from "../components/atoms/buttons/Button"
-import { BaseInputField } from "../components/formik-fields/BaseInputField"
 import { Formik, Form, ErrorMessage, Field } from "formik"
-import { CheckBoxField } from "../components/formik-fields/CheckBoxField"
+import { BaseInputField } from "../components/molecules/formik-fields/BaseInputField"
+import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxField"
+
 
 ///
 /////////// Types
