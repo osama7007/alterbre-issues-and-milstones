@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query"
-import { createContext, ReactNode, useState } from "react"
+import { createContext, ReactNode } from "react"
 import { useFetch } from "../../hooks/useFetch"
 import { mutateData, MutateDataParameters_TP } from "../../utils/mutateData"
 import { notify } from "../../utils/toast"
+import { useLocalStorage } from "../../hooks/useLocalStorage"
 
 type numberFormatter_TP = {
   digits_count: number
@@ -23,12 +24,14 @@ export const NumberFormatterProvider = ({
   children: ReactNode
 }) => {
   /////////// VARIABLES
-  ///
-  let initialDigitsCount: number = +localStorage.digits_count || 2
+  const [storedDigitsCount, setStoredDigitsCount] = useLocalStorage(
+    "digits_count",
+    2
+  )
+
   ///
   /////////// STATES
   ///
-  const [digits_count, setDigits_count] = useState(initialDigitsCount)
   ///
   /////////// CUSTOM HOOKS
   ///
@@ -49,8 +52,7 @@ export const NumberFormatterProvider = ({
     queryKey: ["digits_count"],
     select: (digits_countObj) => ({ value: +digits_countObj.value }),
     onSuccess: (digits_count) => {
-      setDigits_count(digits_count.value)
-      localStorage.digits_count = digits_count.value
+      setStoredDigitsCount(digits_count.value)
     },
   })
 
@@ -84,17 +86,17 @@ export const NumberFormatterProvider = ({
       },
       method: "put",
     })
-    localStorage.digits_count = digits_count
-    setDigits_count(digits_count)
+
+    setStoredDigitsCount(digit)
   }
 
   // Number formatter
   const formatNumber = (num: number | string) => {
-    const fixedNum = (+num).toFixed(digits_count)
+    const fixedNum = (+num).toFixed(storedDigitsCount)
     const formattedNum = new Intl.NumberFormat("en-EG", {
       style: "decimal",
       notation: "standard",
-      minimumFractionDigits: digits_count,
+      minimumFractionDigits: storedDigitsCount,
     }).format(+fixedNum)
     return formattedNum
   }
@@ -102,7 +104,7 @@ export const NumberFormatterProvider = ({
   return (
     <numberFormatterCtx.Provider
       value={{
-        digits_count,
+        digits_count: storedDigitsCount,
         changeDigitsCount,
         digits_countLoading,
         formatNumber,
