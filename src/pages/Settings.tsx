@@ -84,7 +84,7 @@ export const Settings = ({ title }: SettingsProps_TP) => {
       <button type="button" onClick={toggleLang}>
         change Language
       </button>
-      <div className="flex items-center gap-2 w-[50rem]">
+      <div>
         <Label
           htmlFor="digitsCount"
           label="عدد الأرقام العشرية"

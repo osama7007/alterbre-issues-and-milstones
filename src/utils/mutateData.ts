@@ -1,13 +1,9 @@
 import { serialize } from "object-to-formdata"
 import { request } from "./axios-util"
 import i18n from "../i18n"
+import { MutateDataParameters_TP } from "../types"
 
 //////// TYPES
-const postMethods_TP = {
-    post: 'POST',
-    put: 'PUT'
-} as const
-export type MutateDataParameters_TP = { endpointName: string, dataType?: 'json' | 'formData', values?: any, method?: keyof typeof postMethods_TP }
 ///
 //////// VARUIABLES
 ///
@@ -16,13 +12,14 @@ const lang = i18n.language.startsWith("ar") ? "ar" : "en"
 export const mutateData = async <T>(
     comingData: MutateDataParameters_TP
 ) => {
-    const { endpointName, dataType = "json", values, method = 'post' } = comingData
+    const { endpointName, dataType = "json", values, method = 'post', axiosOptions } = comingData
 
     if (dataType === 'json') {
         return await request<T>({
             url: endpointName,
             method,
             data: values,
+            ...axiosOptions
         })
     }
     if (dataType === "formData") {
@@ -34,7 +31,8 @@ export const mutateData = async <T>(
             headers: {
                 "Accept-Language": lang,
                 "Content-Type": `multipart/form-data`
-            }
+            },
+            ...axiosOptions
         })
     }
 }

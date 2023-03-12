@@ -128,7 +128,7 @@ export const SideBar = () => {
     <Sidebar
       rtl={isRTL}
       className="col-start-1 col-end-2 row-start-2 row-end-3"
-      transitionDuration={0}
+      transitionDuration={270}
       onMouseEnter={(e) => {
         e.preventDefault()
         collapseSidebar(false)

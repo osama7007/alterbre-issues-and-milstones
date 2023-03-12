@@ -3,6 +3,7 @@ export interface BaseInputProps_TP
   className?: string
   override?: boolean
   autocomplete?: string
+  name: string
 }
 
 const BASE_CLASS_NAME: string =

@@ -1,5 +1,5 @@
 import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { BaseInput } from "../../atoms/inputs/Base"
+import { BaseInput,BaseInputProps_TP } from "../../atoms/inputs/Base"
 import { Label } from "../../atoms/Label"
 // props type
 type Props_TP = {
@@ -10,7 +10,7 @@ export const BaseInputField = ({
   label,
   id,
   ...props
-}: { label: string; id: string } & Props_TP) => {
+}: { label: string; id: string } & BaseInputProps_TP) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
     <div className="mb-2">
