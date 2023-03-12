@@ -7,20 +7,19 @@ const postMethods_TP = {
     post: 'POST',
     put: 'PUT'
 } as const
-type MutateDataParameters_TP = { endpointName: string, dataType?: 'json' | 'formData', values: any, method: keyof typeof postMethods_TP }
+export type MutateDataParameters_TP = { endpointName: string, dataType?: 'json' | 'formData', values?: any, method?: keyof typeof postMethods_TP }
 ///
 //////// VARUIABLES
 ///
 const lang = i18n.language.startsWith("ar") ? "ar" : "en"
 ///
-export const mutateData = async (
+export const mutateData = async <T>(
     comingData: MutateDataParameters_TP
 ) => {
     const { endpointName, dataType = "json", values, method = 'post' } = comingData
-    console.log(`method:`, method)
 
     if (dataType === 'json') {
-        return await request({
+        return await request<T>({
             url: endpointName,
             method,
             data: values,
@@ -28,7 +27,7 @@ export const mutateData = async (
     }
     if (dataType === "formData") {
         let data = serialize(values)
-        return await request({
+        return await request<T>({
             url: endpointName,
             method,
             data,
