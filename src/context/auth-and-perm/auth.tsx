@@ -1,22 +1,28 @@
-import { createContext, ReactNode, useState, useEffect } from "react"
+import { createContext, ReactNode, useState } from "react"
 import Cookies from "js-cookie"
 import { notify } from "../../utils/toast"
 import { useMutation } from "@tanstack/react-query"
-import { mutateData, MutateDataParameters_TP } from "../../utils/mutateData"
-import { useNavigate, useNavigation } from "react-router-dom"
+import { mutateData } from "../../utils/mutateData"
+import { useNavigate } from "react-router-dom"
+import { MutateDataParameters_TP } from "../../types"
+import { useMutate } from "../../hooks/useMutate"
 ///
 /////////TYPES
-type LoginCredintials_TP = {
+type LoginCredentials_TP = {
   username: string
   password: string
 }
 type authCtx_TP = {
   isLoggedIn: boolean
-  logInHandler: (credintials: LoginCredintials_TP) => void
+  isLoggingIn: boolean
+  isLoggingOut: boolean
+  logInHandler: (credentials: LoginCredentials_TP) => void
   logOutHandler: () => void
 }
 export const authCtx = createContext<authCtx_TP>({
   isLoggedIn: false,
+  isLoggingIn: false,
+  isLoggingOut: false,
   logInHandler: () => {},
   logOutHandler: () => {},
 })
@@ -38,35 +44,35 @@ export const AuthCtxProvider = ({ children }: { children: ReactNode }) => {
   type ResponseData_TP = { token: string }
 
   // LOGIN
-  const { mutate: loginMutate } = useMutation({
-    mutationFn: (data: MutateDataParameters_TP) =>
-      mutateData<ResponseData_TP>(data),
-    onSuccess: (data) => {
-      if (data) {
-        Cookies.set("auth", data.token)
-        setIsLoggedIn(true)
-        notify("success", "Welcome")
-        console.log(`Login ~ data:`, data)
-        navigate("/")
-      }
-    },
-    onError: (err) => {
-      notify("error")
-    },
-  })
+  const { mutate: loginMutate, isLoading: isLoggingIn } =
+    useMutate<ResponseData_TP>({
+      mutationFn: mutateData,
+      onSuccess: (data) => {
+        if (data) {
+          Cookies.set("auth", data.token)
+          setIsLoggedIn(true)
+          notify("success", "Welcome")
+          navigate("/")
+        }
+      },
+      onError: (err) => {
+        notify("error")
+      },
+    })
 
   // LOGOUT
-  const { mutate: logoutMutate } = useMutation({
-    mutationFn: (data: MutateDataParameters_TP) => mutateData(data),
-    onSuccess: (data) => {
-      Cookies.remove("auth")
-      setIsLoggedIn(false)
-      notify("success", "Waiting for you!")
-    },
-    onError: (err) => {
-      notify("error")
-    },
-  })
+  const { mutate: logoutMutate, isLoading: isLoggingOut } =
+    useMutate<ResponseData_TP>({
+      mutationFn: mutateData,
+      onSuccess: (data) => {
+        Cookies.remove("auth")
+        setIsLoggedIn(false)
+        notify("success", "Good bye, Waiting for you!")
+      },
+      onError: (err) => {
+        notify("error")
+      },
+    })
   ///
   /////////// SIDE EFFECTS
   ///
@@ -75,16 +81,15 @@ export const AuthCtxProvider = ({ children }: { children: ReactNode }) => {
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
 
-  const logInHandler = (credintials: LoginCredintials_TP) => {
-    console.log(`logInHandler ~ credintials:`, credintials)
+  const logInHandler = (credentials: LoginCredentials_TP) => {
     loginMutate({
       endpointName: "api/login",
-      values: { ...credintials, type: "ios", device_token: "aaa" },
+      values: { ...credentials, type: "ios", device_token: "aaa" },
     })
   }
   const logOutHandler = () => {
     logoutMutate({
-      endpointName: "/api/logout",
+      endpointName: "api/logout",
     })
   }
   ///
@@ -94,6 +99,8 @@ export const AuthCtxProvider = ({ children }: { children: ReactNode }) => {
         isLoggedIn,
         logInHandler,
         logOutHandler,
+        isLoggingIn,
+        isLoggingOut,
       }}
     >
       {children}

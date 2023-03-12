@@ -5,9 +5,10 @@ import { RiVipCrownLine } from "react-icons/ri";
 import { AiFillGolden } from "react-icons/ai";
 import { GiCutDiamond } from "react-icons/gi";
 import { BiDiamond } from "react-icons/bi";
-import { MdOutlinePayments, MdOutlineAttachMoney } from "react-icons/md";
+import { MdOutlinePayments, MdOutlineAttachMoney, MdManageAccounts } from "react-icons/md";
 import { CiImport, CiSettings } from "react-icons/ci";
 import { IconType } from "react-icons/lib";
+import { t } from "i18next";
 
 export type MenuItem_TP = {
     id: string
@@ -126,6 +127,12 @@ export const sideBarItems: MenuItem_TP[] = [
         label: "تأسيس النظام ",
         link: "system",
         icon: CiSettings,
+    },
+    {
+        id: crypto.randomUUID(),
+        label: t("administrative-structure"),
+        link: "/administrative-structure",
+        icon: MdManageAccounts,
     },
     // {
     //   id: crypto.randomUUID(),

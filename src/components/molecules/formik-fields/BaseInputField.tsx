@@ -1,5 +1,5 @@
 import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { BaseInput } from "../../atoms/inputs/Base"
+import { BaseInput,BaseInputProps_TP } from "../../atoms/inputs/Base"
 import { Label } from "../../atoms/Label"
 export const BaseInputField = ({
   label,
@@ -18,6 +18,7 @@ export const BaseInputField = ({
   name: string
   type: string
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
+
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
     <>
