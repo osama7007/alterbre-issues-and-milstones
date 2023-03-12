@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { permissionCtx } from '../context/auth-and-perm/permissions';
-import { permessionsRule } from '../types';
+import { permissionsRule } from '../types';
 
-const usePermission = (permissions: string[], rule: permessionsRule) => {
+const usePermission = (permissions: string[], rule?: permissionsRule) => {
     const { isAllowedTo } = useContext(permissionCtx);
     return isAllowedTo(permissions, rule);
 }

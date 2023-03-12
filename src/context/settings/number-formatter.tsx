@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import { createContext, ReactNode } from "react"
 import { useFetch } from "../../hooks/useFetch"
-import { mutateData, MutateDataParameters_TP } from "../../utils/mutateData"
+import { mutateData } from "../../utils/mutateData"
 import { notify } from "../../utils/toast"
 import { useLocalStorage } from "../../hooks/useLocalStorage"
+import { MutateDataParameters_TP } from "../../types"
 
 type numberFormatter_TP = {
   digits_count: number
@@ -48,7 +49,7 @@ export const NumberFormatterProvider = ({
     isFetching,
     refetch,
   } = useFetch<Setting_TP>({
-    endpoint: "/company/api/v1/company_settings/1",
+    endpoint: "company/api/v1/company_settings/1",
     queryKey: ["digits_count"],
     select: (digits_countObj) => ({ value: +digits_countObj.value }),
     onSuccess: (digits_count) => {
@@ -79,7 +80,7 @@ export const NumberFormatterProvider = ({
 
   const changeDigitsCount = (digit: number) => {
     mutate({
-      endpointName: "/company/api/v1/company_settings/1",
+      endpointName: "company/api/v1/company_settings/1",
       values: {
         key: "digits_count",
         value: digit,

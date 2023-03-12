@@ -1,9 +1,9 @@
 import { createContext, ReactNode } from "react"
-import { permessionsRule } from "../../types"
+import { permissionsRule } from "../../types"
 ///
 ///////// TYPES
 type PermissionContextType = {
-  isAllowedTo: (permissions: string[], rule: permessionsRule) => boolean
+  isAllowedTo: (permissions: string[], rule?: permissionsRule) => boolean
 }
 
 type PermissionCtxProviderProps_TP = {
@@ -14,13 +14,13 @@ type PermissionCtxProviderProps_TP = {
 ///
 ///////// HELPER VARIABLES
 ///
-const defaultBehaviour: PermissionContextType = {
+const defaultBehavior: PermissionContextType = {
   isAllowedTo: () => false,
 }
 ///
 //// CTX
 export const permissionCtx =
-  createContext<PermissionContextType>(defaultBehaviour)
+  createContext<PermissionContextType>(defaultBehavior)
 // PROVIDER
 export const PermissionCtxProvider = ({
   userPermissions,
@@ -28,7 +28,10 @@ export const PermissionCtxProvider = ({
 }: PermissionCtxProviderProps_TP) => {
   /////////// VARIABLES
   ///
-  const isAllowedTo = (permissions: string[], rule: permessionsRule) => {
+  const isAllowedTo = (
+    permissions: string[],
+    rule: permissionsRule = "AND"
+  ) => {
     switch (rule) {
       case "AND":
         return permissions.every((perm) => userPermissions.includes(perm))
