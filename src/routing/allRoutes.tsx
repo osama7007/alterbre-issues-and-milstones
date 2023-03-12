@@ -6,6 +6,7 @@ import { Settings } from "../pages/Settings"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
+import { AdministrativeStructure } from "../pages/AdministrativeStructure"
 
 export const AllRoutesProvider = () => {
   return (
@@ -16,6 +17,12 @@ export const AllRoutesProvider = () => {
           <Route
             path="/settings"
             element={<Settings title={t("settings")} />}
+          />
+          <Route
+            path="/administrative-structure"
+            element={
+              <AdministrativeStructure title={t("administrative-structure")} />
+            }
           />
         </Route>
         <Route path="/login" element={<Login title={t("login")} />} />

@@ -88,6 +88,7 @@ export const Settings = ({ title }: SettingsProps_TP) => {
         <Label htmlFor="digitsCount" size="lg">
           عدد الأرقام العشرية
         </Label>
+
         <BaseInput
           id="digitsCount"
           type="number"

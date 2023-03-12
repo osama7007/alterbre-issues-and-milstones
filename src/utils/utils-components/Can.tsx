@@ -2,7 +2,7 @@
 ///
 import { ReactNode } from "react"
 import usePermission from "../../hooks/usePermission"
-import { permessionsRule } from "../../types"
+import { permissionsRule } from "../../types"
 ///
 /////////// Types
 ///
@@ -10,7 +10,7 @@ type CanProps_TP = {
   access: string[]
   fallback?: ReactNode
   children: ReactNode
-  rule: permessionsRule
+  rule?: permissionsRule
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
