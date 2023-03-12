@@ -1,41 +1,48 @@
 import { useField, ErrorMessage, FieldHookConfig } from "formik"
 import { BaseInput } from "../../atoms/inputs/Base"
 import { Label } from "../../atoms/Label"
-// props type
-type Props_TP = {
-  [key: string]: any
-}
-
 export const BaseInputField = ({
   label,
   id,
+  required,
+  labelProps,
+  type = "text",
   ...props
-}: { label: string; id: string } & Props_TP) => {
+}: {
+  label: string
+  id: string
+  required?: boolean
+  labelProps?: {
+    [key: string]: any
+  }
+  name: string
+  type: string
+} & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
-    <div className="mb-2">
-      <Label
-        label={
-          <div className="flex gap-1">
-            {label}
-            {props.required && <span className="text-mainRed">*</span>}
-          </div>
-        }
-        htmlFor={field.name}
-      />
-      <BaseInput
-        id={id}
-        {...field}
-        {...props}
-        className={`${meta.error && "!border-mainRed"}`}
-        autocomplete="off"
-      />
-
+    <>
+      <div
+        className="mb-2 flex-col-reverse gap-0"
+        style={{
+          display: "flex",
+        }}
+      >
+        <Label htmlFor={id} {...labelProps} required={required}>
+          {label}
+        </Label>
+        <BaseInput
+          id={id}
+          {...field}
+          {...props}
+          error={meta.touched && meta.error ? true : false}
+          autocomplete="off"
+        />
+      </div>
       <ErrorMessage
         component="p"
         className="text-mainRed mt-1"
         name={field.name}
       />
-    </div>
+    </>
   )
 }

@@ -1,80 +1,114 @@
-/////////// IMPORTS
-///
 import { ReactNode } from "react"
-///
-/////////// Types
-///
+import { tv, type VariantProps } from "tailwind-variants"
 
-/////////// HELPER VARIABLES & FUNCTIONS
-///
-type Styles_TP = {
-  [key: string]: string
-}
-const BASE_STYLE: string =
-  "relative active:top-[1px] py-2 px-8 font-bold rounded-md"
+const button = tv({
+  base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
+  variants: {
+    color: {
+      primary: "bg-mainGreen",
+      danger: "bg-mainRed",
+    },
+    disabled: {
+      true: "bg-gray-200 active:top-0 cursor-not-allowed px-4",
+    },
+    bordered: {
+      true: "border-2",
+    },
+  },
+  compoundVariants: [
+    {
+      color: "primary",
+      disabled: true,
+      className: "text-mainGreen border-mainGreen border-2",
+    },
 
-const STYLES: Styles_TP = {
-  primary: BASE_STYLE + " bg-mainGreen text-white",
-  system:
-    BASE_STYLE +
-    " w-full bg-white border border-lightBlack !text-lightBlack flex items-center justify-center gap-2",
-  bordered: BASE_STYLE + " bg-white text-mainGreen border-2 border-mainGreen",
-  disabled: BASE_STYLE + " bg-lightGreen active:top-0 cursor-not-allowed",
-}
-type VersionType = keyof typeof STYLES
+    {
+      color: "danger",
+      disabled: true,
+      className: "text-mainRed border-mainRed border-2",
+    },
+    {
+      color: "primary",
+      bordered: true,
+      className: "text-mainGreen border-mainGreen bg-white",
+    },
+    {
+      color: "danger",
+      bordered: true,
+      className: "text-mainRed border-mainRed bg-white",
+    },
+  ],
+  defaultVariants: {
+    color: "primary",
+  },
+})
 
-interface ButtonProps_TP extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  version?: VersionType
-  customStyles?: string
+const spinner = tv({
+  base: "h-6 w-6 animate-spin rounded-full border-b-2",
+  variants: {
+    color: {
+      primary: "border-mainGreen",
+      danger: "border-mainRed",
+      bordered: "border-mainGreen",
+    },
+  },
+  defaultVariants: {
+    color: "primary",
+  },
+})
+
+type ButtonVariants_TP = VariantProps<typeof button>
+
+interface ButtonProps_TP extends ButtonVariants_TP {
   children: ReactNode
+  className?: string
+  disabled?: boolean
   action?: () => void
+  variant?: "primary" | "danger"
+  loading?: boolean
+  type?: "button" | "submit" | "reset"
+  bordered?: boolean
 }
 
 export const Button = ({
-  version = "primary",
-  type = "button",
-  customStyles,
+  variant,
   children,
-  action,
+  className,
   disabled,
+  action,
+  loading,
+  type = "button",
+  bordered = false,
   ...props
 }: ButtonProps_TP) => {
-  /////////// VARIABLES
-  ///
-
-  var styling = STYLES[version]
-  if (disabled) styling += ` ${STYLES.disabled}`
-  if (customStyles) styling += ` ${customStyles}`
-  ///
-  /////////// CUSTOM HOOKS
-  ///
-
-  ///
-  /////////// STATES
-  ///
-
-  ///
-  /////////// SIDE EFFECTS
-  ///
-
-  ///
-  /////////// IF CASES
-  ///
-
-  ///
-  /////////// FUNCTIONS & EVENTS
-  ///
-
-  ///
+  var newClass =
+    className + " " + loading ? "inline-flex items-center gap-2" : ""
   return (
     <button
-      disabled={disabled}
       type={type}
-      className={styling}
+      disabled={disabled || loading}
+      className={button({
+        color: variant,
+        disabled: disabled || loading,
+        bordered: bordered,
+        className: newClass,
+      })}
       onClick={action}
       {...props}
     >
+      {/* <div className="flex items-center justify-center gap-2"> */}
+      {loading && (
+        <div className=" flex items-center justify-center">
+          <div
+            className={spinner({
+              color: variant,
+            })}
+          ></div>
+        </div>
+      )}
+
       {children}
+      {/* </div> */}
     </button>
   )
 }

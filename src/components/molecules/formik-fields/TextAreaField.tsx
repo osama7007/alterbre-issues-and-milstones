@@ -9,25 +9,23 @@ import { Label } from "../../atoms/Label"
 export const TextAreaField = ({
   label,
   id,
+  required,
   ...props
-}: { label: string } & TextAreaInputProp_TP) => {
+}: { label: string; id: string } & TextAreaInputProp_TP) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
+  console.log("textarea", required)
   return (
     <div className="mb-2">
-      <Label
-        label={
-          <div className="flex gap-1">
-            {label}
-            {props.required && <span className="text-mainRed">*</span>}
-          </div>
-        }
-        htmlFor={field.name}
-      />
+      <Label htmlFor={id} required={required}>
+        {label}
+      </Label>
       <TextAreaInput
         id={id}
         {...field}
         {...props}
-        className={`${meta.error && "!border-mainRed border-2"}`}
+        className={`${
+          meta.touched && meta.error && "!border-mainRed border-2"
+        }`}
       />
 
       <ErrorMessage

@@ -85,11 +85,9 @@ export const Settings = ({ title }: SettingsProps_TP) => {
         change Language
       </button>
       <div className="flex items-center gap-2 w-[50rem]">
-        <Label
-          htmlFor="digitsCount"
-          label="عدد الأرقام العشرية"
-          className="text-lg"
-        />
+        <Label htmlFor="digitsCount" size="lg">
+          عدد الأرقام العشرية
+        </Label>
         <BaseInput
           id="digitsCount"
           type="number"
@@ -97,11 +95,11 @@ export const Settings = ({ title }: SettingsProps_TP) => {
           onChange={changeDigitsCountHandler}
         />
         <Button
-          disabled={digits_countLoading}
+          loading={digits_countLoading}
           action={confirmDigitsCount}
-          customStyles="h-auto w-auto"
+          className="h-auto w-auto"
         >
-          {digits_countLoading ? <Spinner /> : " تغيير الأرقام"}
+          تغيير الأرقام
         </Button>
       </div>
     </>
