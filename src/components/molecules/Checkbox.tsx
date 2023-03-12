@@ -11,9 +11,6 @@ type Props_TP = {
   [key: string]: any
 }
 
-const BASE_CLASS_NAME: string =
-  "w-4 h-4 text-mainGreen border-gray-300 rounded focus:ring-mainGreen form-checkbox shadow-none"
-
 export const Checkbox = ({
   label,
   name,
@@ -23,7 +20,6 @@ export const Checkbox = ({
   checked,
   ...props
 }: CheckboxProps_TP & Props_TP) => {
-  var newClassName = `${BASE_CLASS_NAME} ${className ? className : ""}`
   const isRTL = useIsRTL()
   const marginClass = isRTL ? "mr-2" : "ml-2"
 
@@ -35,13 +31,17 @@ export const Checkbox = ({
           ...props,
           type: "checkbox",
           name,
-          className: newClassName,
           disabled,
           checked,
-          override: true,
         }}
       />
-      <Label label={label} htmlFor={id} className={marginClass} />
+      <Label
+        htmlFor={id}
+        className={marginClass}
+        // className={`${marginClass} ${className ? className : ""}`}
+      >
+        {label}
+      </Label>
     </div>
   )
 }

@@ -1,64 +1,42 @@
-// Tailwind link button atom using <a> tag
-
 import { ReactNode } from "react"
 import { Link } from "react-router-dom"
-interface LinkButtonProps_TP
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  customStyles?: string
-  action?: () => void
-  disabled?: boolean
-  children: ReactNode
-  href: string
-  color?: string
-}
+import { tv, type VariantProps } from "tailwind-variants"
 
-const ColorMap = new Map([
-  ["mainGreen", "text-mainGreen border-b-mainGreen border-b-2"],
-  ["mainRed", "text-mainRed border-b-mainRed border-b-2"],
-])
+const linkButton = tv({
+  base: "border-transparent bg-transparent underline py-2",
+  variants: {
+    color: {
+      primary: "text-blue-600",
+      danger: "text-mainRed",
+    },
+    disabled: {
+      true: "text-gray-200 active:top-0 cursor-not-allowed",
+    },
+  },
+})
+
+type LinkButtonVariants_TP = VariantProps<typeof linkButton>
 
 export const LinkButton = ({
-  customStyles,
-  action,
-  disabled,
   children,
-  color = "mainGreen",
+  className,
+  disabled,
+  color = "primary",
+  to,
   ...props
-}: LinkButtonProps_TP) => {
-  /////////// VARIABLES
-  ///
-  var styling = disabled
-    ? `${ColorMap.get(color)} cursor-not-allowed`
-    : ColorMap.get(color)
-
-  if (customStyles) styling += ` ${customStyles}`
-  ///
-  /////////// CUSTOM HOOKS
-  ///
-  ///
-  /////////// STATES
-  ///
-  ///
-  /////////// SIDE EFFECTS
-  ///
-  ///
-  /////////// IF CASES
-  ///
-  ///
-  /////////// FUNCTIONS & EVENTS
-  ///
-  ///
+}: LinkButtonVariants_TP & {
+  children: ReactNode
+  className?: string
+  disabled?: boolean
+  to: string
+}) => {
   return (
     <Link
-      to={props.href}
-      className={styling}
-      onClick={
-        disabled
-          ? (e) => {
-              e.preventDefault()
-            }
-          : action
-      }
+      to={to}
+      className={linkButton({
+        color,
+        disabled,
+      })}
       {...props}
     >
       {children}

@@ -15,7 +15,7 @@ type Props_TP = {
   [key: string]: any
 }
 
-const BASE_CLASS_NAME: string = "form-radio text-mainGreen focus:ring-mainGreen"
+// const BASE_CLASS_NAME: string = "form-radio text-mainGreen focus:ring-mainGreen"
 
 export const Radio = ({
   label,
@@ -26,7 +26,7 @@ export const Radio = ({
   checked,
   ...props
 }: RadioProps_TP & Props_TP) => {
-  var newClassName = `${BASE_CLASS_NAME} ${className ? className : ""}`
+  // var newClassName = `${BASE_CLASS_NAME} ${className ? className : ""}`
   const isRTL = useIsRTL()
   const marginClass = isRTL ? "mr-2" : "ml-2"
 
@@ -38,13 +38,14 @@ export const Radio = ({
           ...props,
           type: "radio",
           name,
-          className: newClassName,
+          // className: newClassName,
           disabled,
           checked,
-          override: true,
         }}
       />
-      <Label label={label} htmlFor={id} className={marginClass} />
+      <Label htmlFor={id} className={marginClass}>
+        {label}
+      </Label>
     </div>
   )
 }

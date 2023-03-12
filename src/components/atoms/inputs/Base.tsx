@@ -1,13 +1,43 @@
+import { tv, type VariantProps } from "tailwind-variants"
+
+const GeneralInputClass: string = "form-input px-4 py-[.30rem] w-full shadows"
+
+const baseInput = tv({
+  base: "rounded-md border-2 border-transparent focus:!border-2 focus:!border-mainGreen",
+  variants: {
+    error: {
+      true: "border-mainRed",
+    },
+    type: {
+      checkbox:
+        "w-4 h-4 text-mainGreen border-gray-300 rounded focus:ring-mainGreen form-checkbox shadow-none",
+      radio:
+        "w-5 h-5 form-radio rounded-full focus:ring-mainGreen border-gray-300",
+      text: GeneralInputClass,
+      email: GeneralInputClass,
+      password: GeneralInputClass,
+      number: GeneralInputClass,
+      date: GeneralInputClass,
+      time: GeneralInputClass,
+      datetime: GeneralInputClass,
+      month: GeneralInputClass,
+      week: GeneralInputClass,
+      tel: GeneralInputClass,
+      url: GeneralInputClass,
+      search: GeneralInputClass,
+      color: GeneralInputClass,
+    },
+  },
+})
+
+type BaseInputVariants_TP = VariantProps<typeof baseInput>
+
 export interface BaseInputProps_TP
   extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string
-  override?: boolean
   autocomplete?: string
-  name: string
+  error?: boolean
 }
-
-const BASE_CLASS_NAME: string =
-  "shadows w-full rounded-md border-2 border-transparent px-4 py-[.30rem] outline-none focus:!border-2 focus:!border-mainGreen form-input"
 
 export const BaseInput = ({
   placeholder,
@@ -16,15 +46,11 @@ export const BaseInput = ({
   id,
   className,
   disabled,
-  override,
   autocomplete,
+  error,
   value,
   ...props
-}: BaseInputProps_TP) => {
-  var newClassName = `${BASE_CLASS_NAME} ${className || ""}`
-  if (override) {
-    newClassName = className || ""
-  }
+}: BaseInputVariants_TP & BaseInputProps_TP) => {
   return (
     <input
       type={type}
@@ -36,7 +62,11 @@ export const BaseInput = ({
           }
         : {})}
       disabled={disabled}
-      className={newClassName}
+      className={baseInput({
+        error,
+        className,
+        type,
+      })}
       autoComplete={autocomplete}
       {...{ value }}
       {...props}
