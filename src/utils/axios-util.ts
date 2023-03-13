@@ -5,7 +5,7 @@ import i18n from "../i18n"
 
 // const baseURL = import.meta.env.VITE_BASE_URL || "https://erb.alexon.live/"
 // const baseURL = "https://elfatha.alexon.live/"
-const baseURL = "https://jiovaniaff.com/"
+const baseURL = "http://localhost:3600/"
 const lang = i18n.language.startsWith("ar") ? "ar" : "en"
 
 const client = axios.create({
@@ -22,7 +22,7 @@ const client = axios.create({
 
 export const request = async <T>(options: AxiosRequestConfig): Promise<T> => {
   const authCookie = Cookies.get("auth")
-  const onSuccess = (response: AxiosResponse) => response.data.data
+  const onSuccess = (response: AxiosResponse) => response.data
   // const onError = (error: AxiosError) => error
   return await client({ ...options, headers: { Authorization: `Bearer ${authCookie}` } }).then(onSuccess)
 }
