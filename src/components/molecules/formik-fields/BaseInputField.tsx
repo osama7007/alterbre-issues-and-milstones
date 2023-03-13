@@ -23,10 +23,7 @@ export const BaseInputField = ({
   return (
     <>
       <div
-        className="mb-2 flex-col-reverse gap-0"
-        style={{
-          display: "flex",
-        }}
+        className="mb-2"
       >
         <Label htmlFor={id} {...labelProps} required={required}>
           {label}

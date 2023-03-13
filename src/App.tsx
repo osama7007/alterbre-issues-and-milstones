@@ -5,10 +5,8 @@ import { useIsRTL } from "./hooks/useIsRTL"
 // import { router } from "./routing/allRoutes"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { ToastContainer } from "react-toastify"
-import { NumberFormatterProvider } from "./context/settings/number-formatter"
-import { useLayoutEffect } from "react"
+import {  useLayoutEffect } from "react"
 import "react-toastify/dist/ReactToastify.css"
-import { AuthCtxProvider } from "./context/auth-and-perm/auth"
 ///
 /////////// Types
 ///
@@ -44,6 +42,7 @@ const App = () => {
     <>
       <AllRoutesProvider />
       <ToastContainer rtl={isRTL} />
+      <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
     </>
   )
 }

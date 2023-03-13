@@ -1,4 +1,5 @@
-import { AxiosRequestConfig } from "axios"
+import { AxiosError, AxiosRequestConfig } from "axios"
+import { FormikErrors } from "formik"
 
 /* 
 Permissions
@@ -20,4 +21,19 @@ export type MutateDataParameters_TP = {
     dataType?: PostedData_TP,
     values?: any,
     method?: keyof typeof postMethods_TP,
-    axiosOptions?: AxiosRequestConfig }
+    axiosOptions?: AxiosRequestConfig
+}
+
+export type CError = {
+    response: {
+        data: {
+            errors: FormikErrors<{ [key: string]: string; }>
+        }
+    }
+
+}
+
+// upload
+export interface CFile extends File {
+    preview: string
+}
