@@ -7,6 +7,7 @@ import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
 import { AdministrativeStructure } from "../pages/AdministrativeStructure"
+import { Stones } from "../pages/Stones"
 
 export const AllRoutesProvider = () => {
   return (
@@ -24,6 +25,8 @@ export const AllRoutesProvider = () => {
               <AdministrativeStructure title={t("administrative-structure")} />
             }
           />
+          {/* test */}
+          <Route path="/stones" element={<Stones title={t("Stones")} />} />
         </Route>
         <Route path="/login" element={<Login title={t("login")} />} />
       </Routes>
