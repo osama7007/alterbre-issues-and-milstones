@@ -25,6 +25,6 @@ module.exports = {
     },
   },
 
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"), require("tailwindcss-rtl")],
 }
 //   plugins: [...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {})],

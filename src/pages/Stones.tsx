@@ -134,7 +134,7 @@ export const Stones = ({ title }: Stone_TP) => {
                 <div className="flex flex-col gap-12 rounded-xl bg-lightGreen p-6">
                   <div>
                     <h4 className="flex items-center text-2xl font-bold">
-                      {/* <TabsIcon cStyle="ml-1.5" /> */}
+                      {/* <TabsIcon cStyle="me-1.5" /> */}
                       البيانات الاساسيه
                     </h4>
 
@@ -152,6 +152,27 @@ export const Stones = ({ title }: Stone_TP) => {
                         label="اسم المشتري"
                         name="number"
                         placeholder="اسم المشتري"
+                      />
+                      <BaseInputField
+                        type="text"
+                        id="number2"
+                        label="اسم المورد"
+                        name="number2"
+                        placeholder="اسم المورد "
+                      />
+                      <BaseInputField
+                        type="text"
+                        id="number2"
+                        label="اسم المورد"
+                        name="number2"
+                        placeholder="اسم المورد "
+                      />
+                      <BaseInputField
+                        type="text"
+                        id="number2"
+                        label="اسم المورد"
+                        name="number2"
+                        placeholder="اسم المورد "
                       />
                       <BaseInputField
                         type="text"
