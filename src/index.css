@@ -103,6 +103,21 @@ input:-webkit-autofill:active {
   overflow: hidden !important;
 }
 
+.react-date-picker {
+  display: inline;
+}
+
+.react-date-picker.active > .react-date-picker__wrapper {
+  @apply !rounded-md !border-2 !border-mainGreen;
+}
+
+.react-date-picker.error > .react-date-picker__wrapper {
+  @apply !rounded-md !border-2 !border-mainRed;
+}
+
+.react-date-picker__inputGroup input[type="number"] {
+  @apply pt-0 pb-0;
+}
 
 /*end sidebar  */
 .react-date-picker__wrapper {

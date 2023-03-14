@@ -96,7 +96,6 @@ export const Button = ({
       onClick={action}
       {...props}
     >
-      {/* <div className="flex items-center justify-center gap-2"> */}
       {loading && (
         <div className=" flex items-center justify-center">
           <div
@@ -108,7 +107,6 @@ export const Button = ({
       )}
 
       {children}
-      {/* </div> */}
     </button>
   )
 }

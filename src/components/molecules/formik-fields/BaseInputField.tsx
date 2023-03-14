@@ -1,5 +1,5 @@
 import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { BaseInput,BaseInputProps_TP } from "../../atoms/inputs/Base"
+import { BaseInput, BaseInputProps_TP } from "../../atoms/inputs/Base"
 import { Label } from "../../atoms/Label"
 export const BaseInputField = ({
   label,
@@ -18,16 +18,10 @@ export const BaseInputField = ({
   name: string
   type: string
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
-
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
     <>
-      <div
-        className="mb-2 flex-col-reverse gap-0"
-        style={{
-          display: "flex",
-        }}
-      >
+      <div className="mb-2">
         <Label htmlFor={id} {...labelProps} required={required}>
           {label}
         </Label>
@@ -35,7 +29,7 @@ export const BaseInputField = ({
           id={id}
           {...field}
           {...props}
-          error={meta.touched && meta.error ? true : false}
+          error={meta.touched && !!meta.error}
           autocomplete="off"
         />
       </div>
