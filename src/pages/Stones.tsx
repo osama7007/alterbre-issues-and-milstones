@@ -10,6 +10,8 @@ import { Button } from "../components/atoms/buttons/Button"
 import { TextAreaField } from "../components/molecules/formik-fields/TextAreaField"
 import { RadioField } from "../components/molecules/formik-fields/RadioField"
 import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxField"
+import { Card } from "../components/templates/Card"
+import { BoxesData } from "../components/molecules/BoxesData"
 
 /////////// Types
 ///
@@ -82,7 +84,14 @@ export const Stones = ({ title }: Stone_TP) => {
   ///
   /////////// IF CASES
   ///
-
+  const boxesData = [
+    {
+      id: "3278de93-0021-48ec-be9c-3583bad8b64b",
+      account: "إجمالي الضريبة",
+      value: undefined,
+      unit: "جرام",
+    },
+  ]
   ///
   /////////// EVENTS
   ///
@@ -97,8 +106,19 @@ export const Stones = ({ title }: Stone_TP) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>{" "}
-      <>
-        <div className="p-4 flex flex-col gap-4">
+      <div className="grid grid-cols-4 gap-4">
+        <Card
+          header="تاسيس شركه "
+          addLabel="اضافه"
+          viewLabel="عرض"
+          addHandler={() => {
+            console.log("first")
+          }}
+          viewHandler={() => {
+            console.log("ssss")
+          }}
+        />
+        {/* <div className="p-4 flex flex-col gap-4">
           <div className="pr-5">
             <h3 className="text-2xl font-bold">توريد متفرقات </h3>
           </div>
@@ -134,7 +154,6 @@ export const Stones = ({ title }: Stone_TP) => {
                 <div className="flex flex-col gap-12 rounded-xl bg-lightGreen p-6">
                   <div>
                     <h4 className="flex items-center text-2xl font-bold">
-                      {/* <TabsIcon cStyle="me-1.5" /> */}
                       البيانات الاساسيه
                     </h4>
 
@@ -205,8 +224,9 @@ export const Stones = ({ title }: Stone_TP) => {
               </div>
             </Form>
           </Formik>
-        </div>
-      </>
+        </div> */}
+      </div>
+      <BoxesData boxData={boxesData} header="اجمالي السند" />
     </>
   )
 }

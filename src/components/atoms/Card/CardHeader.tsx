@@ -1,15 +1,12 @@
-import { ReactNode } from "react"
-import { tv, type VariantProps } from "tailwind-variants"
+import { tv } from "tailwind-variants"
+import { Header } from "../Header"
 
-const headBase = tv({
+const cardHeader = tv({
   base: "flex w-full items-center justify-center gap-2  rounded-lg  py-2 px-8 text-white bg-mainGreen",
   variants: {
     color: {
       primary: "bg-mainOrange",
       secondary: "bg-mainGreen ",
-    },
-    count: {
-      true: "flex-col",
     },
   },
   compoundVariants: [
@@ -20,7 +17,7 @@ const headBase = tv({
 
     {
       color: "secondary",
-      className: "bg-mainOrange",
+      className: "bg-mainGreen",
     },
   ],
   defaultVariants: {
@@ -28,35 +25,37 @@ const headBase = tv({
   },
 })
 
-type ButtonProps_TP = {
-  title: string
+type cardHeader_TP = {
+  header: string
   variant?: "primary" | "secondary"
   className?: string
-  count?: boolean
+  Counter?: string
 }
 
-export const HeadBase = ({
-  title,
+export const CardHeader = ({
+  header,
   variant,
   className,
-  count = false,
-  ...props
-}: ButtonProps_TP) => {
+  Counter,
+}: cardHeader_TP) => {
   return (
     <div
-      className={headBase({
+      className={cardHeader({
         color: variant,
         className: className,
-        count: count,
       })}
     >
-      {count && (
-        <div className="flex w-full items-center justify-around">
-          {" "}
-          <p>{count}</p>
+      {Counter && (
+        <div className="flex w-full items-center justify-center">
+          <Header header={header} />
+          {Counter ? <p>{Counter}</p> : null}
         </div>
       )}
-      <h3>{title}</h3>
+      {!Counter && (
+        <div className="flex w-full items-center justify-around">
+          <Header header={header} />
+        </div>
+      )}
     </div>
   )
 }
