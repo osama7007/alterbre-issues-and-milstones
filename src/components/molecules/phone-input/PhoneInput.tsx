@@ -53,11 +53,9 @@ import {
       <>
         <div className="col-span-1 flex w-full flex-col gap-2">
           {label && (
-            <label>
                 <Label  htmlFor={name}>
                     {label}
                 </Label>
-            </label>
           )}
           <div className=" relative col-span-1 flex flex-col bg-white">
             <PhoneInput
