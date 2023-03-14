@@ -12,7 +12,7 @@ export const Add = ({
 }: AddProps_TP) => {
   return (
     <IoAddOutline
-      className={` fill-[#464646] cursor-pointer  ${className}`}
+      className={` cursor-pointer  ${className}`}
       onClick={action}
       {...props}
     />

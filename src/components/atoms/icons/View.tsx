@@ -7,7 +7,7 @@ type ViewProps_TP = {
 export const View = ({ className, action, loading, ...props }: ViewProps_TP) => {
   return (
     <GrView
-      className={` fill-[#464646] cursor-pointer  ${className}`}
+      className={`cursor-pointer  ${className}`}
       onClick={action}
       {...props}
     />

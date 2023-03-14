@@ -13,7 +13,7 @@ export const Edit = ({
 
   return (
     <AiFillEdit
-      className={` fill-[#464646] cursor-pointer  ${className}`}
+      className={`cursor-pointer  ${className}`}
       onClick={action}
       {...props}
     />
