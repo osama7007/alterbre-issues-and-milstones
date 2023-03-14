@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  /* margin: 5px 0px; */
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid #295e56;
+  /* border-radius: 50%; */
+  /* transform: translateY(-0.01em); */
+  /* display: grid; */
+  place-content: center;
+  color: #295e56;
+}
+
 @layer base {
   * {
     font-family: "Almarai" !important;
@@ -9,7 +25,7 @@
   }
 
   input {
-    @apply text-mainBlack !outline-none;
+    @apply text-mainBlack !outline-none  focus:!outline-none focus:!border-transparent focus:!ring-0 !caret-mainGreen;
   }
 
   .sidebar ul > li:not(:last-child) {
@@ -31,10 +47,7 @@
   .inputStyles {
     @apply shadows w-full rounded-md px-4 py-[.44rem];
   }
-  /* Carousel */
-  /* .carousel-root *{
-    direction: rtl;
-  } */
+
   .globalInputs {
     @apply shadows w-full rounded-md border-2 border-transparent    px-4 py-[.30rem] outline-none focus:!border-2 focus:!border-mainGreen;
   }
@@ -96,23 +109,7 @@ input:-webkit-autofill:active {
   border-radius: 10px;
   padding: 5px;
 }
-/*input selector */
-.css-1u9des2-indicatorSeparator {
-  @apply hidden;
-}
-.css-13cymwt-control {
-  border-radius: 8px !important;
-}
-.css-1xc3v61-indicatorContainer {
-  background: #e9edec;
-  border-radius: 8px 0 0 8px;
-}
-/* sidebar */
-.daWgIu {
-  overflow: hidden !important;
-}
 
-/*end sidebar  */
 .react-date-picker__wrapper {
   @apply !rounded-md border-transparent bg-white px-4 py-[.26rem] text-mainBlack  shadow-md;
 }
@@ -152,7 +149,6 @@ input:-webkit-autofill:active {
   height: 10px !important;
   overflow: hidden;
 }
-/*end coustom styles */
 
 /*  accordion section  */
 

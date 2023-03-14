@@ -42,23 +42,25 @@ export const PermissionGroup = ({
 
   ///
   return (
-    <div>
-      <h2>{name}</h2>
-      {permissions.map(({ id, name, front_key }) => (
-        <div key={id}>
-          <CheckBoxField
-            label={name}
-            type="checkbox"
-            id={id}
-            name={front_key}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              e.target.checked
-                ? setFieldValue(front_key, id)
-                : setFieldValue(front_key, "")
-            }}
-          />
-        </div>
-      ))}
+    <div className="flex flex-col gap-4">
+      <h4 className="flex items-center  text-lg ">{name}</h4>
+      <div className="grid grid-cols-4 gap-8">
+        {permissions.map(({ id, name, front_key }) => (
+          <div key={id}>
+            <CheckBoxField
+              label={name}
+              type="checkbox"
+              id={id}
+              name={front_key}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                e.target.checked
+                  ? setFieldValue(front_key, id)
+                  : setFieldValue(front_key, "")
+              }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
