@@ -1,9 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Suspense } from "react"
 import ReactDOM from "react-dom/client"
 import { HelmetProvider } from "react-helmet-async"
 import { ProSidebarProvider } from "react-pro-sidebar"
 import { BrowserRouter } from "react-router-dom"
 import App from "./App"
+import { Loading } from "./components/organisms/Loading"
 import { AuthCtxProvider } from "./context/auth-and-perm/auth"
 import { NumberFormatterProvider } from "./context/settings/number-formatter"
 import "./index.css"
@@ -16,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <NumberFormatterProvider>
           <HelmetProvider>
             <ProSidebarProvider>
-              <App />
+              <Suspense fallback={<Loading mainTitle="جاري التحميل" />}>
+                <App />
+              </Suspense>
             </ProSidebarProvider>
           </HelmetProvider>
         </NumberFormatterProvider>

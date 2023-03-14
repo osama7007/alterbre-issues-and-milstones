@@ -63,7 +63,7 @@ export const sideBarItems: MenuItem_TP[] = [
                     {
                         id: crypto.randomUUID(),
                         label: "سند توريد متفرقات ",
-                        link: "/contracts/accessories",
+                        link: "accessories",
                         icon: BiDiamond,
                     },
                 ],
