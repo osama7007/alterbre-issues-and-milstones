@@ -38,7 +38,7 @@ export const Radio = ({
           ...props,
           type: "radio",
           name,
-          // className: newClassName,
+          className: className,
           disabled,
           checked,
         }}

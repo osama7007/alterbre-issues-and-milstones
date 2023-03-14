@@ -29,7 +29,7 @@ export const BaseInputField = ({
           id={id}
           {...field}
           {...props}
-          error={meta.touched && meta.error ? true : false}
+          error={meta.touched && !!meta.error}
           autocomplete="off"
         />
       </div>
