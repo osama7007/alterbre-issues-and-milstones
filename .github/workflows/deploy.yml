@@ -20,10 +20,11 @@ jobs:
           password: HaCkErB0y
           port: 22
           script: |
-            if [ -d /home/front_stage/ && -d /home/front_stage/.git/ ]; then
+            if [ -d /home/front_stage/ ]  && [ -d /home/front_stage/.git/ ]; then
               cd /home/front_stage/
               git pull
             else
+              rm -rf /home/front_stage/
               git clone https://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@github.com/saver711/altebrNew /home/front_stage/
               cd /home/front_stage/
             fi
