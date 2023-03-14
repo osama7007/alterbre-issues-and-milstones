@@ -25,6 +25,13 @@ module.exports = {
     },
   },
 
-  plugins: [require("@tailwindcss/forms"), require("tailwindcss-rtl")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwindcss-rtl"),
+    require("tailwind-scrollbar"),
+  ],
+  variants: {
+    scrollbar: ["rounded"],
+  },
 }
 //   plugins: [...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {})],

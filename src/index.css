@@ -87,6 +87,21 @@ input[type="radio"] {
 }
 /* end base */
 
+/* UTILITIES */
+@layer utilities {
+  .scrollbar {
+    @apply scrollbar-thin scrollbar-thumb-mainGreen scrollbar-track-green hover:scrollbar-thumb-mainOrange;
+  }
+}
+/* ./UTILITIES */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 .inputTextFiled {
   width: 13.75rem;
   box-shadow: 0.5px 0.5px 6px rgba(0, 0, 0, 0.1);
@@ -216,3 +231,15 @@ input[type="radio"] {
   padding: 3px;
   max-width: 20rem;
 }
+
+/* 
+LIGHTBOX
+*/
+/* .yarl__thumbnails_thumbnail:not(:only-child):first-child {
+  display: none;
+} */
+
+/* .yarl__thumbnails_thumbnail:first-child:nth-last-child(5),
+.yarl__thumbnails_thumbnail:first-child:nth-last-child(5) ~ .yarl__thumbnails_thumbnail:nth-child(2) {
+    display: none;
+} */

@@ -11,7 +11,7 @@ import { BaseInputField } from "../../components/molecules/formik-fields/BaseInp
 import { Loading } from "../../components/organisms/Loading"
 import { useFetch } from "../../hooks/useFetch"
 import { useMutate } from "../../hooks/useMutate"
-import { CError } from "../../types"
+import { CError_TP } from "../../types"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
 import { PermissionGroup } from "./PermissionGroup"
@@ -72,7 +72,7 @@ export const AdministrativeStructure = ({
       (perm) => (asyncInitValues[perm.front_key as keyof Permission_TP] = "")
     )
   )
-  const errors = rulePostError as CError | null
+  const errors = rulePostError as CError_TP | null
   ///
   /////////// STATES
   ///
@@ -115,7 +115,7 @@ export const AdministrativeStructure = ({
             validationSchema={schema()}
           >
             {({ values, touched }) => (
-              <InnerForm errors={errors?.response.data.errors}>
+              <InnerForm errors={errors?.response.data.data}>
                 <Form>
                   <div className="flex flex-col gap-6 rounded-xl bg-lightGreen p-6">
                     <div className="flex flex-col gap-6 mt-4 rounded-xl bg-flatWhite py-6 px-8">
