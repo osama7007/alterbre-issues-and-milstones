@@ -20,7 +20,7 @@ jobs:
           password: HaCkErB0y
           port: 22
           script: |
-            if [ -d /home/front_stage/ ]; then
+            if [ -d /home/front_stage/ && -d /home/front_stage/.git/ ]; then
               cd /home/front_stage/
               git pull
             else
