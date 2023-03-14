@@ -20,8 +20,8 @@ export const BaseInputField = ({
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
-    <>
-      <div className="mb-2">
+    <div className="col-span-1 relative ">
+      <div className="flex flex-col gap-1">
         <Label htmlFor={id} {...labelProps} required={required}>
           {label}
         </Label>
@@ -35,9 +35,9 @@ export const BaseInputField = ({
       </div>
       <ErrorMessage
         component="p"
-        className="text-mainRed mt-1"
+        className="text-red-500 absolute -bottom-6 w-full"
         name={field.name}
       />
-    </>
+    </div>
   )
 }

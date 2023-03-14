@@ -28,7 +28,7 @@ export const Radio = ({
 }: RadioProps_TP & Props_TP) => {
   // var newClassName = `${BASE_CLASS_NAME} ${className ? className : ""}`
   const isRTL = useIsRTL()
-  const marginClass = isRTL ? "mr-2" : "ml-2"
+  const marginClass = isRTL ? "ms-2" : "me-2"
 
   return (
     <div className="flex items-center">
