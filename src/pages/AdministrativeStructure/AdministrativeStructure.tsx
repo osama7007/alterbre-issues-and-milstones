@@ -9,7 +9,7 @@ import { Spinner } from "../../components/atoms/UI/Spinner"
 import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
 import { useFetch } from "../../hooks/useFetch"
 import { useMutate } from "../../hooks/useMutate"
-import { CError } from "../../types"
+import { CError_TP } from "../../types"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
 import { PermissionGroup } from "./PermissionGroup"
@@ -70,7 +70,7 @@ export const AdministrativeStructure = ({
       (perm) => (asyncInitValues[perm.front_key as keyof Permission_TP] = "")
     )
   )
-  const errors = rulePostError as CError | null
+  const errors = rulePostError as CError_TP | null
   ///
   /////////// STATES
   ///
@@ -107,7 +107,7 @@ export const AdministrativeStructure = ({
             validationSchema={schema()}
           >
             {({ values, touched }) => (
-              <InnerForm errors={errors?.response.data.errors}>
+              <InnerForm errors={errors?.response.data.data}>
                 <Form>
                   <BaseInputField
                     value={values.name}
