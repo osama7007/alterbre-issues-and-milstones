@@ -52,6 +52,7 @@ export const BaseInput = ({
   value,
   ...props
 }: BaseInputVariants_TP & BaseInputProps_TP) => {
+
   return (
     <input
       type={type}

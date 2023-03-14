@@ -11,7 +11,7 @@ export const CheckBoxField = ({
   id,
   ...props
 }: { label: string } & Props_TP) => {
-  const [field, meta] = useField(props as FieldHookConfig<string>)
+  const [ field, meta ] = useField(props as FieldHookConfig<string>)
   return (
     <div className="mb-2">
       <Checkbox

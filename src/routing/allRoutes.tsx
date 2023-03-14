@@ -28,7 +28,7 @@ export const AllRoutesProvider = () => {
             }
           />
           {/* test */}
-          <Route path="/stones" element={<Stones title={t("Stones")} />} />
+          <Route path="/accessories" element={<Stones title={t("Stones")} />} />
         </Route>
         <Route path="/login" element={<Login title={t("login")} />} />
       </Routes>
