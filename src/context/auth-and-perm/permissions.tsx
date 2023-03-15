@@ -1,9 +1,9 @@
 import { createContext, ReactNode } from "react"
-import { permissionsRule } from "../../types"
+import { permissionsRule_TP } from "../../types"
 ///
 ///////// TYPES
 type PermissionContextType = {
-  isAllowedTo: (permissions: string[], rule?: permissionsRule) => boolean
+  isAllowedTo: (permissions: string[], rule?: permissionsRule_TP) => boolean
 }
 
 type PermissionCtxProviderProps_TP = {
@@ -30,7 +30,7 @@ export const PermissionCtxProvider = ({
   ///
   const isAllowedTo = (
     permissions: string[],
-    rule: permissionsRule = "AND"
+    rule: permissionsRule_TP = "AND"
   ) => {
     switch (rule) {
       case "AND":

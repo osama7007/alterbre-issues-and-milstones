@@ -3,7 +3,7 @@
 import { Form, Formik } from "formik"
 import { Helmet } from "react-helmet-async"
 import { DropFile } from "../components/molecules/DropFile"
-import { CFile } from "../types"
+import { CFile_TP } from "../types"
 import * as Yup from "yup"
 import { Button } from "../components/atoms/buttons/Button"
 ///
@@ -14,7 +14,7 @@ type SystemProps_TP = {
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
-const initialValues: { files: CFile[]; media: CFile[] } = {
+const initialValues: { files: CFile_TP[]; media: CFile_TP[] } = {
   files: [],
   media: [],
 }

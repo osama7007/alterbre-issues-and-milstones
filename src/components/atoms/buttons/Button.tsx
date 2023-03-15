@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
+import { Spinner } from "../UI/Spinner"
 
 const button = tv({
   base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
@@ -96,7 +97,6 @@ export const Button = ({
       onClick={action}
       {...props}
     >
-      {/* <div className="flex items-center justify-center gap-2"> */}
       {loading && (
         <div className=" flex items-center justify-center">
           <div
@@ -108,7 +108,6 @@ export const Button = ({
       )}
 
       {children}
-      {/* </div> */}
     </button>
   )
 }

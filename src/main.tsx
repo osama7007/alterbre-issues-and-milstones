@@ -18,11 +18,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <NumberFormatterProvider>
           <HelmetProvider>
             <ProSidebarProvider>
-              <Suspense
-                fallback={
-                  <Loading subTitle="تحميل الترجمة" mainTitle="تحميل" />
-                }
-              >
+              <Suspense fallback={<Loading mainTitle="جاري التحميل" />}>
                 <App />
               </Suspense>
             </ProSidebarProvider>

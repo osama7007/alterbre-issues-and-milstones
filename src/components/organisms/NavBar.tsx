@@ -12,19 +12,19 @@ const NavBar = () => {
   return (
     <div className="w-100 flex h-14 items-center justify-between p-2">
       <div className="w-100 flex items-center gap-12 py-6 px-4">
-        <img src={logo} className="mr-3 h-12 w-12 object-contain" alt="logo" />
+        <img src={logo} className="ms-3 h-12 w-12 object-contain" alt="logo" />
         <Can rule="OR" access={["view.cities"]}>
-          <form className="flex items-center rounded-md border-2 border-slate-200 p-1">
+          <form className="flex items-center rounded-md border-2 border-slate-200 p-1 ">
             <input
               type="search"
               placeholder="بحث"
-              className=" placeholder-slate-400 "
+              className=" placeholder-slate-400 border-transparent p-0"
             />
             <BiSearchAlt className="fill-slate-400" />
           </form>
         </Can>
       </div>
-      <div className="ml-2 flex  items-center gap-4">
+      <div className="me-2 flex  items-center gap-4">
         <IoSettingsOutline
           onClick={logOutHandler}
           className="icon fill-mainBlack cursor-pointer"
