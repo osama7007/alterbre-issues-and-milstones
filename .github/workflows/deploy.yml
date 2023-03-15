@@ -25,7 +25,7 @@ jobs:
               git pull
             else
               rm -rf /home/front_stage/
-              git clone https://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@github.com/saver711/altebrNew /home/front_stage/
+              git clone https://$GH_TOKEN@github.com/saver711/altebrNew /home/front_stage/
               cd /home/front_stage/
             fi
             if [-d .node_modules/]; then
@@ -33,5 +33,10 @@ jobs:
             fi
             npm install
 
-            touch action_test.txt
-            echo "test worked" > action_test.txt
+            # check if .env exists
+            if [ -f .env ]; then
+              chown www:www .env
+            else
+              touch .env
+              chown www:www .env
+            fi
