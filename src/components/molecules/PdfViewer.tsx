@@ -36,12 +36,12 @@ export const PdfViewer = ({
   /////////// VARIABLES
   ///
   const defaultLayoutPluginInstance = defaultLayoutPlugin({})
-//   const thumbnailPluginInstance = thumbnailPlugin()
-//   const { Cover } = thumbnailPluginInstance
+  //   const thumbnailPluginInstance = thumbnailPlugin()
+  //   const { Cover } = thumbnailPluginInstance
 
-//   const pageThumbnailPluginInstance = pageThumbnailPlugin({
-//     PageThumbnail: <Cover getPageIndex={() => 1} />,
-//   })
+  //   const pageThumbnailPluginInstance = pageThumbnailPlugin({
+  //     PageThumbnail: <Cover getPageIndex={() => 1} />,
+  //   })
   ///
   /////////// CUSTOM HOOKS
   ///
@@ -62,12 +62,18 @@ export const PdfViewer = ({
     // add hover effect
     // تعديل الهايت هنا
     <div
-      className={`cursor-pointer ${showControls ? 'h-full' : 'h-[30rem]'}`}
+      className={`cursor-pointer relative  w-full group ${
+        showControls ? "h-full" : "h-32"
+      }`}
       onClick={() => action && action()}
     >
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
         <Viewer
-          defaultScale={SpecialZoomLevel.PageFit}
+          defaultScale={
+            !showControls
+              ? SpecialZoomLevel.PageFit
+              : SpecialZoomLevel.ActualSize
+          }
           localization={isRTL ? ar_AE : (en_US as unknown as LocalizationMap)}
           plugins={
             showControls ? [defaultLayoutPluginInstance] : []
@@ -76,6 +82,11 @@ export const PdfViewer = ({
           fileUrl={file.preview}
         />
       </Worker>
+      {!showControls && (
+        <span className="absolute top-9 left-0 text-[.60rem] text-center bg-black bg-opacity-10 hidden  group-hover:flex  items-center justify-center">
+          Click on file to preview
+        </span>
+      )}
     </div>
   )
 }

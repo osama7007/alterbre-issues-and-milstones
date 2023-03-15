@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants"
-import { Header } from "../Header"
+import { Header } from "../../atoms/Header"
 
 const cardHeader = tv({
   base: "flex w-full items-center justify-center gap-2  rounded-lg  py-2 px-8 text-white bg-mainGreen",
@@ -48,7 +48,7 @@ export const CardHeader = ({
       {Counter && (
         <div className="flex w-full items-center justify-center">
           <Header header={header} />
-          {Counter ? <p>{Counter}</p> : null}
+          <p>{Counter}</p>
         </div>
       )}
       {!Counter && (
