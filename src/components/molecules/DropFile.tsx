@@ -330,7 +330,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                     <div className="grid grid-flow-row-dense grid-cols-2 items-center justify-center gap-8 ">
                       <div className=" col-span-1  w-full ">
                         <AiFillDelete
-                          className=" hover:fill-mainRed cursor-pointer"
+                          className=" hover:fill-red-500 fill-mainRed cursor-pointer"
                           onClick={() => deleteFileHandler(pdf.id)}
                         />
                         <PdfViewer
