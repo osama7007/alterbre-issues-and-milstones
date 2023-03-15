@@ -2,7 +2,7 @@ name: remote ssh command
 on:
   push:
     branches:
-      - khalid
+      - dev
 jobs:
   build:
     name: Update on server
@@ -25,7 +25,7 @@ jobs:
               git pull
             else
               rm -rf /home/front_stage/
-              git clone https://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@github.com/saver711/altebrNew /home/front_stage/
+              git clone https://$GH_TOKEN@github.com/saver711/altebrNew /home/front_stage/
               cd /home/front_stage/
             fi
             if [-d .node_modules/]; then
