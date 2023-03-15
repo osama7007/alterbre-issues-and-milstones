@@ -1,83 +1,73 @@
 /////////// IMPORTS
-import {
-    ErrorMessage,
-    FormikErrors,
-    FormikSharedConfig,
-    FormikTouched,
-    useFormikContext
-  } from "formik"
-  import PhoneInput from "react-phone-number-input"
-  import { Label } from "../../atoms/Label"
-  
+import { ErrorMessage, useFormikContext } from "formik"
+import PhoneInput from "react-phone-number-input"
+import { useState , useRef } from "react"
+import flags from "react-phone-number-input/flags"
+import { Label } from "../../atoms/Label"
+import 'react-phone-number-input/style.css'
+import { tv } from "tailwind-variants"
+///
+/////////// Types
+///
+type PhoneInputs_TP = {
+  label: string
+  name: "phone"
+  placeholder: string
+}
+/////////// HELPER VARIABLES & FUNCTIONS
+///
+const phoneInput = tv({
+    base: "rounded-md border-2 border-transparent focus:!border-2 focus:!border-mainGreen form-input px-4 py-[.30rem] w-full shadows bg-white",
+    variants: {
+        errors: {
+        true: "border-mainRed",
+      },
+      isTouched:{
+        true: "!rounded-md !border-2 !border-mainRed"
+      }
+    },
+  })
+///
+export const PhoneInputs = ({ label, name, placeholder }: PhoneInputs_TP) => {
+  /////////// VARIABLES
   ///
-  /////////// Types
   ///
-  type PhoneInputs_TP = {
-    error: FormikErrors<any>
-    touched: FormikTouched<any>
-    flag: any
-    label: string
-    name: string
-    placeholder: string
-  }
-  /////////// HELPER VARIABLES & FUNCTIONS
+  /////////// CUSTOM HOOKS
   ///
-  
+  const { setFieldValue, errors } = useFormikContext<any>()
   ///
-  export const PhoneInputComp = ({
-    error,
-    touched,
-    flag,
-    label,
-    name,
-    placeholder,
-  }: PhoneInputs_TP) => {
-    /////////// VARIABLES
-    ///
-    ///
-    /////////// CUSTOM HOOKS
-    ///
-    const { setFieldValue } = useFormikContext<FormikSharedConfig>()
-    ///
-    /////////// STATES
-    ///
-  
-    ///
-    /////////// SIDE EFFECTS
-    ///
-    /////////// FUNCTIONS | EVENTS | IF CASES
-    ///
-  
-    ///
-    return (
-      <>
-        <div className="col-span-1 flex w-full flex-col gap-2">
-          {label && (
-            <label>
-                <Label  htmlFor={name}>
-                    {label}
-                </Label>
-            </label>
-          )}
-          <div className=" relative col-span-1 flex flex-col bg-white">
-            <PhoneInput
-              className={
-                touched && error
-                  ? "globalInputs !rounded-md !border-2 !border-mainRed"
-                  : "globalInputs"
-              }
-              flags={flag}
-              placeholder={placeholder}
-              name={name}
-              onChange={(number: number | string |undefined) => {
-                setFieldValue(name, number)
-              }}
-              style={{ direction: "ltr" }}
-            />
-           <ErrorMessage name={name} component="p" className="text-xs text-red-500"/>
-          </div>
-        </div>
-      </>
-    )
-  }
-  
+  /////////// STATES
+  ///
+  const [isTouched, setIsTouched] = useState(false)
+  ///
+  /////////// SIDE EFFECTS
+  ///
+  /////////// FUNCTIONS | EVENTS | IF CASES
+  ///
+
+  ///
+  return (
+    <>
+      <div className=" relative col-span-1 flex flex-col">
+      <Label htmlFor={name}>{label}</Label>
+        <PhoneInput
+          onBlur={() => setIsTouched(true)}
+          className={phoneInput({
+            errors:!!errors.phone,
+            isTouched
+          })}
+          flags={flags}
+          placeholder={placeholder}
+          name={name}
+          onChange={(number: number | string | undefined) => {
+            setFieldValue(name, number)
+          }}
+          style={{ direction: "ltr" }}
+        />
+        <ErrorMessage component="p" className="text-red-500 absolute -bottom-6 w-full"
+        name={name}
+      />
+      </div>
+    </>
+  )
+}
