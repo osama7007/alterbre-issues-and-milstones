@@ -1,8 +1,9 @@
-import DatePicker from "react-date-picker"
-import { Label } from "../../atoms/Label"
-import { MdOutlineDateRange } from "react-icons/md"
+import { useFormikContext } from "formik"
 import { useState } from "react"
+import DatePicker from "react-date-picker"
+import { MdOutlineDateRange } from "react-icons/md"
 import { tv } from "tailwind-variants"
+import { Label } from "../../atoms/Label"
 
 const dateInputField = tv({
   variants: {
@@ -18,26 +19,30 @@ const dateInputField = tv({
 export const DateInputField = ({
   label,
   name,
-  setFieldValue,
   value,
-  error,
   maxDate,
   minDate,
   labelProps,
 }: {
   label: string
   name: string
-  setFieldValue: any
   value: Date
-  error: string
   maxDate?: Date
   minDate?: Date
   labelProps?: {
     [key: string]: any
   }
 }) => {
+  const { setFieldValue, setFieldTouched, errors, touched } = useFormikContext<{
+    [key: string]: any
+  }>()
   const [dateActive, SetDateActive] = useState(false)
-  const [touched, setIsTouched] = useState(false)
+  const [isTouched, setIsTouched] = useState(touched[name])
+
+  const handleBlur = () => {
+    setFieldTouched(name, true)
+    setIsTouched(true)
+  }
 
   return (
     <div className="mb-2">
@@ -48,10 +53,12 @@ export const DateInputField = ({
         onCalendarOpen={() => SetDateActive(true)}
         onCalendarClose={() => {
           SetDateActive(false)
-          setIsTouched(true)
+          handleBlur()
         }}
         value={value}
-        onChange={setFieldValue.bind(null, [name])}
+        onChange={(date: Date) => {
+          setFieldValue(name, date)
+        }}
         maxDate={maxDate}
         minDate={minDate}
         format="d-M-y"
@@ -60,12 +67,13 @@ export const DateInputField = ({
         }
         className={dateInputField({
           active: dateActive,
-          error: touched && !!error,
+          error: isTouched && !!errors[name],
         })}
         required
       />
-      {touched && error && <p className="text-mainRed mt-1">{error}</p>}
-      {/* <ErrorMessage component="p" className="text-mainRed mt-1" name={name} /> */}
+      {touched && errors[name] && (
+        <p className="text-mainRed mt-1">{errors[name]?.toString()}</p>
+      )}
     </div>
   )
 }
