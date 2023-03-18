@@ -1,6 +1,5 @@
 import { useFormikContext } from "formik"
-import React from "react"
-// tailwind merge
+import { createElement } from "react"
 import { twMerge } from "tailwind-merge"
 
 export const FormikError = ({
@@ -17,11 +16,8 @@ export const FormikError = ({
   }>()
   const error = formikErrors[name]
   const isTouched = formikTouched[name]
-  if (name === "date") {
-    console.log(error, isTouched)
-  }
   return !!error && isTouched
-    ? React.createElement(
+    ? createElement(
         as,
         { className: twMerge(className, "text-mainRed") },
         error.toString()

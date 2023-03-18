@@ -35,13 +35,7 @@ export const DateInputField = ({
     useFormikContext<{
       [key: string]: any
     }>()
-  const [dateActive, SetDateActive] = useState(false)
-  const [isTouched, setIsTouched] = useState(touched[name])
-
-  const handleBlur = () => {
-    setFieldTouched(name, true)
-    setIsTouched(true)
-  }
+  const [dateActive, setDateActive] = useState(false)
 
   return (
     <div className="mb-2">
@@ -49,15 +43,17 @@ export const DateInputField = ({
         {label}
       </Label>
       <DatePicker
-        onCalendarOpen={() => SetDateActive(true)}
+        onCalendarOpen={() => {
+          setDateActive(true)
+          setFieldTouched(name, true, true)
+        }}
         onCalendarClose={() => {
-          SetDateActive(false)
-          handleBlur()
+          setDateActive(false)
+          setFieldTouched(name, true, true)
         }}
         value={values[name] ? new Date(values[name]) : new Date()}
         onChange={(date: Date) => {
-          setFieldValue(name, date)
-          handleBlur()
+          setFieldValue(name, date, true)
         }}
         maxDate={maxDate}
         minDate={minDate}
@@ -67,7 +63,7 @@ export const DateInputField = ({
         }
         className={dateInputField({
           active: dateActive,
-          error: isTouched && !!errors[name],
+          error: touched[name] && !!errors[name],
         })}
         required
       />

@@ -24,7 +24,7 @@ export const RadioField = ({
         id={id}
         name={props.name}
         className={`${errors[props.name] && "ring-2 ring-mainRed"}`}
-        checked={values[props.name]}
+        defaultChecked={values[props.name]}
         onChange={(e: any) => {
           setFieldValue(props.name, e.target.checked)
         }}
