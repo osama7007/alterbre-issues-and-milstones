@@ -10,7 +10,6 @@ const baseInput = tv({
     },
     type: {
       checkbox:
-      
         "w-4 h-4 text-mainGreen border-gray-300 rounded focus:ring-mainGreen form-checkbox shadow-none",
       radio:
         "w-5 h-5 form-radio rounded-full focus:ring-mainGreen border-gray-300",
@@ -27,12 +26,6 @@ const baseInput = tv({
       url: GeneralInputClass,
       search: GeneralInputClass,
       color: GeneralInputClass,
-      // ...{
-      //   ['text', 'email', 'password', 'number', 'date', 'time', 'datetime', 'month', 'week', 'tel', 'url', 'search', 'color'].reduce((acc: string, type: typeof GeneralInputClass ) => {
-      //     acc[type] = GeneralInputClass
-      //     return acc
-      //   }, {})
-      // }
     },
   },
 })

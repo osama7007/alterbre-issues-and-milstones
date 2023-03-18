@@ -1,7 +1,7 @@
 /////////// IMPORTS
 import { useFormikContext } from "formik"
 import PhoneInput from "react-phone-number-input"
-import { Label } from "../../atoms/Label"
+import { Label } from "../../atoms"
 
 ///
 /////////// Types

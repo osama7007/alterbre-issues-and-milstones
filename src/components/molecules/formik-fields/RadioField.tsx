@@ -1,4 +1,5 @@
 import { useFormikContext } from "formik"
+import { FormikError } from "../../atoms"
 import { Radio } from "../Radio"
 // props type
 type Props_TP = {
@@ -31,9 +32,7 @@ export const RadioField = ({
           setFieldTouched(props.name, true)
         }}
       />
-      {touched[props.name] && !!errors[props.name] ? (
-        <p className="text-mainRed text-xs">{errors[props.name]?.toString()}</p>
-      ) : null}
+      <FormikError name={props.name} />
     </div>
   )
 }

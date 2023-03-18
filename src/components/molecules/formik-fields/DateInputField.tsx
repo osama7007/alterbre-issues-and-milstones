@@ -3,7 +3,7 @@ import { useState } from "react"
 import DatePicker from "react-date-picker"
 import { MdOutlineDateRange } from "react-icons/md"
 import { tv } from "tailwind-variants"
-import { Label } from "../../atoms/Label"
+import { FormikError, Label } from "../../atoms"
 
 const dateInputField = tv({
   variants: {
@@ -71,9 +71,7 @@ export const DateInputField = ({
         })}
         required
       />
-      {isTouched && errors[name] && (
-        <p className="text-mainRed mt-1">{errors[name]?.toString()}</p>
-      )}
+      <FormikError name={name} />
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { useFormikContext } from "formik"
-import { Label } from "../../atoms/Label"
-import { BaseInput } from "../../atoms/inputs/Base"
+import { BaseInput, FormikError, Label } from "../../atoms"
 
 export const BaseInputField = ({
   label,
@@ -44,9 +43,7 @@ export const BaseInputField = ({
           }}
         />
       </div>
-      {touched[props.name] && !!errors[props.name] ? (
-        <p className="text-mainRed text-xs">{errors[props.name]?.toString()}</p>
-      ) : null}
+      <FormikError name={props.name} />
     </div>
   )
 }

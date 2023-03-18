@@ -1,4 +1,5 @@
 import { useFormikContext } from "formik"
+import { FormikError } from "../../atoms"
 import { Checkbox } from "../Checkbox"
 
 // props type
@@ -11,10 +12,9 @@ export const CheckBoxField = ({
   id,
   ...props
 }: { label: string } & Props_TP) => {
-  const { setFieldValue, setFieldTouched, errors, touched, values } =
-    useFormikContext<{
-      [key: string]: any
-    }>()
+  const { setFieldValue, setFieldTouched, errors, values } = useFormikContext<{
+    [key: string]: any
+  }>()
   return (
     <div className="mb-2">
       <Checkbox
@@ -31,9 +31,7 @@ export const CheckBoxField = ({
           setFieldTouched(props.name, true)
         }}
       />
-      {touched[props.name] && !!errors[props.name] ? (
-        <p className="text-mainRed text-xs">{errors[props.name]?.toString()}</p>
-      ) : null}
+      <FormikError name={props.name} />
     </div>
   )
 }
