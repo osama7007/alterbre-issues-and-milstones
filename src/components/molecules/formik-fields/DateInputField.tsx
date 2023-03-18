@@ -19,23 +19,22 @@ const dateInputField = tv({
 export const DateInputField = ({
   label,
   name,
-  value,
   maxDate,
   minDate,
   labelProps,
 }: {
   label: string
   name: string
-  value: Date
   maxDate?: Date
   minDate?: Date
   labelProps?: {
     [key: string]: any
   }
 }) => {
-  const { setFieldValue, setFieldTouched, errors, touched } = useFormikContext<{
-    [key: string]: any
-  }>()
+  const { setFieldValue, setFieldTouched, errors, touched, values } =
+    useFormikContext<{
+      [key: string]: any
+    }>()
   const [dateActive, SetDateActive] = useState(false)
   const [isTouched, setIsTouched] = useState(touched[name])
 
@@ -55,7 +54,7 @@ export const DateInputField = ({
           SetDateActive(false)
           handleBlur()
         }}
-        value={value}
+        value={values[name] ? new Date(values[name]) : new Date()}
         onChange={(date: Date) => {
           setFieldValue(name, date)
         }}

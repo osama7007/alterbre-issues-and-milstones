@@ -1,6 +1,7 @@
-import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { BaseInput, BaseInputProps_TP } from "../../atoms/inputs/Base"
+import { useFormikContext } from "formik"
 import { Label } from "../../atoms/Label"
+import { BaseInput } from "../../atoms/inputs/Base"
+
 export const BaseInputField = ({
   label,
   id,
@@ -18,7 +19,11 @@ export const BaseInputField = ({
   name: string
   type: string
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
-  const [field, meta] = useField(props as FieldHookConfig<string>)
+  const { setFieldValue, setFieldTouched, errors, touched, values } =
+    useFormikContext<{
+      [key: string]: any
+    }>()
+
   return (
     <div className="col-span-1 relative ">
       <div className="flex flex-col gap-1">
@@ -27,17 +32,21 @@ export const BaseInputField = ({
         </Label>
         <BaseInput
           id={id}
-          {...field}
           {...props}
-          error={meta.touched && !!meta.error}
+          value={values[props.name]}
+          error={touched[props.name] && !!errors[props.name]}
           autocomplete="off"
+          onBlur={() => {
+            setFieldTouched(props.name, true)
+          }}
+          onChange={(e) => {
+            setFieldValue(props.name, e.target.value)
+          }}
         />
       </div>
-      <ErrorMessage
-        component="p"
-        className="text-red-500 absolute -bottom-6 w-full"
-        name={field.name}
-      />
+      {touched[props.name] && !!errors[props.name] ? (
+        <p className="text-mainRed text-xs">{errors[props.name]?.toString()}</p>
+      ) : null}
     </div>
   )
 }
