@@ -57,6 +57,7 @@ export const DateInputField = ({
         value={values[name] ? new Date(values[name]) : new Date()}
         onChange={(date: Date) => {
           setFieldValue(name, date)
+          handleBlur()
         }}
         maxDate={maxDate}
         minDate={minDate}
@@ -70,7 +71,7 @@ export const DateInputField = ({
         })}
         required
       />
-      {touched && errors[name] && (
+      {isTouched && errors[name] && (
         <p className="text-mainRed mt-1">{errors[name]?.toString()}</p>
       )}
     </div>

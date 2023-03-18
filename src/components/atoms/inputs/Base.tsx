@@ -27,6 +27,12 @@ const baseInput = tv({
       url: GeneralInputClass,
       search: GeneralInputClass,
       color: GeneralInputClass,
+      // ...{
+      //   ['text', 'email', 'password', 'number', 'date', 'time', 'datetime', 'month', 'week', 'tel', 'url', 'search', 'color'].reduce((acc: string, type: typeof GeneralInputClass ) => {
+      //     acc[type] = GeneralInputClass
+      //     return acc
+      //   }, {})
+      // }
     },
   },
 })
