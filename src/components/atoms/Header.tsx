@@ -1,6 +1,7 @@
 type HeaderProps_TP = {
   header: string
   className?: string
+  
 }
 
 export const Header = ({ header, className }: HeaderProps_TP) => {

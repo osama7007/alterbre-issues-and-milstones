@@ -7,7 +7,7 @@ type boxesDataBase_TP = {
 }
 
 const boxesData = tv({
-  base: "flex flex-col justify-center gap-3 rounded-xl  p-3 text-center text-sm font-bold text-white",
+  base: "flex flex-col justify-center gap-3 rounded-xl  p-3 text-center  font-bold text-white",
   variants: {
     color: {
       primary: "bg-mainGreen",

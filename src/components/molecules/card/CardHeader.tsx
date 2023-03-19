@@ -27,21 +27,21 @@ const cardHeader = tv({
 
 type cardHeader_TP = {
   header: string
-  variant?: "primary" | "secondary"
+  headerColor?: "primary" | "secondary" 
   className?: string
   Counter?: string
 }
 
 export const CardHeader = ({
   header,
-  variant,
+  headerColor,
   className,
   Counter,
 }: cardHeader_TP) => {
   return (
     <div
       className={cardHeader({
-        color: variant,
+        color: headerColor,
         className: className,
       })}
     >
