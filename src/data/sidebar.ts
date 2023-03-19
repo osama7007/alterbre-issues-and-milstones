@@ -1,29 +1,28 @@
-import { TbSmartHome } from "react-icons/tb";
-import { IoDocumentsOutline } from "react-icons/io5";
-import { CiExport } from "react-icons/ci";
-import { RiVipCrownLine } from "react-icons/ri";
-import { AiFillGolden } from "react-icons/ai";
-import { GiCutDiamond } from "react-icons/gi";
-import { BiDiamond } from "react-icons/bi";
-import { MdOutlinePayments, MdOutlineAttachMoney, MdManageAccounts } from "react-icons/md";
-import { CiImport, CiSettings } from "react-icons/ci";
-import { HiUserAdd} from "react-icons/hi";
-import { IconType } from "react-icons/lib";
 import { t } from "i18next";
+import { AiFillGolden } from "react-icons/ai";
+import { BiDiamond } from "react-icons/bi";
+import { CiExport, CiImport, CiSettings } from "react-icons/ci";
+import { GiCutDiamond } from "react-icons/gi";
+import { HiUserAdd } from "react-icons/hi";
+import { IoDocumentsOutline } from "react-icons/io5";
+import { IconType } from "react-icons/lib";
+import { MdManageAccounts, MdOutlineAttachMoney, MdOutlinePayments } from "react-icons/md";
+import { RiVipCrownLine } from "react-icons/ri";
+import { TbSmartHome } from "react-icons/tb";
 
 export type MenuItem_TP = {
+  id: string
+  icon: IconType
+  label: string
+  link?: string
+
+  items?: {
     id: string
     icon: IconType
     label: string
     link?: string
-
-    items?: {
-        id: string
-        icon: IconType
-        label: string
-        link?: string
-        items?: MenuItem_TP[]
-    }[]
+    items?: MenuItem_TP[]
+  }[]
 }
 
 export const sideBarItems: MenuItem_TP[] = [
@@ -116,16 +115,11 @@ export const sideBarItems: MenuItem_TP[] = [
         ],
       },
       {
-        label: t("administrative-structure"),
-        link: "/administrative-structure",
-        icon: MdManageAccounts,
-    },
-    {
         id: crypto.randomUUID(),
         label: t("add-employee"),
         link: "/add-employee",
         icon: HiUserAdd,
-    },
+      }, {
         id: crypto.randomUUID(),
         label: "حجز الذهب ",
         link: "accessories",
@@ -145,12 +139,6 @@ export const sideBarItems: MenuItem_TP[] = [
     link: "/administrative-structure",
     icon: MdManageAccounts,
   },
-  // {
-  //   id: crypto.randomUUID(),
-  //   label: " الترقيم ",
-  //   link: "coding",
-  //   icon: CiSettings,
-  // },
   {
     id: crypto.randomUUID(),
     label: "الاعدادات ",
