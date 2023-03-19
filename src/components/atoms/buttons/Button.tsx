@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
+import { Spinner } from "../"
 
 const button = tv({
   base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
@@ -38,20 +39,6 @@ const button = tv({
       className: "text-mainRed border-mainRed bg-white",
     },
   ],
-  defaultVariants: {
-    color: "primary",
-  },
-})
-
-const spinner = tv({
-  base: "h-6 w-6 animate-spin rounded-full border-b-2",
-  variants: {
-    color: {
-      primary: "border-mainGreen",
-      danger: "border-mainRed",
-      bordered: "border-mainGreen",
-    },
-  },
   defaultVariants: {
     color: "primary",
   },
@@ -96,19 +83,9 @@ export const Button = ({
       onClick={action}
       {...props}
     >
-      {/* <div className="flex items-center justify-center gap-2"> */}
-      {loading && (
-        <div className=" flex items-center justify-center">
-          <div
-            className={spinner({
-              color: variant,
-            })}
-          ></div>
-        </div>
-      )}
+      {loading && <Spinner />}
 
       {children}
-      {/* </div> */}
     </button>
   )
 }

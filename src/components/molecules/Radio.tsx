@@ -1,6 +1,5 @@
-import { Label } from "../atoms/Label"
-import { BaseInput } from "../atoms/inputs/Base"
 import { useIsRTL } from "../../hooks/useIsRTL"
+import { BaseInput, Label } from "../atoms"
 
 type RadioProps_TP = {
   label: string
@@ -15,20 +14,17 @@ type Props_TP = {
   [key: string]: any
 }
 
-// const BASE_CLASS_NAME: string = "form-radio text-mainGreen focus:ring-mainGreen"
-
 export const Radio = ({
   label,
   name,
   id,
   className,
   disabled,
-  checked,
+  defaultChecked,
   ...props
 }: RadioProps_TP & Props_TP) => {
-  // var newClassName = `${BASE_CLASS_NAME} ${className ? className : ""}`
   const isRTL = useIsRTL()
-  const marginClass = isRTL ? "mr-2" : "ml-2"
+  const marginClass = isRTL ? "ms-2" : "me-2"
 
   return (
     <div className="flex items-center">
@@ -38,9 +34,9 @@ export const Radio = ({
           ...props,
           type: "radio",
           name,
-          // className: newClassName,
+          className: className,
           disabled,
-          checked,
+          defaultChecked,
         }}
       />
       <Label htmlFor={id} className={marginClass}>

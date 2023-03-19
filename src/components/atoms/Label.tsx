@@ -38,9 +38,10 @@
 //   )
 // }
 import { ReactNode } from "react"
-import { tv, type VariantProps } from "tailwind-variants"
+import { tv } from "tailwind-variants"
 
 const label = tv({
+  base: "inline-block",
   variants: {
     color: {
       primary: "text-mainBlack",
@@ -51,7 +52,7 @@ const label = tv({
       lg: "text-lg",
     },
     required: {
-      true: 'after:content-["*"] after:text-mainRed after:ml-1',
+      true: 'after:content-["*"] after:text-mainRed after:me-1',
     },
   },
   defaultVariants: {
