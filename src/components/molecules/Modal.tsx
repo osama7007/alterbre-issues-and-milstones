@@ -7,7 +7,7 @@ import { Fragment, ReactNode } from "react"
 ///
 type ModalProps_TP = {
   isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onClose: React.Dispatch<React.SetStateAction<boolean>>
   title?: string
   children: ReactNode
 }
@@ -15,12 +15,7 @@ type ModalProps_TP = {
 ///
 
 ///
-export const Modal = ({
-  isOpen,
-  setIsOpen,
-  title,
-  children,
-}: ModalProps_TP) => {
+export const Modal = ({ isOpen, onClose, title, children }: ModalProps_TP) => {
   /////////// VARIABLES
   ///
 
@@ -42,7 +37,7 @@ export const Modal = ({
   ///
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setIsOpen}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
