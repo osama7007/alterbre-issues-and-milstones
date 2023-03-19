@@ -4,16 +4,19 @@ import { ErrorMessage, useFormikContext } from "formik"
 import { t } from "i18next"
 import { useEffect, useState } from "react"
 import Dropzone from "react-dropzone"
-import { MdPhotoSizeSelectActual } from "react-icons/md"
-import { FiUploadCloud } from "react-icons/fi"
-import { BsFiletypePdf } from "react-icons/bs"
 import { CFile_TP, CImageFile_TP } from "../../types"
 import { pdfOrImage } from "../../utils/helpers"
 import { CLightbox } from "./CLightbox"
-import { Button } from "../atoms/buttons/Button"
 import { Modal } from "./Modal"
 import { PdfViewer } from "./PdfViewer"
+import { Button } from "../atoms/buttons/Button"
+import { SvgDelete } from "../atoms/icons/SvgDelete"
+import { UploadSvg } from "../atoms/icons/UploadSvg"
+import { MdPhotoSizeSelectActual } from "react-icons/md"
+import { BsFiletypePdf } from "react-icons/bs"
 import { AiFillDelete } from "react-icons/ai"
+import { ViewSvg } from "../atoms/icons/ViewSvg"
+import { PDFSvg } from "../atoms/icons/PDFSvg"
 
 ///
 /////////// Types
@@ -201,7 +204,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                 {...getRootProps()}
               >
                 <input {...getInputProps()} />
-                <FiUploadCloud className=" stroke-gray-500" />
+                <UploadSvg stroke={"#A0A0A0"} />
                 <p className="text-gray-500">{t("click to upload")}</p>
                 <Button type="submit">رفع الملفات</Button>
                 <ErrorMessage
@@ -227,7 +230,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                             <span className=" absolute -top-1 -right-3 bg-mainGreen px-2 py-1 text-[7px] rounded-full text-white">
                               {images.length}
                             </span>
-                            <MdPhotoSizeSelectActual className="w-5 h-5 fill-gray-700" />
+                            <ViewSvg stroke="#292D32" />
                           </div>
                         </div>
                       </div>
@@ -237,9 +240,9 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                           حذف الكل
                         </span>
                         <div className="bg-lightGray rounded-md p-3 ">
-                          <AiFillDelete
-                            className="w-5 h-5 fill-mainRed"
-                            onClick={deleteAllImagesHandler}
+                          <SvgDelete
+                            action={deleteAllImagesHandler}
+                            stroke="#ef4444"
                           />
                           {/* <Button action={deleteAllImagesHandler} variant="danger">
                       <AiFillDelete className="w-5 h-5" />
@@ -265,7 +268,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                             <span className=" absolute -top-1 -right-3 bg-mainGreen px-2 py-1 text-[7px] rounded-full text-white">
                               {pdfs.length}
                             </span>
-                            <BsFiletypePdf className="w-5 h-5 fill-gray-700" />
+                            <PDFSvg stroke="#292D32" />
                           </div>
                         </div>
                       </div>
@@ -275,10 +278,11 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                           حذف الكل
                         </span>
                         <div className="bg-lightGray rounded-md p-3 ">
-                          <AiFillDelete
-                            className="w-5 h-5 fill-mainRed"
-                            onClick={deleteAllPdfsHandler}
+                          <SvgDelete
+                            action={deleteAllPdfsHandler}
+                            stroke="#ef4444"
                           />
+
                           {/* <Button action={deleteAllPdfsHandler} variant="danger">
                       Delete all pdfs
                     </Button> */}
