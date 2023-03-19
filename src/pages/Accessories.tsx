@@ -118,6 +118,46 @@ export const Accessories = ({ title }: Stone_TP) => {
             console.log("ssss")
           }}
         />
+        <Card
+          header="تاسيس شركه "
+          addLabel="اضافه"
+          viewLabel="عرض"
+          addHandler={() => {
+            console.log("first")
+          }}
+          viewHandler={() => {
+            console.log("ssss")
+          }}
+        />
+        <Card
+          header="تاسيس شركه "
+          viewLabel="عرض"
+          viewHandler={() => {
+            console.log("ssss")
+          }}
+          addButton={false}
+          variant={"secondary"}
+          headerColor={"secondary"}
+        />
+        <Card
+          header="تاسيس شركه "
+          addButton={false}
+          viewLabel="عرض"
+          viewHandler={() => {
+            console.log("ssss")
+          }}
+        />
+        <Card
+          header="تاسيس شركه "
+          addLabel="اضافه"
+          viewLabel="عرض"
+          addHandler={() => {
+            console.log("first")
+          }}
+          viewHandler={() => {
+            console.log("ssss")
+          }}
+        />
         {/* <div className="p-4 flex flex-col gap-4">
           <div className="pr-5">
             <h3 className="text-2xl font-bold">توريد متفرقات </h3>
@@ -227,8 +267,6 @@ export const Accessories = ({ title }: Stone_TP) => {
         </div> */}
       </div>
       <BoxesData boxData={boxesData} header="اجمالي السند" />
-      <BoxesData boxData={boxesData} header="اجمالي السند" />
     </>
   )
 }
-

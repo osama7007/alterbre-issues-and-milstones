@@ -4,10 +4,11 @@
 /////////// Types
 type Card_TP = {
   header: string
-  addLabel: string
+  headerColor?: "primary" | "secondary"
+  addLabel?: string
   viewLabel: string
   variant?: "primary" | "secondary"
-  addHandler: () => void
+  addHandler?: () => void
   viewHandler: () => void
   addButton?: boolean
   showButton?: boolean
@@ -24,6 +25,7 @@ import { ShowButton } from "../molecules/ViewButton"
 ///
 export const Card = ({
   header,
+  headerColor,
   addLabel,
   viewLabel,
   variant,
@@ -55,7 +57,7 @@ export const Card = ({
     <>
       <div className="col-span-1  w-full  rounded-md p-3 shadow  ">
         <div className=" grid grid-flow-col grid-rows-3 gap-4">
-          <CardHeader header={header} />
+          <CardHeader header={header} headerColor={headerColor} />
           {addButton && <AddButton addLabel={addLabel} action={addHandler} />}
           {showButton && (
             <ShowButton
