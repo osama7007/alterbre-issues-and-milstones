@@ -1,12 +1,9 @@
 /////////// IMPORTS
 ///
-import { AxiosError } from "axios"
 import { Form, Formik, FormikValues } from "formik"
 import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
 import { Button } from "../../components/atoms/buttons/Button"
-import { HeadBase } from "../../components/atoms/Card/CardHeader"
-import { Spinner } from "../../components/atoms/UI/Spinner"
 import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
 import { Loading } from "../../components/organisms/Loading"
 import { useFetch } from "../../hooks/useFetch"
@@ -84,7 +81,6 @@ export const AdministrativeStructure = ({
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
   const addAdminStructureHandler = (values: FormikValues) => {
-    console.log(`addAdminStructureHandler ~ values:`, values)
     mutate({
       endpointName: "",
       values: {},

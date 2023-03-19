@@ -1,5 +1,5 @@
-import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import { BaseInput, BaseInputProps_TP } from "../../atoms/inputs/Base"
+import { ErrorMessage, FieldHookConfig, useField, useFormikContext } from "formik"
+import { BaseInput } from "../../atoms/inputs/Base"
 import { Label } from "../../atoms/Label"
 export const BaseInputField = ({
   label,
@@ -9,23 +9,27 @@ export const BaseInputField = ({
   type = "text",
   ...props
 }: {
-  label: string
+  label?: string
   id: string
   required?: boolean
   labelProps?: {
     [key: string]: any
   }
   name: string
-  type: string
+  type: "text" | "number" | "password" | "email"
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
   return (
     <div className="col-span-1 relative ">
       <div className="flex flex-col gap-1">
-        <Label htmlFor={id} {...labelProps} required={required}>
-          {label}
-        </Label>
+        {label && (
+          <Label htmlFor={id} {...labelProps} required={required}>
+            {label}
+          </Label>
+        )}
+
         <BaseInput
+          type={type}
           id={id}
           {...field}
           {...props}

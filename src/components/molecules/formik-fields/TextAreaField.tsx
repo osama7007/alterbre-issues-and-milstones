@@ -13,7 +13,7 @@ export const TextAreaField = ({
   ...props
 }: { label: string; id: string } & TextAreaInputProp_TP) => {
   const [field, meta] = useField(props as FieldHookConfig<string>)
-  console.log("textarea", required)
+
   return (
     <div className="mb-2">
       <Label htmlFor={id} required={required}>

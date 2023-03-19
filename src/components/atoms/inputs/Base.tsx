@@ -70,7 +70,7 @@ export const BaseInput = ({
         type,
       })}
       autoComplete={autocomplete}
-      {...{ value }}
+      value={value}
       {...props}
     />
   )
