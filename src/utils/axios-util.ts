@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 import Cookies from "js-cookie"
 import i18n from "../i18n"
 
-const baseURL = import.meta.env.VITE_BASE_URL || "https://elfatha.alexon.live/"
+// const baseURL = import.meta.env.VITE_BASE_URL || "https://elfatha.alexon.live/"
 // const baseURL = "https://jiovaniaff.com/"
 // const baseURL = "https://elfatha.alexon.live/"
 const baseURL = "http://localhost:3600/"
