@@ -4,15 +4,19 @@ import { ErrorMessage, useFormikContext } from "formik"
 import { t } from "i18next"
 import { useEffect, useState } from "react"
 import Dropzone from "react-dropzone"
-import { MdPhotoSizeSelectActual } from "react-icons/md"
-import { GrCloudUpload, GrDocumentPdf } from "react-icons/gr"
 import { CFile_TP, CImageFile_TP } from "../../types"
 import { pdfOrImage } from "../../utils/helpers"
 import { CLightbox } from "./CLightbox"
-import { Button } from "../atoms/buttons/Button"
 import { Modal } from "./Modal"
 import { PdfViewer } from "./PdfViewer"
+import { Button } from "../atoms/buttons/Button"
+import { SvgDelete } from "../atoms/icons/SvgDelete"
+import { UploadSvg } from "../atoms/icons/UploadSvg"
+import { MdPhotoSizeSelectActual } from "react-icons/md"
+import { BsFiletypePdf } from "react-icons/bs"
 import { AiFillDelete } from "react-icons/ai"
+import { ViewSvg } from "../atoms/icons/ViewSvg"
+import { PDFSvg } from "../atoms/icons/PDFSvg"
 
 ///
 /////////// Types
@@ -43,7 +47,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   // const [addMode, setAddMode] = useState<"add" | "overwrite">("overwrite")
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [manyPdfsOpen, setManyPdfsOpen] = useState(false)
-  
+
   console.log(`DropFile ~ pdfs:`, pdfs)
   ///
   /////////// SIDE EFFECTS
@@ -155,137 +159,202 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   }, [pdfs.length])
   ///
   return (
-    <>
-      <Dropzone
-        accept={{
-          "image/png": [".png"],
-          "image/jpeg": [".jpeg", ".jpg"],
-          "image/gif": [".gif"],
-          "application/pdf": [".pdf"],
-        }}
-        onDrop={(acceptedFiles) => {
-          // if (addMode === "overwrite") {
-          setFieldValue(
-            name,
-            acceptedFiles.map((file) =>
-              Object.assign(file, {
-                preview: URL.createObjectURL(file),
-                id: crypto.randomUUID(),
-              })
+    <div className=" grid grid-cols-4 gap-8 rounded-md bg-flatWhite py-6 px-8 w-full">
+      <div className=" col-span-4">
+        <Dropzone
+          accept={{
+            "image/png": [".png"],
+            "image/jpeg": [".jpeg", ".jpg"],
+            "image/gif": [".gif"],
+            "application/pdf": [".pdf"],
+          }}
+          onDrop={(acceptedFiles) => {
+            // if (addMode === "overwrite") {
+            setFieldValue(
+              name,
+              acceptedFiles.map((file) =>
+                Object.assign(file, {
+                  preview: URL.createObjectURL(file),
+                  id: crypto.randomUUID(),
+                })
+              )
             )
-          )
 
-          //   return
-          // }
+            //   return
+            // }
 
-          // ADD FUNCTIONALITY
-          // if (values) {
-          //   const currFilesState = values[name as keyof typeof values]
-          //   const newFiles = acceptedFiles.map((file) =>
-          //     Object.assign(file, {
-          //       preview: URL.createObjectURL(file),
-          //     })
-          //   )
+            // ADD FUNCTIONALITY
+            // if (values) {
+            //   const currFilesState = values[name as keyof typeof values]
+            //   const newFiles = acceptedFiles.map((file) =>
+            //     Object.assign(file, {
+            //       preview: URL.createObjectURL(file),
+            //     })
+            //   )
 
-          //   setFieldValue(name, [...currFilesState, ...newFiles])
-          // }
-        }}
-      >
-        {({ getRootProps, getInputProps, open }) => (
-          <>
-            <div className="cursor-pointer" {...getRootProps()}>
-              <input {...getInputProps()} />
-              <GrCloudUpload />
-              <p>{t("click to upload")}</p>
-            </div>
+            //   setFieldValue(name, [...currFilesState, ...newFiles])
+            // }
+          }}
+        >
+          {({ getRootProps, getInputProps, open }) => (
+            <div className="flex justify-center items-center gap-8">
+              {/* from */}
+              <div
+                className="flex flex-col justify-center items-center rounded-lg w-full cursor-pointer  p-4 gap-2 shadows bg-gray-100"
+                {...getRootProps()}
+              >
+                <input {...getInputProps()} />
+                <UploadSvg stroke={"#A0A0A0"} />
+                <p className="text-gray-500">{t("click to upload")}</p>
+                <Button type="submit">رفع الملفات</Button>
+                <ErrorMessage
+                  component="p"
+                  name={name}
+                  className="text-red-500"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                {/* Delete  images*/}
+                <div className="flex items-center justify-center gap-2">
+                  {!!images.length && (
+                    <>
+                      <div className="flex flex-col  gap-1 justify-center">
+                        <span className="text-[8px] text-gray-700">
+                          عرض الصور
+                        </span>
+                        <div className="bg-lightGray rounded-md p-1 relative ">
+                          <div
+                            onClick={() => setLightboxOpen(true)}
+                            className="cursor-pointer flex items-center justify-center p-2 "
+                          >
+                            <span className=" absolute -top-1 -right-3 bg-mainGreen px-2 py-1 text-[7px] rounded-full text-white">
+                              {images.length}
+                            </span>
+                            <ViewSvg stroke="#292D32" />
+                          </div>
+                        </div>
+                      </div>
+                      {/* change  to atoms */}{" "}
+                      <div className="flex flex-col  gap-1 justify-center">
+                        <span className="text-[8px] text-gray-700">
+                          حذف الكل
+                        </span>
+                        <div className="bg-lightGray rounded-md p-3 ">
+                          <SvgDelete
+                            action={deleteAllImagesHandler}
+                            stroke="#ef4444"
+                          />
+                          {/* <Button action={deleteAllImagesHandler} variant="danger">
+                      <AiFillDelete className="w-5 h-5" />
+                    </Button> */}{" "}
+                        </div>{" "}
+                      </div>
+                    </>
+                  )}
+                </div>
+                {/* Delete pdfs*/}
+                <div className="flex items-center justify-center gap-2">
+                  {!!pdfs.length && (
+                    <>
+                      <div className="flex flex-col  gap-1 justify-center">
+                        <span className="text-[8px] text-gray-700">
+                          عرض الصور
+                        </span>
+                        <div className="bg-lightGray rounded-md p-1 relative">
+                          <div
+                            onClick={() => setManyPdfsOpen(true)}
+                            className="cursor-pointer flex items-center justify-center p-2 "
+                          >
+                            <span className=" absolute -top-1 -right-3 bg-mainGreen px-2 py-1 text-[7px] rounded-full text-white">
+                              {pdfs.length}
+                            </span>
+                            <PDFSvg stroke="#292D32" />
+                          </div>
+                        </div>
+                      </div>
+                      {/* change  to atoms */}{" "}
+                      <div className="flex flex-col  gap-1 justify-center">
+                        <span className="text-[8px] text-gray-700">
+                          حذف الكل
+                        </span>
+                        <div className="bg-lightGray rounded-md p-3 ">
+                          <SvgDelete
+                            action={deleteAllPdfsHandler}
+                            stroke="#ef4444"
+                          />
 
-            <div>
-              {!!images.length && (
-                <>
-                  <div
-                    onClick={() => setLightboxOpen(true)}
-                    className="cursor-pointer"
-                  >
-                    <span>{images.length}</span>
-                    <MdPhotoSizeSelectActual />
-                  </div>
-                  <Button action={deleteAllImagesHandler} variant="danger">
-                    Delete all
-                  </Button>
-                </>
-              )}
-            </div>
-            <div>
-              {!!pdfs.length && (
-                <>
-                  <div
-                    onClick={() => setManyPdfsOpen(true)}
-                    className="cursor-pointer"
-                  >
-                    <span>{pdfs.length}</span>
-                    <GrDocumentPdf />
-                  </div>
-                  <Button action={deleteAllPdfsHandler} variant="danger">
-                    Delete all pdfs
-                  </Button>
-                </>
-              )}
-            </div>
-
-            {/* FOR preview THUMBNAILS */}
-            {/* {!!thumbs.length && (
+                          {/* <Button action={deleteAllPdfsHandler} variant="danger">
+                      Delete all pdfs
+                    </Button> */}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+              {/* FOR preview THUMBNAILS */}
+              {/* {!!thumbs.length && (
               <div className="scrollbar flex items-end max-w-full overflow-x-auto"> */}
-            {/* <div> */}
-            {/* {thumbs} */}
-            {/* </div> */}
-
-            {/* ADD FUNCTIONALITY */}
-            {/* <AiOutlinePlus
+              {/* <div> */}
+              {/* {thumbs} */}
+              {/* </div> */}
+              {/* ADD FUNCTIONALITY */}
+              {/* <AiOutlinePlus
                   className="cursor-pointer"
                   onClick={() => {
                     setAddMode("add")
                     open()
                   }}
                 /> */}
-            {/* </div> */}
-            {/* )} */}
-          </>
+              {/* </div> */}
+              {/* )} */}
+            </div>
+          )}
+        </Dropzone>
+      </div>
+      {/* preview */}
+      <div className=" col-span-1">
+        {/* lightboxOpen images*/}
+
+        {!!images.length && lightboxOpen && (
+          <CLightbox
+            deleteFileHandler={deleteFileHandler}
+            open={lightboxOpen}
+            closeHandler={() => setLightboxOpen(false)}
+            images={images}
+          />
         )}
-      </Dropzone>
-      <ErrorMessage component="p" name={name} />
-      {!!images.length && lightboxOpen && (
-        <CLightbox
-          deleteFileHandler={deleteFileHandler}
-          open={lightboxOpen}
-          closeHandler={() => setLightboxOpen(false)}
-          images={images}
-        />
-      )}
-      {!!pdfs.length && manyPdfsOpen && (
-        <Modal isOpen={manyPdfsOpen} setIsOpen={setManyPdfsOpen}>
-          <div>
-            <div>
-              {pdfs.map((pdf) => (
-                <div key={pdf.id}>
-                  <AiFillDelete onClick={() => deleteFileHandler(pdf.id)} />
-                  <PdfViewer
-                    action={() => setActivePdf(pdf)}
-                    file={pdf}
-                    
-                    showControls={false}
-                  />
-                </div>
-              ))}
-            </div>
+        {/* lightboxOpen pdfs*/}
+        {!!pdfs.length && manyPdfsOpen && (
+          <Modal isOpen={manyPdfsOpen} setIsOpen={setManyPdfsOpen}>
+            <div className="grid grid-cols-5 gap-2 w-full">
+              <div className=" col-span-1 scrollbar ">
+                {pdfs.map((pdf) => (
+                  <div key={pdf.id}>
+                    <div className="grid grid-flow-row-dense grid-cols-2 items-center justify-center gap-8 ">
+                      <div className=" col-span-1  w-full ">
+                        <AiFillDelete
+                          className=" hover:fill-red-500 fill-mainRed cursor-pointer"
+                          onClick={() => deleteFileHandler(pdf.id)}
+                        />
+                        <PdfViewer
+                          action={() => setActivePdf(pdf)}
+                          file={pdf}
+                          showControls={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-            <div>
-              {!!!activePdf && <h3>Click on file to preview</h3>}
-
-              {activePdf && <PdfViewer file={activePdf} />}
+              <div className="col-span-4 ">
+                {activePdf && <PdfViewer file={activePdf} />}
+              </div>
             </div>
-          </div>
-        </Modal>
-      )}
-    </>
+          </Modal>
+        )}
+      </div>
+    </div>
   )
 }

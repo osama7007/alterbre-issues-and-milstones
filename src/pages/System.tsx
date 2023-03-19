@@ -6,6 +6,7 @@ import { DropFile } from "../components/molecules/DropFile"
 import { CFile_TP } from "../types"
 import * as Yup from "yup"
 import { Button } from "../components/atoms/buttons/Button"
+import { Example } from "../try-ahmed/Example"
 ///
 /////////// Types
 ///
@@ -14,13 +15,18 @@ type SystemProps_TP = {
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
-const initialValues: { files: CFile_TP[]; media: CFile_TP[] } = {
-  files: [],
-  media: [],
+export const initialValues = {
+  type: "",
+  weight: "",
+  karat: "",
+  stock: "",
 }
 
 const validation = Yup.object().shape({
-  files: Yup.array().required().min(1),
+  type: Yup.string().trim().required(),
+  weight: Yup.string().trim().required(),
+  karat: Yup.string().trim().required(),
+  stock: Yup.string().trim().required(),
 })
 ///
 export const System = ({ title }: SystemProps_TP) => {
@@ -50,17 +56,14 @@ export const System = ({ title }: SystemProps_TP) => {
         <title>{title}</title>
       </Helmet>
       <Formik
-        onSubmit={(values) => console.log('>>>>>>>',values)}
+        onSubmit={(values) => console.log("values", values)}
         initialValues={initialValues}
         validationSchema={validation}
       >
         {({ values, errors }) => (
           <Form>
-            <DropFile name="files" />
-            <DropFile name="media" />
-            <Button type="submit">
-                Click
-            </Button>
+            <Example />
+            <button type="submit">OKK</button>
           </Form>
         )}
       </Formik>

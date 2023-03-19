@@ -70,7 +70,7 @@ export const Button = ({
 }: ButtonProps_TP) => {
   var newClass =
     className + " " + (loading ? "inline-flex items-center gap-2" : "")
-  return (
+  return (  
     <button
       type={type}
       disabled={disabled || loading}

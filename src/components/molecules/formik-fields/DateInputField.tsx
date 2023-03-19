@@ -36,7 +36,6 @@ export const DateInputField = ({
       [key: string]: any
     }>()
   const [dateActive, setDateActive] = useState(false)
-
   return (
     <div className="mb-2">
       <Label htmlFor={name} {...labelProps}>
@@ -51,7 +50,7 @@ export const DateInputField = ({
           setDateActive(false)
           setFieldTouched(name, true, true)
         }}
-        value={values[name] ? new Date(values[name]) : new Date()}
+        value={values[name]}
         onChange={(date: Date) => {
           setFieldValue(name, date, true)
         }}
