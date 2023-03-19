@@ -69,9 +69,9 @@ export const LoginForm = () => {
           />
           <Button
             disabled={isLoggingIn}
-            customStyles="mt-3"
+            className="mt-3"
             type="submit"
-            version="primary"
+            variant="primary"
           >
             {isLoggingIn ? <Spinner /> : "دخول"}
           </Button>
