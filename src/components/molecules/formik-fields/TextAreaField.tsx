@@ -1,10 +1,7 @@
-import { useField, ErrorMessage, FieldHookConfig } from "formik"
-import {
-  TextAreaInput,
-  TextAreaInputProp_TP,
-} from "../../atoms/inputs/TextAreaInput"
+import { useFormikContext } from "formik"
+import { TextAreaInputProp_TP } from "../../atoms/inputs/TextAreaInput"
 
-import { Label } from "../../atoms/Label"
+import { FormikError, Label, TextAreaInput } from "../../atoms"
 
 export const TextAreaField = ({
   label,
@@ -12,8 +9,9 @@ export const TextAreaField = ({
   required,
   ...props
 }: { label: string; id: string } & TextAreaInputProp_TP) => {
-  const [field, meta] = useField(props as FieldHookConfig<string>)
-
+  const { setFieldValue, setFieldTouched, errors, touched } = useFormikContext<{
+    [key: string]: any
+  }>()
   return (
     <div className="mb-2">
       <Label htmlFor={id} required={required}>
@@ -21,18 +19,21 @@ export const TextAreaField = ({
       </Label>
       <TextAreaInput
         id={id}
-        {...field}
-        {...props}
         className={`${
-          meta.touched && meta.error && "!border-mainRed border-2"
+          touched[props.name as string] &&
+          !!errors[props.name as string] &&
+          "!border-mainRed border-2"
         }`}
+        onChange={(e) => {
+          setFieldValue(props.name as string, e.target.value)
+        }}
+        onBlur={() => {
+          setFieldTouched(props.name as string, true)
+        }}
+        {...props}
       />
 
-      <ErrorMessage
-        component="p"
-        className="text-mainRed mt-1"
-        name={field.name}
-      />
+      <FormikError name={props.name as string} />
     </div>
   )
 }

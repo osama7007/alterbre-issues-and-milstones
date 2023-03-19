@@ -2,12 +2,10 @@ import { AiFillDelete } from "react-icons/ai"
 type DeleteProps_TP = {
   className?: string
   action?: () => void
-  loading?: boolean
 }
 export const Delete = ({
   className,
   action,
-  loading,
   ...props
 }: DeleteProps_TP) => {
 

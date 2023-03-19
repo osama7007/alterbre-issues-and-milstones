@@ -1,6 +1,6 @@
-import { useField, ErrorMessage, FieldHookConfig } from "formik"
+import { useFormikContext } from "formik"
+import { FormikError } from "../../atoms"
 import { Radio } from "../Radio"
-
 // props type
 type Props_TP = {
   [key: string]: any
@@ -11,21 +11,28 @@ export const RadioField = ({
   id,
   ...props
 }: { label: string } & Props_TP) => {
-  const [field, meta] = useField(props as FieldHookConfig<string>)
+  const { setFieldValue, setFieldTouched, errors, touched, values } =
+    useFormikContext<{
+      [key: string]: any
+    }>()
+
   return (
     <div className="mb-2">
       <Radio
+        {...props}
         label={label}
         id={id}
-        className={`${meta.error && "ring-2 ring-mainRed"}`}
-        {...field}
-        {...props}
+        name={props.name}
+        className={`${errors[props.name] && "ring-2 ring-mainRed"}`}
+        defaultChecked={values[props.name]}
+        onChange={(e: any) => {
+          setFieldValue(props.name, e.target.checked)
+        }}
+        onBlur={() => {
+          setFieldTouched(props.name, true)
+        }}
       />
-      <ErrorMessage
-        component="p"
-        className="text-mainRed mt-1"
-        name={field.name}
-      />
+      <FormikError name={props.name} />
     </div>
   )
 }

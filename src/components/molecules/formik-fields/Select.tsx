@@ -3,18 +3,17 @@ import Select, {
   ActionMeta,
   MultiValue,
   SingleValue,
-  Theme
+  Theme,
 } from "react-select"
 import CreatableSelect from "react-select/creatable"
-import { Label } from "../../atoms/Label"
-import { Spinner } from "../../atoms/UI/Spinner"
 
 import makeAnimated from "react-select/animated"
 import { SelectOption_TP } from "../../../types"
+import { FormikError, Label, Spinner } from "../../atoms"
 
 type Select_TP = {
   label?: string
-  name: string
+  name?: string
   id: string
   isMulti?: boolean
   required?: boolean
@@ -28,6 +27,7 @@ type Select_TP = {
   creatable?: boolean
   formatCreateLabel?: (inputValue: string) => string
   fieldKey?: keyof SelectOption_TP
+  isDisabled?: boolean
 }
 
 export const SelectComp = ({
@@ -41,6 +41,7 @@ export const SelectComp = ({
   options,
   loading,
   onChange,
+  isDisabled,
   creatable = false,
   formatCreateLabel,
   fieldKey = "value",
@@ -62,8 +63,8 @@ export const SelectComp = ({
     required: required,
     placeholder: loading ? loadingPlaceholder : placeholder,
     options: options,
-    isLoading: loading,
-    isDisabled: loading,
+    isLoading: loading && !isDisabled,
+    isDisabled: loading || isDisabled,
     classNames: {
       control: ({ menuIsOpen }: { menuIsOpen: boolean }) =>
         `!rounded-md !shadow-none !shadow-md !border-2 ${
@@ -96,14 +97,18 @@ export const SelectComp = ({
       option: SingleValue<SelectOption_TP> | MultiValue<SelectOption_TP>,
       actionMeta: ActionMeta<SelectOption_TP>
     ) => {
-      setFieldValue(
-        name,
-        isMulti
-          ? (option as MultiValue<SelectOption_TP>).map(
-              (option) => option[fieldKey]
-            )
-          : (option as SelectOption_TP)[fieldKey]
-      )
+      if (setFieldValue) {
+        setFieldValue(
+          name as string,
+          isMulti
+            ? (option as MultiValue<SelectOption_TP>).map(
+                (option) => option[fieldKey]
+              )
+            : (option as SelectOption_TP)[fieldKey],
+
+          true
+        )
+      }
       if (onChange) {
         onChange(option)
       }
@@ -119,17 +124,11 @@ export const SelectComp = ({
             <CreatableSelect
               {...selectProps}
               formatCreateLabel={formatCreateLabel}
-              // onCreateOption={() => {}}
             />
           ) : (
             <Select {...selectProps} />
           )}
-
-          {touched[name as string] && !!errors[name as string] ? (
-            <p className="text-mainRed text-xs">
-              {errors[name as string]?.toString()}
-            </p>
-          ) : null}
+          <FormikError name={name as string} />
         </div>
       </div>
     </>

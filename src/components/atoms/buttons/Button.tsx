@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
-import { Spinner } from "../UI/Spinner"
+import { Spinner } from "../"
 
 const button = tv({
   base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
@@ -44,20 +44,6 @@ const button = tv({
   },
 })
 
-const spinner = tv({
-  base: "h-6 w-6 animate-spin rounded-full border-b-2",
-  variants: {
-    color: {
-      primary: "border-mainGreen",
-      danger: "border-mainRed",
-      bordered: "border-mainGreen",
-    },
-  },
-  defaultVariants: {
-    color: "primary",
-  },
-})
-
 type ButtonVariants_TP = VariantProps<typeof button>
 
 interface ButtonProps_TP extends ButtonVariants_TP {
@@ -83,8 +69,8 @@ export const Button = ({
   ...props
 }: ButtonProps_TP) => {
   var newClass =
-    className + " " + loading ? "inline-flex items-center gap-2" : ""
-  return (
+    className + " " + (loading ? "inline-flex items-center gap-2" : "")
+  return (  
     <button
       type={type}
       disabled={disabled || loading}
@@ -97,15 +83,7 @@ export const Button = ({
       onClick={action}
       {...props}
     >
-      {loading && (
-        <div className=" flex items-center justify-center">
-          <div
-            className={spinner({
-              color: variant,
-            })}
-          ></div>
-        </div>
-      )}
+      {loading && <Spinner />}
 
       {children}
     </button>
