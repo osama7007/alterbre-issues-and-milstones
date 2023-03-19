@@ -3,7 +3,7 @@ export const AccordionUp = ({}) => {
     <div className="rounded-full  border border-white w-7 h-7 flex items-center justify-center">
       <svg
         aria-hidden="true"
-        data-reactid="266"
+        data-reactid="265"
         fill="none"
         height="24"
         stroke="white"

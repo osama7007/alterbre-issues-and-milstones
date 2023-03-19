@@ -6,21 +6,23 @@ export const FormikError = ({
   name,
   as = "p",
   className,
+  withTouched = true,
 }: {
   name: string
   as?: string
   className?: string
+  withTouched?: boolean
 }) => {
   const { errors: formikErrors, touched: formikTouched } = useFormikContext<{
     [key: string]: any
   }>()
   const error = formikErrors[name]
   const isTouched = formikTouched[name]
-  return !!error && isTouched
+  return (withTouched ? !!error && isTouched : !!error)
     ? createElement(
         as,
         { className: twMerge(className, "text-mainRed") },
-        error.toString()
+        error?.toString()
       )
     : null
 }

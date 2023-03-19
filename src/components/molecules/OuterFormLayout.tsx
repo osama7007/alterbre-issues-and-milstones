@@ -9,7 +9,7 @@ import { Button } from "../atoms/buttons/Button"
 type OuterFormLayout_TP = {
   children: ReactNode
   header?: string
-  hasSubmit?: boolean
+  submitText?: string
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -18,7 +18,7 @@ type OuterFormLayout_TP = {
 export const OuterFormLayout = ({
   children,
   header,
-  hasSubmit = true,
+  submitText = "حفظ",
 }: OuterFormLayout_TP) => {
   /////////// VARIABLES
   ///
@@ -33,7 +33,7 @@ export const OuterFormLayout = ({
 
   ///
   /////////// SIDE EFFECTS
-  /// 
+  ///
 
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
@@ -44,9 +44,9 @@ export const OuterFormLayout = ({
       <div className="py-4 px-2 flex flex-col">
         <h2 className="text-2xl font-bold mb-2">{header}</h2>
         <div className="bg-lightGreen p-4 rounded-lg">{children}</div>
-        {hasSubmit && (
+        {!!submitText && (
           <Button type="submit" variant="primary" className="mr-auto mt-8">
-            حفظ
+            {submitText}
           </Button>
         )}
       </div>

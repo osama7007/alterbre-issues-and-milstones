@@ -1,11 +1,11 @@
 /////////// IMPORTS
-import { ErrorMessage, useFormikContext } from "formik"
+import { useFormikContext } from "formik"
 import PhoneInput from "react-phone-number-input"
-import { useState, useRef } from "react"
 import flags from "react-phone-number-input/flags"
-import { Label } from "../../atoms/Label"
 import "react-phone-number-input/style.css"
 import { tv } from "tailwind-variants"
+import { FormikError } from "../../atoms"
+import { Label } from "../../atoms/Label"
 ///
 /////////// Types
 ///
@@ -17,13 +17,10 @@ type PhoneInputs_TP = {
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
 const phoneInput = tv({
-  base: "rounded-md border-2 border-transparent focus:!border-2 focus:!border-mainGreen form-input px-4 py-[.30rem] w-full shadows bg-white",
+  base: "rounded-md border-2 border-transparent focus:border-2 focus:border-mainGreen form-input px-4 py-[.30rem] w-full shadows bg-white",
   variants: {
-    errors: {
-      true: "border-mainRed",
-    },
-    isTouched: {
-      true: "!rounded-md !border-2 !border-mainRed",
+    error: {
+      true: "border-mainRed !rounded-md !border-2",
     },
   },
 })
@@ -34,12 +31,11 @@ export const PhoneInputs = ({ label, name, placeholder }: PhoneInputs_TP) => {
   ///
   /////////// CUSTOM HOOKS
   ///
-  const { setFieldValue, errors } = useFormikContext<any>()
-  console.log(errors)
+  const { setFieldValue, errors, touched, handleBlur } = useFormikContext<any>()
   ///
   /////////// STATES
   ///
-  const [isTouched, setIsTouched] = useState(false)
+
   ///
   /////////// SIDE EFFECTS
   ///
@@ -52,28 +48,19 @@ export const PhoneInputs = ({ label, name, placeholder }: PhoneInputs_TP) => {
       <div className=" relative col-span-1 flex flex-col">
         <Label htmlFor={name}>{label}</Label>
         <PhoneInput
-          onBlur={() => setIsTouched(!!errors.phone)}
+          onBlur={handleBlur(name)}
           className={phoneInput({
-            errors:isTouched,
-            isTouched,
+            error: touched[name] && !!errors.phone,
           })}
           flags={flags}
           placeholder={placeholder}
           name={name}
           onChange={(number: number | string | undefined) => {
             setFieldValue(name, number)
-            setIsTouched(!!errors.phone)
           }}
           style={{ direction: "ltr" }}
         />
-        {(!!errors.phone ) ? (
-            <>
-              {(isTouched ) &&  <p className="text-mainRed">{errors.phone.toString()}</p>}
-              {!isTouched && <ErrorMessage name={name} className="text-mainRed" component="p"/>}
-            </>
-        ) :
-        isTouched && <p className="text-mainRed">{errors.phone ? errors.phone.toString() : ""}</p>
-    }
+        <FormikError name={name} />
       </div>
     </>
   )

@@ -1,17 +1,18 @@
 import { useFormikContext } from "formik"
 import { useState } from "react"
-import DatePicker from "react-date-picker"
-import { MdOutlineDateRange } from "react-icons/md"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 import { tv } from "tailwind-variants"
-import { FormikError, Label } from "../../atoms"
+import { BaseInput, FormikError, Label } from "../../atoms"
 
 const dateInputField = tv({
+  base: "direction-rtl",
   variants: {
     active: {
-      true: "active",
+      true: "!rounded-md !border-2 !border-mainGreen !ring-0",
     },
     error: {
-      true: "error",
+      true: "!rounded-md !border-2 !border-mainRed",
     },
   },
 })
@@ -31,40 +32,37 @@ export const DateInputField = ({
     [key: string]: any
   }
 }) => {
-  const { setFieldValue, setFieldTouched, errors, touched, values } =
+  const { setFieldValue, errors, touched, handleBlur, values } =
     useFormikContext<{
       [key: string]: any
     }>()
   const [dateActive, setDateActive] = useState(false)
+
   return (
     <div className="mb-2">
       <Label htmlFor={name} {...labelProps}>
         {label}
       </Label>
       <DatePicker
-        onCalendarOpen={() => {
-          setDateActive(true)
-          setFieldTouched(name, true, true)
-        }}
-        onCalendarClose={() => {
-          setDateActive(false)
-          setFieldTouched(name, true, true)
-        }}
-        value={values[name]}
+        selected={values[name]}
         onChange={(date: Date) => {
-          setFieldValue(name, date, true)
+          setFieldValue(name, date)
         }}
-        maxDate={maxDate}
-        minDate={minDate}
-        format="d-M-y"
-        calendarIcon={
-          <MdOutlineDateRange className=" !stroke-mainGreen" size={20} />
-        }
+        onBlur={handleBlur(name)}
         className={dateInputField({
           active: dateActive,
           error: touched[name] && !!errors[name],
         })}
-        required
+        onCalendarOpen={() => {
+          setDateActive(true)
+        }}
+        onCalendarClose={() => {
+          setDateActive(false)
+        }}
+        maxDate={maxDate}
+        minDate={minDate}
+        customInput={<BaseInput name={name} placeholder="Select a date" />}
+        isClearable={true}
       />
       <FormikError name={name} />
     </div>
