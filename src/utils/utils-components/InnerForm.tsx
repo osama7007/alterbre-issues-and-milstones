@@ -7,7 +7,7 @@ import { useEffect } from "react"
 ///
 type InnerFormProps_TP = {
   children: JSX.Element
-  errors: FormikErrors<{ [key: string]: string[] }> | undefined
+  errors?: FormikErrors<{ [key: string]: string|Date }> | undefined
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///

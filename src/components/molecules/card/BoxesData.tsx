@@ -1,5 +1,5 @@
-import { BoxesDataBase } from "../atoms/Card/boxesDataBase"
-import { Header } from "../atoms/Header"
+import { BoxesDataBase } from "../../atoms/card/BoxesDataBase"
+import { Header } from "../../atoms/Header"
 
 type boxesData_TP = {
   header: string

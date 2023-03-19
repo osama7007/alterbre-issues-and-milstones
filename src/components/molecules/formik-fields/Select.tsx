@@ -128,7 +128,6 @@ export const SelectComp = ({
           ) : (
             <Select {...selectProps} />
           )}
-
           <FormikError name={name as string} />
         </div>
       </div>

@@ -53,3 +53,8 @@ export interface CFile_TP extends File {
 export interface CImageFile_TP extends SlideImage, CFile_TP {
     type: "image"
 }
+export type SelectOption_TP = {
+    id: string
+    value: string
+    label: string
+}

@@ -1,5 +1,8 @@
 import type { Plugin, RenderViewer } from "@react-pdf-viewer/core"
+/* 
+// ///// NOT USED RIGHT NOW
 // page thumbnail
+*/
 interface PageThumbnailPluginProps {
   PageThumbnail: React.ReactElement
 }

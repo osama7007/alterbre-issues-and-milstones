@@ -11,7 +11,7 @@ import { TextAreaField } from "../components/molecules/formik-fields/TextAreaFie
 import { RadioField } from "../components/molecules/formik-fields/RadioField"
 import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxField"
 import { Card } from "../components/templates/Card"
-import { BoxesData } from "../components/molecules/BoxesData"
+import { BoxesData } from "../components/molecules/card/BoxesData"
 
 /////////// Types
 ///
@@ -65,7 +65,7 @@ const validatingSchema = Yup.object({
     .typeError("الأرقام فقط مسموحة"),
 })
 ///
-export const Stones = ({ title }: Stone_TP) => {
+export const Accessories = ({ title }: Stone_TP) => {
   /////////// VARIABLES
   ///
 
@@ -227,6 +227,8 @@ export const Stones = ({ title }: Stone_TP) => {
         </div> */}
       </div>
       <BoxesData boxData={boxesData} header="اجمالي السند" />
+      <BoxesData boxData={boxesData} header="اجمالي السند" />
     </>
   )
 }
+
