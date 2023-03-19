@@ -47,7 +47,7 @@ export const BaseInputField = ({
           {...props}
           value={fieldValue}
           error={touched[props.name] && !!errors[props.name]}
-          autocomplete="off"
+          autoComplete="off"
           onBlur={() => {
             setFieldTouched(props.name, true)
           }}
