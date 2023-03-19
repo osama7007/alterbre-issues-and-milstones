@@ -1,4 +1,5 @@
-import { useField, ErrorMessage, FieldHookConfig } from "formik"
+import { useFormikContext } from "formik"
+import { FormikError } from "../../atoms"
 import { Checkbox } from "../Checkbox"
 
 // props type
@@ -11,21 +12,26 @@ export const CheckBoxField = ({
   id,
   ...props
 }: { label: string } & Props_TP) => {
-  const [ field, meta ] = useField(props as FieldHookConfig<string>)
+  const { setFieldValue, setFieldTouched, errors, values } = useFormikContext<{
+    [key: string]: any
+  }>()
   return (
     <div className="mb-2">
       <Checkbox
         label={label}
         id={id}
-        className={`${meta.error && "border-2 border-mainRed"}`}
-        {...field}
+        value={values[props.name]}
+        className={`${errors[props.name] && "border-2 border-mainRed"}`}
         {...props}
+        checked={values[props.name]}
+        onChange={(e) => {
+          setFieldValue(props.name, e.target.checked)
+        }}
+        onBlur={() => {
+          setFieldTouched(props.name, true)
+        }}
       />
-      <ErrorMessage
-        component="p"
-        className="text-mainRed mt-1"
-        name={field.name}
-      />
+      <FormikError name={props.name} />
     </div>
   )
 }

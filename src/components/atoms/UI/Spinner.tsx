@@ -6,16 +6,21 @@ import { tv } from "tailwind-variants"
 /////////// Types
 ///
 const spinner = tv({
-  base: "h-6 w-6 animate-spin rounded-full border-b-2",
+  base: "animate-spin rounded-full",
   variants: {
     color: {
       primary: "border-mainGreen",
       danger: "border-mainRed",
-      bordered: "border-mainGreen",
+    },
+    size: {
+      small: "h-4 w-4 border-b-2",
+      medium: "h-6 w-6 border-b-4",
+      large: "h-8 w-8 border-b-4",
     },
   },
   defaultVariants: {
     color: "primary",
+    size: "medium",
   },
 })
 /////////// HELPER VARIABLES & FUNCTIONS
@@ -24,8 +29,12 @@ const spinner = tv({
 ///
 export const Spinner = ({
   variant = "primary",
+  size = "medium",
+  className,
 }: {
-  variant?: "primary" | "danger" | "bordered"
+  variant?: "primary" | "danger"
+  size?: "small" | "medium" | "large"
+  className?: string
 }) => {
   /////////// VARIABLES
   ///
@@ -47,10 +56,11 @@ export const Spinner = ({
 
   ///
   return (
-    <div className="flex items-center justify-center">
+    <div className={`flex items-center justify-center ${className}`}>
       <div
         className={spinner({
           color: variant,
+          size: size,
         })}
       ></div>
     </div>
