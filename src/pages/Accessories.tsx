@@ -12,6 +12,7 @@ import { RadioField } from "../components/molecules/formik-fields/RadioField"
 import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxField"
 import { Card } from "../components/templates/Card"
 import { BoxesData } from "../components/molecules/card/BoxesData"
+import { ShowButton } from "../components/molecules/ViewButton"
 
 /////////// Types
 ///
@@ -267,6 +268,33 @@ export const Accessories = ({ title }: Stone_TP) => {
         </div> */}
       </div>
       <BoxesData boxData={boxesData} header="اجمالي السند" />
+      <div className="grid grid-cols-4 gap-4">
+        <ShowButton
+          action={() => console.log("first")}
+          viewLabel="عرض"
+          variant="secondary"
+        />
+        <ShowButton
+          action={() => console.log("first")}
+          viewLabel="عرض"
+          variant="secondary"
+        />
+        <ShowButton
+          action={() => console.log("first")}
+          viewLabel="عرض"
+          variant="secondary"
+        />
+        <ShowButton
+          action={() => console.log("first")}
+          viewLabel="عرض"
+          variant="secondary"
+        />
+        <ShowButton
+          action={() => console.log("first")}
+          viewLabel="عرض"
+          variant="secondary"
+        />
+      </div>
     </>
   )
 }

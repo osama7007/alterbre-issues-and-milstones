@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants"
 import { View } from "../atoms/icons/View"
 
 const showButton = tv({
-  base: "w-full  border border-lightBlack  flex items-center justify-center gap-2 relative active:top-[1px] py-2 px-8 font-bold rounded-md  bg-opacity-20 ",
+  base: "w-full  border border-lightBlack  flex items-center justify-center gap-2 relative text-lightBlack  active:top-[1px] py-2 px-8 font-bold rounded-md  bg-opacity-20 ",
   variants: {
     color: {
       primary: "bg-mainOrange",
