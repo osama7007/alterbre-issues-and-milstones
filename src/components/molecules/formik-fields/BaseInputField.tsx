@@ -1,4 +1,5 @@
 import { useFormikContext } from "formik"
+import { useEffect, useState } from "react"
 import { BaseInput, FormikError, Label } from "../../atoms"
 
 export const BaseInputField = ({
@@ -23,6 +24,14 @@ export const BaseInputField = ({
       [key: string]: any
     }>()
 
+  const [fieldValue, setFieldValueState] = useState(
+    props.value || values[props.name]
+  )
+
+  useEffect(() => {
+    setFieldValue(props.name, fieldValue)
+  }, [fieldValue])
+
   return (
     <div className="col-span-1 relative ">
       <div className="flex flex-col gap-1">
@@ -32,14 +41,16 @@ export const BaseInputField = ({
         <BaseInput
           id={id}
           {...props}
-          value={values[props.name]}
+          value={fieldValue}
           error={touched[props.name] && !!errors[props.name]}
           autocomplete="off"
           onBlur={() => {
             setFieldTouched(props.name, true)
           }}
           onChange={(e) => {
-            setFieldValue(props.name, e.target.value)
+            if (props.value === undefined) {
+              setFieldValueState(e.target.value)
+            }
           }}
         />
       </div>
