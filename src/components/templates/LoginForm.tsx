@@ -72,8 +72,9 @@ export const LoginForm = () => {
             className="mt-3"
             type="submit"
             variant="primary"
+            loading = {isLoggingIn}
           >
-            {isLoggingIn ? <Spinner /> : "دخول"}
+          دخول
           </Button>
         </Form>
       </Formik>

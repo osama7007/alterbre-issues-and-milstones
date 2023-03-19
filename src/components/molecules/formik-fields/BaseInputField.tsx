@@ -10,14 +10,14 @@ export const BaseInputField = ({
   type = "text",
   ...props
 }: {
-  label: string
+  label?: string
   id: string
   required?: boolean
   labelProps?: {
     [key: string]: any
   }
   name: string
-  type: string
+  type: "text" | "number" | "password" | "email"
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
   const { setFieldValue, setFieldTouched, errors, touched, values } =
     useFormikContext<{
@@ -33,12 +33,16 @@ export const BaseInputField = ({
   }, [fieldValue])
 
   return (
-    <div className="col-span-1 relative ">
+    <div className="col-span-1">
       <div className="flex flex-col gap-1">
-        <Label htmlFor={id} {...labelProps} required={required}>
-          {label}
-        </Label>
+        {label && (
+          <Label htmlFor={id} {...labelProps} required={required}>
+            {label}
+          </Label>
+        )}
+
         <BaseInput
+          type={type}
           id={id}
           {...props}
           value={fieldValue}
