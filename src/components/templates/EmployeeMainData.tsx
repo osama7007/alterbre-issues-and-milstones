@@ -1,8 +1,8 @@
 /////////// IMPORTS
 ///
-import { InnerFormLayout } from "./molecules/InnerFormLayout"
-import { BaseInputField } from "./molecules/formik-fields/BaseInputField"
-import { DateInputField } from "./molecules/formik-fields/DateInputField"
+import { InnerFormLayout } from "../molecules/InnerFormLayout"
+import { BaseInputField } from "../molecules/formik-fields/BaseInputField"
+import { DateInputField } from "../molecules/formik-fields/DateInputField"
 ///
 /////////// Types
 ///
@@ -79,24 +79,23 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         <DateInputField
           label="تاريخ التعيين"
           name="hiring_date"
-          value={new Date()}
           maxDate={new Date()}
         />
         {/* hiring date end */}
 
         {/* email start */}
         <BaseInputField
-          id="email" 
+          id="email"
           label="البريد الاكتروني"
           name="email"
-          type='email'
+          type="email"
           placeholder="البريد الاكتروني"
         />
         {/* email end */}
 
         {/* password start */}
         <BaseInputField
-          id="password" 
+          id="password"
           label="الرقم السري"
           name="password"
           type="password"

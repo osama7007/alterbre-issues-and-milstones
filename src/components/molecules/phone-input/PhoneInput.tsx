@@ -1,6 +1,6 @@
 /////////// IMPORTS
 import { useFormikContext } from "formik"
-import PhoneInput from "react-phone-number-input"
+import { default as BasePhoneInput } from "react-phone-number-input"
 import flags from "react-phone-number-input/flags"
 import "react-phone-number-input/style.css"
 import { tv } from "tailwind-variants"
@@ -25,7 +25,7 @@ const phoneInput = tv({
   },
 })
 ///
-export const PhoneInputs = ({ label, name, placeholder }: PhoneInputs_TP) => {
+export const PhoneInput = ({ label, name, placeholder }: PhoneInputs_TP) => {
   /////////// VARIABLES
   ///
   ///
@@ -47,7 +47,7 @@ export const PhoneInputs = ({ label, name, placeholder }: PhoneInputs_TP) => {
     <>
       <div className=" relative col-span-1 flex flex-col">
         <Label htmlFor={name}>{label}</Label>
-        <PhoneInput
+        <BasePhoneInput
           onBlur={handleBlur(name)}
           className={phoneInput({
             error: touched[name] && !!errors.phone,
