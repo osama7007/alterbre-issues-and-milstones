@@ -1,8 +1,9 @@
-import DatePicker from "react-date-picker"
-import { Label } from "../../atoms/Label"
-import { MdOutlineDateRange } from "react-icons/md"
+import { useFormikContext } from "formik"
 import { useState } from "react"
+import DatePicker from "react-date-picker"
+import { MdOutlineDateRange } from "react-icons/md"
 import { tv } from "tailwind-variants"
+import { FormikError, Label } from "../../atoms"
 
 const dateInputField = tv({
   variants: {
@@ -18,40 +19,41 @@ const dateInputField = tv({
 export const DateInputField = ({
   label,
   name,
-  setFieldValue,
-  value,
-  error,
   maxDate,
   minDate,
   labelProps,
 }: {
   label: string
   name: string
-  setFieldValue: any
-  value: Date
-  error: string
   maxDate?: Date
   minDate?: Date
   labelProps?: {
     [key: string]: any
   }
 }) => {
-  const [dateActive, SetDateActive] = useState(false)
-  const [touched, setIsTouched] = useState(false)
-
+  const { setFieldValue, setFieldTouched, errors, touched, values } =
+    useFormikContext<{
+      [key: string]: any
+    }>()
+  const [dateActive, setDateActive] = useState(false)
   return (
     <div className="mb-2">
       <Label htmlFor={name} {...labelProps}>
         {label}
       </Label>
       <DatePicker
-        onCalendarOpen={() => SetDateActive(true)}
-        onCalendarClose={() => {
-          SetDateActive(false)
-          setIsTouched(true)
+        onCalendarOpen={() => {
+          setDateActive(true)
+          setFieldTouched(name, true, true)
         }}
-        value={value}
-        onChange={setFieldValue.bind(null, [name])}
+        onCalendarClose={() => {
+          setDateActive(false)
+          setFieldTouched(name, true, true)
+        }}
+        value={values[name]}
+        onChange={(date: Date) => {
+          setFieldValue(name, date, true)
+        }}
         maxDate={maxDate}
         minDate={minDate}
         format="d-M-y"
@@ -60,12 +62,11 @@ export const DateInputField = ({
         }
         className={dateInputField({
           active: dateActive,
-          error: touched && !!error,
+          error: touched[name] && !!errors[name],
         })}
         required
       />
-      {touched && error && <p className="text-mainRed mt-1">{error}</p>}
-      {/* <ErrorMessage component="p" className="text-mainRed mt-1" name={name} /> */}
+      <FormikError name={name} />
     </div>
   )
 }

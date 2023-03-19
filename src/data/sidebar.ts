@@ -7,6 +7,7 @@ import { GiCutDiamond } from "react-icons/gi";
 import { BiDiamond } from "react-icons/bi";
 import { MdOutlinePayments, MdOutlineAttachMoney, MdManageAccounts } from "react-icons/md";
 import { CiImport, CiSettings } from "react-icons/ci";
+import { HiUserAdd} from "react-icons/hi";
 import { IconType } from "react-icons/lib";
 import { t } from "i18next";
 
@@ -115,6 +116,16 @@ export const sideBarItems: MenuItem_TP[] = [
         ],
       },
       {
+        label: t("administrative-structure"),
+        link: "/administrative-structure",
+        icon: MdManageAccounts,
+    },
+    {
+        id: crypto.randomUUID(),
+        label: t("add-employee"),
+        link: "/add-employee",
+        icon: HiUserAdd,
+    },
         id: crypto.randomUUID(),
         label: "حجز الذهب ",
         link: "accessories",

@@ -10,7 +10,6 @@ const baseInput = tv({
     },
     type: {
       checkbox:
-      
         "w-4 h-4 text-mainGreen border-gray-300 rounded focus:ring-mainGreen form-checkbox shadow-none",
       radio:
         "w-5 h-5 form-radio rounded-full focus:ring-mainGreen border-gray-300",
