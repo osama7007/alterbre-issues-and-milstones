@@ -20,6 +20,12 @@ type HomeProps_TP = {
 ///
 
 const validatingSchema = Yup.object({
+  email: Yup.string()
+  .trim()
+  .required("برجاء ملئ هذا الحقل"),
+  password: Yup.string()
+  .trim()
+  .required("برجاء ملئ هذا الحقل"),
   phone: Yup.string()
     .trim()
     .required("برجاء ملئ هذا الحقل").test('isValidateNumber', 'رقم غير صحيح', function (value) {
@@ -70,6 +76,7 @@ export const Home = ({ title }: HomeProps_TP) => {
           }}
           validationSchema={validatingSchema}
         >
+          {({errors})=>(
           <Form>
             <BaseInputField
               id="email"
@@ -98,6 +105,7 @@ export const Home = ({ title }: HomeProps_TP) => {
               Submit
             </Button>
           </Form>
+          )}
         </Formik>
       </div>
     </>
