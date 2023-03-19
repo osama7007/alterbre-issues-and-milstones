@@ -1,6 +1,5 @@
 /////////// IMPORTS
 ///
-import { AxiosError } from "axios"
 import { Form, Formik, FormikValues } from "formik"
 import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
@@ -84,7 +83,6 @@ export const AdministrativeStructure = ({
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
   const addAdminStructureHandler = (values: FormikValues) => {
-    console.log(`addAdminStructureHandler ~ values:`, values)
     mutate({
       endpointName: "",
       values: {},
