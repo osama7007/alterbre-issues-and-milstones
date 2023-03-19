@@ -34,10 +34,13 @@ type Select_TP = {
   CreateComponent?: ({
     value,
     onAdd,
+    setSelectOptions,
   }: {
     value: string
     onAdd: (value: string) => void
+    setSelectOptions?: (options: any[]) => void
   }) => JSX.Element
+  setOptions?: (options: any[]) => void
 }
 
 const selectTheme = (theme: Theme) => ({
@@ -81,6 +84,7 @@ export const SelectComp = ({
   onSimpleCreate,
   CreateComponent,
   onComplexCreate,
+  setOptions,
   ...props
 }: Select_TP) => {
   const animatedComponents = makeAnimated()
@@ -167,6 +171,7 @@ export const SelectComp = ({
                         setCreateModalOpen(false)
                       }}
                       value={createValue}
+                      setSelectOptions={setOptions}
                     />
                   }
                 </Modal>

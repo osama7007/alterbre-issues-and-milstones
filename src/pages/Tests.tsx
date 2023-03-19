@@ -8,21 +8,19 @@ import { Select } from "../components/molecules"
 const NewSelectOptionComponent = ({
   value,
   onAdd,
+  setSelectOptions,
 }: {
   value: string
   onAdd: (value: string) => void
+  setSelectOptions?: (options: any[]) => void
 }) => {
-  const [loading, setLoading] = useState(false)
   return (
     <div className="flex items-center justify-between gap-2">
       <span>{value}</span>
       <Button
         action={() => {
-          setLoading((val) => !val)
           onAdd(value)
-          setLoading((val) => !val)
         }}
-        loading={loading}
       >
         Add
       </Button>
@@ -46,7 +44,7 @@ export const Tests = () => {
           select: "1",
         }}
         validationSchema={Yup.object().shape({
-          select: Yup.string().required(),
+          select: Yup.array().of(Yup.string()),
         })}
         onSubmit={(values) => {
           console.log(values)
@@ -77,6 +75,7 @@ export const Tests = () => {
                 { id: options.length + 1, value, label: value },
               ])
             }}
+            setOptions={setOptions}
           />
         </Form>
       </Formik>
