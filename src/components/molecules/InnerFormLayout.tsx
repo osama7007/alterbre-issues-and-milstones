@@ -1,7 +1,7 @@
 /////////// IMPORTS
 ///
 import { ReactNode } from "react"
-import { TabsIcon } from "../../svgIcons"
+import { TabsIcon } from "../atoms/icons/Tabs"
 ///
 /////////// Types
 ///
@@ -39,10 +39,12 @@ export const InnerFormLayout = ({
   return (
     <>
       <div className="p-2 w-full">
-        <div className="flex items-center gap-x-2 mb-5">
-          <TabsIcon />
-          <h2>{title}</h2>
-        </div>
+        {title && (
+          <div className="flex items-center gap-x-2 mb-5">
+            <TabsIcon />
+            <h2>{title}</h2>
+          </div>
+        )}
         <div className="bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8">
           {children}
         </div>

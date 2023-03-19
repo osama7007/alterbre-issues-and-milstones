@@ -2,18 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Todo:  use tw classes instead*/
 input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background-color: #fff;
-  /* margin: 5px 0px; */
   width: 1rem;
   height: 1rem;
   border: 0.1rem solid #295e56;
-  /* border-radius: 50%; */
-  /* transform: translateY(-0.01em); */
-  /* display: grid; */
   place-content: center;
   color: #295e56;
 }
@@ -24,25 +21,8 @@ input[type="radio"] {
     font-weight: bold !important;
   }
 
-  .sidebar ul > li:not(:last-child) {
-    @apply border-b-[1px];
-  }
-  .icon {
-    @apply h-6 w-6 object-contain;
-  }
   .shadows {
     box-shadow: 0.5px 0.5px 4px rgba(0, 0, 0, 0.25) !important;
-  }
-  .main li {
-    @apply relative list-disc text-base font-normal marker:text-xl marker:text-mainGreen;
-  }
-  .main li span {
-    @apply text-base font-bold;
-  }
-
-  .carousel-root .thumb.selected,
-  .carousel-root .thumb:hover {
-    @apply border-2 border-mainGreen;
   }
 }
 /* end base */
@@ -62,35 +42,14 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-.react-date-picker {
-  display: inline;
+.react-datepicker__day--selected {
+  @apply bg-mainGreen text-white;
 }
 
-.react-date-picker.active > .react-date-picker__wrapper {
-  @apply !rounded-md !border-2 !border-mainGreen;
+.react-datepicker__close-icon {
+  @apply after:text-white after:bg-mainGreen after:content-['X'] relative after:absolute pl-6 pt-2 after:pt-1.5  after:rounded-full after:w-6 after:h-6 after:font-bold after:leading-none after:text-center;
 }
 
-.react-date-picker.error > .react-date-picker__wrapper {
-  @apply !rounded-md !border-2 !border-mainRed;
-}
-
-.react-date-picker__inputGroup input[type="number"] {
-  @apply pt-0 pb-0;
-}
-
-/*end sidebar  */
-.react-date-picker__wrapper {
-  @apply !rounded-md border-transparent bg-white px-4 py-[.26rem] text-mainBlack  shadow-md;
-}
-.react-date-picker__calendar {
-  @apply mt-2;
-}
-.react-calendar__tile--active {
-  @apply bg-mainGreen text-lightGreen;
-}
-.react-date-picker__clear-button svg {
-  @apply !stroke-red-500;
-}
-.react-date-picker__calendar {
-  direction: ltr !important;
+.react-datepicker__input-container {
+  @apply flex;
 }

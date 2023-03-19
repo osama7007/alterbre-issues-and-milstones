@@ -1,9 +1,9 @@
+import { useContext } from "react"
 import { BiSearchAlt } from "react-icons/bi"
 import { IoIosArrowDown } from "react-icons/io"
-import { IoSettingsOutline, IoNotificationsOutline } from "react-icons/io5"
+import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5"
 import logo from "../../assets/altebr_logo.png"
 import { authCtx } from "../../context/auth-and-perm/auth"
-import { useContext } from "react"
 import { Can } from "../../utils/utils-components/Can"
 
 const NavBar = () => {
@@ -36,7 +36,7 @@ const NavBar = () => {
           </span>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <img src={logo} className="icon  object-contain" alt="logo" />
+          <img src={logo} className="w-6 h-6  object-contain" alt="logo" />
           <h6 className="m-0">اسم المستخدم</h6>
           <IoIosArrowDown className="h-4 w-4 fill-mainBlack" />
         </div>
