@@ -11,7 +11,7 @@ import { TextAreaField } from "../components/molecules/formik-fields/TextAreaFie
 import { RadioField } from "../components/molecules/formik-fields/RadioField"
 import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxField"
 import { Card } from "../components/templates/Card"
-import { BoxesData } from "../components/molecules/BoxesData"
+import { BoxesData } from "../components/molecules/card/BoxesData"
 
 /////////// Types
 ///

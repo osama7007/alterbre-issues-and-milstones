@@ -1,6 +1,6 @@
 /////////// IMPORTS
 ///
- ///
+///
 /////////// Types
 type Card_TP = {
   header: string
@@ -14,9 +14,9 @@ type Card_TP = {
 }
 ///
 
-import { CardHeader } from "../atoms/Card/CardHeader"
+import { CardHeader } from "../molecules/card/CardHeader"
 import { AddButton } from "../molecules/AddButton"
-import { ShowButton } from "../molecules/ShowButton"
+import { ShowButton } from "../molecules/ViewButton"
 
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
