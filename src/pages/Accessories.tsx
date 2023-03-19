@@ -65,7 +65,7 @@ const validatingSchema = Yup.object({
     .typeError("الأرقام فقط مسموحة"),
 })
 ///
-export const Stones = ({ title }: Stone_TP) => {
+export const Accessories = ({ title }: Stone_TP) => {
   /////////// VARIABLES
   ///
 
@@ -227,6 +227,8 @@ export const Stones = ({ title }: Stone_TP) => {
         </div> */}
       </div>
       <BoxesData boxData={boxesData} header="اجمالي السند" />
+      <BoxesData boxData={boxesData} header="اجمالي السند" />
     </>
   )
 }
+

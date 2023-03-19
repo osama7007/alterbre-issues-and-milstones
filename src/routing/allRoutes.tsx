@@ -6,7 +6,7 @@ import { Settings } from "../pages/Settings"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
-import { Stones } from "../pages/Stones"
+import { Accessories } from "../pages/Accessories"
 import { AdministrativeStructure } from "../pages/AdministrativeStructure/AdministrativeStructure"
 import { System } from "../pages/System"
 
@@ -28,7 +28,10 @@ export const AllRoutesProvider = () => {
             }
           />
           {/* test */}
-          <Route path="/accessories" element={<Stones title={t("Stones")} />} />
+          <Route
+            path="/accessories"
+            element={<Accessories title={t("Stones")} />}
+          />
         </Route>
         <Route path="/login" element={<Login title={t("login")} />} />
       </Routes>
