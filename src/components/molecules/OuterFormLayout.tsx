@@ -42,7 +42,7 @@ export const OuterFormLayout = ({
   return (
     <>
       <div className="py-4 px-2 flex flex-col">
-        <h2 className="text-2xl font-bold mb-2">{header}</h2>
+        <h2 className="text-2xl font-bold mb-8">{header}</h2>
         <div className="bg-lightGreen p-4 rounded-lg">{children}</div>
         {!!submitText && (
           <Button type="submit" variant="primary" className="mr-auto mt-8">

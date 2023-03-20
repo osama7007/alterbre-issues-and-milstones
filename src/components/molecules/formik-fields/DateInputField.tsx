@@ -1,5 +1,5 @@
 import { useFormikContext } from "formik"
-import { useState } from "react"
+import { forwardRef, useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { tv } from "tailwind-variants"
@@ -17,17 +17,23 @@ const dateInputField = tv({
   },
 })
 
+const DatePickerInput = forwardRef(({ ...props }, ref?: any) => {
+  return <BaseInput ref={ref} {...props} />
+})
+
 export const DateInputField = ({
   label,
   name,
   maxDate,
   minDate,
   labelProps,
+  value,
 }: {
   label: string
   name: string
   maxDate?: Date
   minDate?: Date
+  value?: Date
   labelProps?: {
     [key: string]: any
   }
@@ -60,9 +66,17 @@ export const DateInputField = ({
           setDateActive(false)
         }}
           maxDate={maxDate}
+        dateFormat="dd/MM/yyyy"
         minDate={minDate}
-        customInput={<BaseInput name={name} placeholder="Select a date" />}
+        customInput={<DatePickerInput />}
         isClearable={true}
+        name={name}
+        value={
+          // date to string
+          values[name]
+            ? values[name]?.toLocaleDateString()
+            : value?.toLocaleDateString()
+        }
       />
       <FormikError name={name} />
     </div>

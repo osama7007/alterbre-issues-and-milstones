@@ -1,14 +1,13 @@
 /////////// IMPORTS
 ///
 import { SingleValue } from "react-select"
-import { InnerFormLayout } from "./molecules/InnerFormLayout"
-import { BaseInputField } from "./molecules/formik-fields/BaseInputField"
-import { DateInputField } from "./molecules/formik-fields/DateInputField"
-import { SelectOption_TP } from "../types"
-import { SelectComp } from "./molecules/formik-fields/Select"
+import { InnerFormLayout, PhoneInput } from "../molecules"
+import { BaseInputField } from "../molecules"
+import { DateInputField } from "../molecules"
+import { SelectOption_TP } from "../../types"
+import { SelectComp } from "../molecules/formik-fields/Select"
 import { useFormikContext } from "formik"
-import { useFetch } from "../hooks"
-import { PhoneInputs } from "./molecules/phone-input/PhoneInput"
+import { useFetch } from "../../hooks"
 ///
 /////////// Types
 ///
@@ -130,6 +129,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
           name="name_ar"
           type="text"
           placeholder="الاسم بالعربي"
+          labelProps={{ className: "mb-1" }}
         />
         {/* name ar end */}
 
@@ -140,6 +140,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
           name="name_en"
           type="text"
           placeholder="الاسم بالانجليزي"
+          labelProps={{ className: "mb-1" }}
         />
         {/* name en end */}
 
@@ -222,7 +223,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* address end */}
 
         {/* phone start */}
-        <PhoneInputs label="رقم الجوال" name="phone" placeholder="رقم الجوال" />
+        <PhoneInput label="رقم الجوال" name="phone" placeholder="رقم الجوال" />
         {/* phone end */}
 
         {/* second phone start */}

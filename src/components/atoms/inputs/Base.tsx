@@ -1,3 +1,4 @@
+import { forwardRef } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
 
 const GeneralInputClass: string = "form-input px-4 py-[.30rem] w-full shadows"
@@ -37,40 +38,67 @@ export interface BaseInputProps_TP
   className?: string
   autocomplete?: string
   error?: boolean
+  ref?: any
 }
 
-export const BaseInput = ({
-  placeholder,
-  type = "text",
-  name,
-  id,
-  className,
-  disabled,
-  autocomplete,
-  error,
-  value,
-  ...props
-}: BaseInputVariants_TP & BaseInputProps_TP) => {
+export const BaseInput = forwardRef(
+  ({ ...props }: BaseInputProps_TP & BaseInputVariants_TP, ref: any) => {
+    return (
+      <input
+        {...props}
+        type={props.type || "text"}
+        name={props.name}
+        id={props.id}
+        {...(props.placeholder ? { placeholder: props.placeholder } : {})}
+        disabled={props.disabled}
+        className={baseInput({
+          error: props.error,
+          className: props.className,
+          type: props.type || "text",
+        })}
+        autoComplete={props.autoComplete}
+        value={props.value}
+        ref={ref}
+      />
+    )
+  }
+)
 
-  return (
-    <input
-      type={type}
-      name={name}
-      id={id}
-      {...(placeholder
-        ? {
-            placeholder,
-          }
-        : {})}
-      disabled={disabled}
-      className={baseInput({
-        error,
-        className,
-        type,
-      })}
-      autoComplete={autocomplete}
-      value={value}
-      {...props}
-    />
-  )
-}
+// ({
+//   placeholder,
+//   type = "text",
+//   name,
+//   id,
+//   className,
+//   disabled,
+//   autocomplete,
+//   error,
+//   value,
+//   ...props
+// }: BaseInputVariants_TP & BaseInputProps_TP) => {
+//   if (props.ref) {
+//     console.log(name)
+//   }
+
+//   return (
+//     <input
+//       type={type}
+//       name={name}
+//       id={id}
+//       {...(placeholder
+//         ? {
+//             placeholder,
+//           }
+//         : {})}
+//       disabled={disabled}
+//       className={baseInput({
+//         error,
+//         className,
+//         type,
+//       })}
+//       autoComplete={autocomplete}
+//       value={value}
+//       {...props}
+//     />
+//   )
+// }

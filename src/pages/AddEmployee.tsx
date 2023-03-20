@@ -1,12 +1,10 @@
 /////////// IMPORTS
 ///
 //import classes from './AddEmployee.module.css'
+import { Form, Formik } from "formik"
 import { Helmet } from "react-helmet-async"
-import { OuterFormLayout } from "../components/molecules/OuterFormLayout"
-import { NationalAddress } from "../components/templates/NationalAddress"
-import { EmployeeMainData } from "../components/EmployeeMainData"
-import { Button } from "../components/atoms/buttons/Button"
-import { Formik, Form } from "formik"
+import { OuterFormLayout } from "../components/molecules"
+import { EmployeeMainData, NationalAddress } from "../components/templates"
 import { InnerForm } from "../utils/utils-components/InnerForm"
 import * as Yup from "yup"
 import { isValidPhoneNumber } from "react-phone-number-input"
@@ -19,7 +17,6 @@ type AddEmployeeProps_TP = {
 
 type InitialValues_TP = {
   // employee main data types
-  name_ar: string
   name_en: string
   branch: string
   management: string
@@ -37,7 +34,8 @@ type InitialValues_TP = {
   day: string
   email: string
   password: string
-  // national address types
+  // employee main data types
+  name_ar: string  // national address types
   city_id: string
   district_id: string
   min_Address: string // review backend
@@ -67,8 +65,7 @@ const initialValues: InitialValues_TP = {
   hiring_date: new Date(),
   day: "",
   email: "",
-  password: "",
-  // national address initial values
+  password: "",  // national address initial values
   city_id: "",
   district_id: "",
   min_Address: "", // review backend
@@ -101,7 +98,8 @@ const validatingSchema = Yup.object({
   day: Yup.date().required("برجاء ملئ هذا الحقل"),
   email: Yup.string().trim().required("برجاء ملئ هذا الحقل"),
   password: Yup.string().trim().required("برجاء ملئ هذا الحقل"),
-
+  birth_date: Yup.date().required("برجاء ملئ هذا الحقل"),
+  hiring_date: Yup.date().required("برجاء ملئ هذا الحقل"),
   // national address validation
   city_id: Yup.string().trim().required("برجاء ملئ هذا الحقل"),
   district_id: Yup.string().trim().required("برجاء ملئ هذا الحقل"),

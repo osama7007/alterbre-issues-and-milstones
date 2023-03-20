@@ -1,17 +1,19 @@
 import { useFormikContext } from "formik"
+import { ChangeEvent, useState } from "react"
 import Select, {
   ActionMeta,
   MultiValue,
   SingleValue,
   Theme,
 } from "react-select"
-import CreatableSelect from "react-select/creatable"
-
 import makeAnimated from "react-select/animated"
+import CreatableSelect from "react-select/creatable"
 import { SelectOption_TP } from "../../../types"
 import { FormikError, Label, Spinner } from "../../atoms"
+import { Modal } from "../Modal"
 
 type Select_TP = {
+  value: SelectOption_TP | undefined
   label?: string
   name?: string
   id: string
@@ -28,7 +30,42 @@ type Select_TP = {
   formatCreateLabel?: (inputValue: string) => string
   fieldKey?: keyof SelectOption_TP
   isDisabled?: boolean
+  onSimpleCreate?: (inputValue: string) => void
+  onComplexCreate?: (inputValue: string) => void
+  CreateComponent?: ({
+    value,
+    onAdd,
+    setSelectOptions,
+  }: {
+    value: string
+    onAdd: (value: string) => void
+    setSelectOptions?: (options: any[]) => void
+  }) => JSX.Element
+  setOptions?: (options: any[]) => void
 }
+
+const selectTheme = (theme: Theme) => ({
+  ...theme,
+  borderRadius: 5,
+  colors: {
+    ...theme.colors,
+    neutral80: "#295E56",
+    primary25: "#e9eeed",
+    primary: "#295E56",
+  },
+})
+
+const selectClassNames = (touched: boolean, error: boolean) => ({
+  control: ({ menuIsOpen }: { menuIsOpen: boolean }) =>
+    `!rounded-md !shadow-none !shadow-md !border-2 ${
+      touched && error ? " !border-mainRed" : ""
+    } 
+                  ${menuIsOpen && "!border-mainGreen"}
+
+                  `,
+  dropdownIndicator: () => `!text-mainGreen`,
+  valueContainer: () => `!overflow-x-auto !overflow-y-hidden scrollbar`,
+})
 
 export const SelectComp = ({
   label,
@@ -45,12 +82,27 @@ export const SelectComp = ({
   creatable = false,
   formatCreateLabel,
   fieldKey = "value",
+  onSimpleCreate,
+  CreateComponent,
+  onComplexCreate,
+  setOptions,
   ...props
 }: Select_TP) => {
   const animatedComponents = makeAnimated()
-  const { setFieldValue, setFieldTouched, errors, touched } = useFormikContext<{
+  const { setFieldValue, errors, touched, handleBlur } = useFormikContext<{
     [key: string]: any
   }>()
+  const [createModalOpen, setCreateModalOpen] = useState(false)
+  const [createValue, setCreateValue] = useState("")
+  const handleCreate = (inputValue: string) => {
+    if (onSimpleCreate) {
+      onSimpleCreate(inputValue)
+    } else if (CreateComponent) {
+      setCreateModalOpen(true)
+      setCreateValue(inputValue)
+    }
+  }
+
   var selectProps = {
     ...props,
     components: {
@@ -65,34 +117,12 @@ export const SelectComp = ({
     options: options,
     isLoading: loading && !isDisabled,
     isDisabled: loading || isDisabled,
-    classNames: {
-      control: ({ menuIsOpen }: { menuIsOpen: boolean }) =>
-        `!rounded-md !shadow-none !shadow-md !border-2 ${
-          touched[name as string] && errors[name as string]
-            ? " !border-mainRed"
-            : ""
-        } 
-                  ${menuIsOpen && "!border-mainGreen"}
-
-                  `,
-      dropdownIndicator: () => `!text-mainGreen`,
-      valueContainer: () => `!overflow-x-auto !overflow-y-hidden scrollbar`,
-    },
-    theme: (theme: Theme) => ({
-      ...theme,
-      borderRadius: 5,
-      colors: {
-        ...theme.colors,
-        neutral80: "#295E56",
-        primary25: "#e9eeed",
-        primary: "#295E56",
-      },
-    }),
-    onBlur: () => {
-      if (setFieldTouched) {
-        setFieldTouched(name as string, true)
-      }
-    },
+    classNames: selectClassNames(
+      !!touched[name as string],
+      !!errors[name as string]
+    ),
+    theme: selectTheme,
+    onBlur: handleBlur(name) as (e: ChangeEvent) => void,
     onChange: (
       option: SingleValue<SelectOption_TP> | MultiValue<SelectOption_TP>,
       actionMeta: ActionMeta<SelectOption_TP>
@@ -119,12 +149,35 @@ export const SelectComp = ({
     <>
       <div className="col-span-1 flex w-full flex-col gap-2">
         {label && <Label htmlFor={id}>{label}</Label>}
-        <div className=" relative col-span-1 flex flex-col bg-white">
+        <div className="relative col-span-1 flex flex-col bg-white">
           {creatable ? (
-            <CreatableSelect
-              {...selectProps}
-              formatCreateLabel={formatCreateLabel}
-            />
+            <>
+              <CreatableSelect
+                {...selectProps}
+                formatCreateLabel={formatCreateLabel}
+                onCreateOption={handleCreate}
+              />
+              {CreateComponent && (
+                <Modal
+                  title="Create new option"
+                  isOpen={creatable && createModalOpen}
+                  onClose={() => {
+                    setCreateModalOpen(false)
+                  }}
+                >
+                  {
+                    <CreateComponent
+                      onAdd={(value) => {
+                        onComplexCreate && onComplexCreate(value)
+                        setCreateModalOpen(false)
+                      }}
+                      value={createValue}
+                      setSelectOptions={setOptions}
+                    />
+                  }
+                </Modal>
+              )}
+            </>
           ) : (
             <Select {...selectProps} />
           )}
