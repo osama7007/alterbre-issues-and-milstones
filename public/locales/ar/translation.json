@@ -1,8 +1,10 @@
 {
   "home": "الرئيسية",
+  "add": "إضافة",
   "settings": "الإعدادات",
   "click to upload": "إضغط أو إسحب لرفع الملفات",
   "administrative-structure": "الهيكل الإداري",
+  "add-administrative-structure": "إضافة هيكل الإداري",
   "required": "هذا الحقل مطلوب",
   "login": "تسجيل دخول",
   "add-employee": "إضافة موظف",

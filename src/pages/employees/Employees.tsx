@@ -46,7 +46,7 @@ export const Employees = ({ title }: EmployeesProps_TP) => {
       </Helmet>
       {isSuccess &&
         employees.map(({ id, name }) => (
-          <div onClick={() => navigate(`${id}`)}>{name}</div>
+          <div key={id} onClick={() => navigate(`${id}`)}>{name}</div>
         ))}
     </>
   )

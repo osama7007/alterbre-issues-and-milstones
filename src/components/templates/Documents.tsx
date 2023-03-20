@@ -1,14 +1,12 @@
 /////////// IMPORTS
 ///
-import { t } from "i18next"
-import { BaseInputField, CheckBoxField, InnerFormLayout } from "../molecules"
-import { Button } from "../atoms"
-import { SelectOption_TP } from "../../types"
-import { useFetch } from "../../hooks"
-import { Modal } from "../molecules"
-import { useState } from "react"
 import { useFormikContext } from "formik"
-import { Select } from "../molecules"
+import { t } from "i18next"
+import { useState } from "react"
+import { useFetch } from "../../hooks"
+import { SelectOption_TP } from "../../types"
+import { Button } from "../atoms"
+import { BaseInputField, CheckBoxField, InnerFormLayout, Modal, Select } from "../molecules"
 ///
 /////////// Types
 ///
@@ -73,8 +71,16 @@ export const Documents = () => {
     <>
       <InnerFormLayout
         title={t("documents")}
-        subTitle={t("show documents")}
-        action={handleFetch}
+        leftComponent={
+          <Button
+            variant="primary"
+            type="button"
+            className="mb-3"
+            action={handleFetch}
+          >
+            {t("show documents")}
+          </Button>
+        }
       >
         {documents && documents.length > 0 ? (
           <div>
@@ -117,17 +123,17 @@ export const Documents = () => {
             />
             {/* id type end */}
           </div>
-          <div className="col-span-4" >
+          <div className="col-span-4">
             <div className="col-span-1">
-            {/* name start */}
-            <BaseInputField
-              id="name"
-              label="الاسم"
-              name="name"
-              type="text"
-              placeholder="الاسم"
-            />
-            {/* name end */}
+              {/* name start */}
+              <BaseInputField
+                id="name"
+                label="الاسم"
+                name="name"
+                type="text"
+                placeholder="الاسم"
+              />
+              {/* name end */}
             </div>
 
             {/* number start */}

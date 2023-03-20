@@ -13,6 +13,7 @@ import { ErrorPage } from "./ErrorPage"
 import { Root } from "./Root"
 import { Employees } from "../pages/employees/Employees"
 import { OneEmployee } from "../pages/employees/OneEmployee"
+import { AddAdministrativeStructure } from "../pages/AdministrativeStructure/AddAdministrativeStructure"
 
 export const AllRoutesProvider = () => {
   return (
@@ -29,6 +30,14 @@ export const AllRoutesProvider = () => {
             path="/administrative-structure"
             element={
               <AdministrativeStructure title={t("administrative-structure")} />
+            }
+          />
+          <Route
+            path="/add-administrative-structure"
+            element={
+              <AddAdministrativeStructure
+                title={t("add-administrative-structure")}
+              />
             }
           />
           <Route

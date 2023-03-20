@@ -12,7 +12,7 @@ export type permissionGroup_TP = {
     permissions: Permission_TP[]
 }
 
-export const schema = () => Yup.object().shape({
+export const addAdministrativeSchema = () => Yup.object().shape({
     name: Yup.string()
         .trim()
         .required(t('required') || 'هذا الحقل مطلوب'),

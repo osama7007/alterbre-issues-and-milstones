@@ -1,5 +1,6 @@
 /////////// IMPORTS
 ///
+import { DefaultTFuncReturn } from "i18next"
 import { ReactNode } from "react"
 import { Button } from "../atoms/buttons/Button"
 ///
@@ -8,8 +9,9 @@ import { Button } from "../atoms/buttons/Button"
 ///
 type OuterFormLayout_TP = {
   children: ReactNode
-  header?: string
+  header?: string | DefaultTFuncReturn
   submitText?: string
+  leftComponent?: ReactNode
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -18,7 +20,8 @@ type OuterFormLayout_TP = {
 export const OuterFormLayout = ({
   children,
   header,
-  submitText = "حفظ",
+  submitText,
+  leftComponent,
 }: OuterFormLayout_TP) => {
   /////////// VARIABLES
   ///
@@ -42,7 +45,11 @@ export const OuterFormLayout = ({
   return (
     <>
       <div className="py-4 px-2 flex flex-col">
-        <h2 className="text-2xl font-bold mb-8">{header}</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold mb-8">{header}</h2>
+          {leftComponent && leftComponent}
+        </div>
+
         <div className="bg-lightGreen p-4 rounded-lg">{children}</div>
         {!!submitText && (
           <Button type="submit" variant="primary" className="mr-auto mt-8">
