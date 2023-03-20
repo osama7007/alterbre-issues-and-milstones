@@ -4,7 +4,6 @@
 import { Helmet } from "react-helmet-async"
 import { useFetch } from "../../hooks"
 import { Employee_TP } from "./employees-types"
-import { useNavigate } from "react-router-dom"
 import { EmployeeCard } from "../../components/templates/employees/EmployeeCard"
 ///
 /////////// Types
@@ -19,7 +18,7 @@ type EmployeesProps_TP = {
 export const Employees = ({ title }: EmployeesProps_TP) => {
   /////////// VARIABLES
   ///
-  const navigate = useNavigate()
+
   ///
   /////////// CUSTOM HOOKS
   ///

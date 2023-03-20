@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
 import { Spinner } from "../"
 
-const button = tv({
+const buttonVars = tv({
   base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
   variants: {
     color: {
@@ -44,7 +44,7 @@ const button = tv({
   },
 })
 
-type ButtonVariants_TP = VariantProps<typeof button>
+type ButtonVariants_TP = VariantProps<typeof buttonVars>
 
 interface ButtonProps_TP extends ButtonVariants_TP {
   children: ReactNode
@@ -74,7 +74,7 @@ export const Button = ({
     <button
       type={type}
       disabled={disabled || loading}
-      className={button({
+      className={buttonVars({
         color: variant,
         disabled: disabled || loading,
         bordered: bordered,
