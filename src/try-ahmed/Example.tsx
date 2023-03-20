@@ -2,9 +2,9 @@
 ///
 import { createColumnHelper } from "@tanstack/react-table"
 import { useFormikContext } from "formik"
-import { useState, useMemo } from "react"
+import { useMemo, useState } from "react"
 import { BaseInputField } from "../components/molecules/formik-fields/BaseInputField"
-import { SelectComp } from "../components/molecules/formik-fields/Select"
+import { Select } from "../components/molecules"
 import { useFetch } from "../hooks/useFetch"
 import { initialValues } from "../pages/System"
 import { SelectOption_TP } from "../types"
@@ -103,7 +103,7 @@ export const Example = () => {
       // THE REST
       columnHelper.accessor((row) => row.type, {
         cell: (info) => (
-          <SelectComp
+          <Select
             name="type"
             id="type"
             options={typeSelectOptions}
@@ -136,7 +136,7 @@ export const Example = () => {
       }),
       columnHelper.accessor((row) => row.karat, {
         cell: (info) => (
-          <SelectComp
+          <Select
             name="karat"
             id="karat"
             options={karatSelectOptions}

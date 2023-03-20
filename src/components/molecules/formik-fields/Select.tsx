@@ -13,7 +13,7 @@ import { FormikError, Label, Spinner } from "../../atoms"
 import { Modal } from "../Modal"
 
 type Select_TP = {
-  value: SelectOption_TP | undefined
+  value?: SelectOption_TP | undefined
   label?: string
   name?: string
   id: string
@@ -149,7 +149,7 @@ export const SelectComp = ({
     <>
       <div className="col-span-1 flex w-full flex-col gap-2">
         {label && <Label htmlFor={id}>{label}</Label>}
-        <div className="relative col-span-1 flex flex-col bg-white">
+        <div className="relative col-span-1 flex flex-col">
           {creatable ? (
             <>
               <CreatableSelect

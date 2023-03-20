@@ -1,13 +1,11 @@
 /////////// IMPORTS
 ///
-import { SingleValue } from "react-select"
-import { InnerFormLayout, PhoneInput } from "../molecules"
-import { BaseInputField } from "../molecules"
-import { DateInputField } from "../molecules"
-import { SelectOption_TP } from "../../types"
-import { SelectComp } from "../molecules/formik-fields/Select"
 import { useFormikContext } from "formik"
-import { useFetch } from "../../hooks"
+import { SingleValue } from "react-select"
+import { useFetch } from "../hooks"
+import { SelectOption_TP } from "../types"
+import { BaseInputField, DateInputField, InnerFormLayout, PhoneInput } from "./molecules"
+import { Select } from "../components/molecules"
 ///
 /////////// Types
 ///
@@ -145,11 +143,10 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* name en end */}
 
         {/* branch start */}
-        <SelectComp
+        <Select
           id="branch"
           label="الفرع"
           name="branch"
-          
           placeholder="الطائف"
           loadingPlaceholder="جاري التحميل"
           options={branches}
@@ -162,7 +159,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* branch end */}
 
         {/* management start */}
-        <SelectComp
+        <Select
           id="management"
           label="الادراة"
           name="management"
@@ -179,7 +176,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* management end */}
 
         {/* job title start */}
-        <SelectComp
+        <Select
           id="jobTitle"
           label="المسمى الوظيفي"
           name="jobTitle"
@@ -196,7 +193,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* job title end */}
 
         {/* company start */}
-        <SelectComp
+        <Select
           id="company"
           label="الشركة"
           name="company"
@@ -237,7 +234,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* second phone end */}
 
         {/* resident start */}
-        <SelectComp
+        <Select
           id="resident"
           label="الاقامة"
           name="resident"
@@ -254,7 +251,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* resident end */}
 
         {/* job degree start */}
-        <SelectComp
+        <Select
           id="jobDegree"
           label="الدرجة الوظيفية"
           name="jobDegree"
@@ -271,7 +268,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
         {/* job degree end */}
 
         {/* nationality start */}
-        <SelectComp
+        <Select
           id="nationality"
           label="الحنسية"
           name="nationality"
@@ -286,16 +283,6 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
           loading={nationalityLoading}
         />
         {/* nationality end */}
-
-        {/* email start */}
-        <BaseInputField
-          id="age"
-          label="العمر"
-          name="age"
-          type="number"
-          placeholder="العمر"
-        />
-        {/* email end */}
 
         {/* hiring date start */}
         <DateInputField
@@ -315,7 +302,7 @@ export const EmployeeMainData = ({ title }: EmployeeMainDataProps_TP) => {
 
           
         {/* vacation start */}
-        <SelectComp
+        <Select
           id="day"
           label="رصيد الأجازات"
           name="day"

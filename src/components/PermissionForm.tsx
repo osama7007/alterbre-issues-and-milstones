@@ -4,20 +4,19 @@
 /////////// Types
 ///
 import { useFormikContext } from "formik"
-import { PermissionGroup } from "../../pages/AdministrativeStructure/PermissionGroup"
-import { InnerFormLayout } from "../molecules/InnerFormLayout"
-import { SelectComp } from "../molecules/formik-fields/Select"
-import { useFetch } from "../../hooks"
-import { SelectOption_TP } from "../../types"
-import { permissionGroup_TP } from "../../pages/AdministrativeStructure/types-schemas"
-import { BaseInputField } from "../molecules"
+import { useFetch } from "../hooks"
+import { PermissionGroup } from "../pages/AdministrativeStructure/PermissionGroup"
+import { permissionGroup_TP } from "../pages/AdministrativeStructure/types-schemas"
+import { SelectOption_TP } from "../types"
+import { BaseInputField } from "./molecules"
+import { InnerFormLayout } from "./molecules/InnerFormLayout"
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
 type Permission_TP = {
   permissions: permissionGroup_TP[]
 }
 ///
-export const PermissonForm = ({ permissions }: Permission_TP) => {
+export const PermissionForm = ({ permissions }: Permission_TP) => {
   /////////// VARIABLES
   ///
   ///
