@@ -7,7 +7,7 @@ import { useEffect } from "react"
 ///
 type InnerFormProps_TP = {
   children: JSX.Element
-  errors?: FormikErrors<{ [key: string]: string|Date }> | undefined
+  errors?: FormikErrors<{ [key: string]: string[] }> | undefined
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -32,6 +32,10 @@ export const InnerForm = ({ children, errors }: InnerFormProps_TP) => {
     if (errors) {
       Object.entries(errors).map(([key, val]) => {
         if (val) {
+          /* 
+          دلوقتي انا مهندل ان لو رجعلي اراي اوف ايرورز متعلقة بفيلد واحد انا باخد منهم اول ايرور بس
+          محتاج اهندل طريقة اني اعرض الباقي
+          */
           setFieldError(key, val[0])
         }
       })

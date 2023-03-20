@@ -4,13 +4,9 @@ import { Form, Formik, FormikValues } from "formik"
 import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
 import { Button } from "../../components/atoms/buttons/Button"
-import { HeadBase } from "../../components/molecules/card/CardHeader"
-import { Spinner } from "../../components/atoms/UI/Spinner"
 import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
 import { Loading } from "../../components/organisms/Loading"
-import { useFetch } from "../../hooks/useFetch"
-import { useMutate } from "../../hooks/useMutate"
-import { CError_TP } from "../../types"
+import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
 import { PermissionGroup } from "./PermissionGroup"
@@ -71,7 +67,7 @@ export const AdministrativeStructure = ({
       (perm) => (asyncInitValues[perm.front_key as keyof Permission_TP] = "")
     )
   )
-  const errors = rulePostError as CError_TP | null
+
   ///
   /////////// STATES
   ///
@@ -83,6 +79,7 @@ export const AdministrativeStructure = ({
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
   const addAdminStructureHandler = (values: FormikValues) => {
+    console.log(`addAdminStructureHandler ~ values:`, values)
     mutate({
       endpointName: "",
       values: {},
@@ -113,15 +110,14 @@ export const AdministrativeStructure = ({
             validationSchema={schema()}
           >
             {({ values, touched }) => (
-              <InnerForm errors={errors?.response.data.data}>
+              <InnerForm errors={rulePostError?.response.data.data}>
                 <Form>
                   <div className="flex flex-col gap-6 rounded-xl bg-lightGreen p-6">
                     <div className="flex flex-col gap-6 mt-4 rounded-xl bg-flatWhite py-6 px-8">
                       <div className=" grid grid-cols-4 ">
                         <BaseInputField
-                          placeholder={"حماده"}
+                          placeholder="مدير"
                           labelProps={{ className: "mb-1" }}
-                          value={values.name}
                           type="text"
                           id="name"
                           label="الإسم"
@@ -140,7 +136,7 @@ export const AdministrativeStructure = ({
                               name={name}
                               permissions={permissions}
                             />
-                          ))}{" "}
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -148,7 +144,7 @@ export const AdministrativeStructure = ({
                     <div className="flex items-end justify-end">
                       <Button type="submit" loading={isMutating}>
                         تأكيد
-                      </Button>{" "}
+                      </Button>
                     </div>
                   </div>
                 </Form>

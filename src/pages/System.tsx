@@ -2,10 +2,7 @@
 ///
 import { Form, Formik } from "formik"
 import { Helmet } from "react-helmet-async"
-import { DropFile } from "../components/molecules/DropFile"
-import { CFile_TP } from "../types"
 import * as Yup from "yup"
-import { Button } from "../components/atoms/buttons/Button"
 import { Example } from "../try-ahmed/Example"
 ///
 /////////// Types
@@ -20,13 +17,15 @@ export const initialValues = {
   weight: "",
   karat: "",
   stock: "",
+  goldTaxes: "",
 }
 
 const validation = Yup.object().shape({
   type: Yup.string().trim().required(),
-  weight: Yup.string().trim().required(),
+  weight: Yup.number().required().typeError("ارقام فقط"),
   karat: Yup.string().trim().required(),
   stock: Yup.string().trim().required(),
+  goldTaxes: Yup.number().required().typeError("ارقام فقط"),
 })
 ///
 export const System = ({ title }: SystemProps_TP) => {

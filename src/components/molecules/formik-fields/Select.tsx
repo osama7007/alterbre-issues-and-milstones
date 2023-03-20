@@ -12,6 +12,7 @@ import { SelectOption_TP } from "../../../types"
 import { FormikError, Label, Spinner } from "../../atoms"
 
 type Select_TP = {
+  value: SelectOption_TP | undefined
   label?: string
   name?: string
   id: string

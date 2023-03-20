@@ -7,12 +7,10 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 // import "yet-another-react-lightbox/plugins/captions.css"
 import "yet-another-react-lightbox/plugins/thumbnails.css"
-import Lightbox, {
-  SlideImage,
-} from "yet-another-react-lightbox"
+import Lightbox, { SlideImage } from "yet-another-react-lightbox"
 import { RiDeleteBin3Fill } from "react-icons/ri"
 import { CImageFile_TP } from "../../types"
-import {useState} from 'react'
+import { useState } from "react"
 ///
 /////////// Types
 ///

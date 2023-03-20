@@ -2,7 +2,7 @@
 ///
 import { createColumnHelper } from "@tanstack/react-table"
 import { useFormikContext } from "formik"
-import { useMemo, useState } from "react"
+import { useState, useMemo } from "react"
 import { BaseInputField } from "../components/molecules/formik-fields/BaseInputField"
 import { SelectComp } from "../components/molecules/formik-fields/Select"
 import { useFetch } from "../hooks/useFetch"
@@ -13,11 +13,11 @@ import { TableWithForm } from "./TableWithForm"
 /////////// Types
 ///
 type ExampleProps_TP = {}
-type Person = {
+type Band_TP = {
   // ADD THIS IF I NEED ROW INDEX
   index: string
   type: string
-  weight: string
+  weight: number
   karat: string
   stock: string
   wage: string
@@ -27,39 +27,58 @@ type Person = {
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
 
-const defaultData: Person[] = [
+const defaultData: Band_TP[] = [
   // EACH OBJECT IS A ROW
   {
     // ADD THIS IF I NEED ROW INDEX
     index: "",
     type: "",
-    weight: "",
+    weight: 0,
     karat: "",
     stock: "",
     wage: "",
     wageTaxes: "",
     goldTaxes: "",
   },
+  // {
+  //   // ADD THIS IF I NEED ROW INDEX
+  //   index: "",
+  //   type: "opt1",
+  //   weight: 0,
+  //   karat: "",
+  //   stock: "",
+  //   wage: "",
+  //   wageTaxes: "",
+  //   goldTaxes: "",
+  // },
 ]
-const columnHelper = createColumnHelper<Person>()
+const columnHelper = createColumnHelper<Band_TP>()
 
 ///
 export const Example = () => {
   /////////// VARIABLES
   ///
-const [data, setData] = useState(() => [...defaultData])
-const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>()
+  const [data, setData] = useState(() => [...defaultData])
+  const [selectedTypeOption, setSelectedTypeOption] =
+    useState<SelectOption_TP>()
+  const [selectedKaratOption, setSelectedKaratOption] =
+    useState<SelectOption_TP>()
+
+  // FETCH options
   const { data: typeSelectOptions, isLoading: isLoadingTypeSelectOptions } =
     useFetch<SelectOption_TP[]>({
       endpoint: "options",
       queryKey: ["options"],
     })
 
+  // FETCH karats
   const { data: karatSelectOptions, isLoading: isLoadingKaratSelectOptions } =
     useFetch<SelectOption_TP[]>({
       endpoint: "karats",
       queryKey: ["karats"],
     })
+
+  // FETCH stocks
   const { data: stocks, isLoading: isLoadingStocks } = useFetch<
     { karat: string; value: string }[]
   >({
@@ -71,8 +90,9 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
     useFormikContext<typeof initialValues>()
   console.log(`Example ~ values:`, values)
 
-  const columns = useMemo(
-    () => [
+  const columns =
+    useMemo(() =>
+    [
       // ADD THIS IF I NEED ROW INDEX
       columnHelper.accessor((row) => row.index, {
         id: "rowNumber",
@@ -90,6 +110,10 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
             loading={isLoadingTypeSelectOptions}
             placeholder="select"
             fieldKey="id"
+            value={selectedTypeOption}
+            onChange={(option) => {
+              setSelectedTypeOption(option)
+            }}
           />
         ),
         id: "type",
@@ -98,20 +122,28 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
       }),
       columnHelper.accessor((row) => row.weight, {
         cell: (info) => (
-          <BaseInputField id="weight" name="weight" type="text" />
+          <BaseInputField
+            // onChange={(val) => {
+            //   console.log(`columnHelper.accessor ~ val:`, val)
+            //   // setWeightVal()
+            // }}
+            id="weight"
+            name="weight"
+            type="text"
+          />
         ),
         id: "weight",
       }),
       columnHelper.accessor((row) => row.karat, {
         cell: (info) => (
           <SelectComp
-            value={selectedKaratOption}
             name="karat"
             id="karat"
             options={karatSelectOptions}
             loading={isLoadingKaratSelectOptions || isLoadingStocks}
             placeholder="select"
             fieldKey="id"
+            value={selectedKaratOption}
             onChange={(option) => {
               setFieldValue("stock", values.karat)
               setSelectedKaratOption(option)
@@ -126,7 +158,11 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
             "تحميل الأسهم"
           ) : (
             <BaseInputField
-              value={values.karat}
+              value={
+                stocks?.find(
+                  (stock) => stock.karat === selectedKaratOption?.value
+                )?.value
+              }
               id="stock"
               name="stock"
               type="text"
@@ -134,12 +170,26 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
           ),
         id: "stock",
       }),
-    ],
-    [
+      columnHelper.accessor((row) => row.goldTaxes, {
+        cell: (info) => (
+          <BaseInputField
+            value={+values.weight * +values.stock}
+            id="goldTaxes"
+            name="goldTaxes"
+            type="text"
+          />
+        ),
+        id: "goldTaxes",
+      }),
+    ]
+    , [
       isLoadingTypeSelectOptions,
       isLoadingKaratSelectOptions,
       isLoadingStocks,
-      values.karat,
+      selectedKaratOption,
+      selectedTypeOption,
+      // values.weight,
+      values.stock,
     ]
   )
   ///
@@ -149,7 +199,6 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
   ///
   /////////// STATES
   ///
-  
 
   ///
   /////////// SIDE EFFECTS
@@ -162,7 +211,7 @@ const [selectedKaratOption, setSelectedKaratOption] = useState<SelectOption_TP>(
   ///
   return (
     <>
-      <TableWithForm<Person> data={data} setData={setData} columns={columns} />
+      <TableWithForm<Band_TP> data={data} setData={setData} columns={columns} />
     </>
   )
 }
