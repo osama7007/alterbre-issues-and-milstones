@@ -13,7 +13,7 @@ import { FormikError, Label, Spinner } from "../../atoms"
 import { Modal } from "../Modal"
 
 type Select_TP = {
-  value: SelectOption_TP | undefined
+  value?: SelectOption_TP | undefined
   label?: string
   name?: string
   id: string

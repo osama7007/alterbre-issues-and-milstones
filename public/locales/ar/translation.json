@@ -5,5 +5,12 @@
   "administrative-structure": "الهيكل الإداري",
   "required": "هذا الحقل مطلوب",
   "login": "تسجيل دخول",
-  "add-employee": "إضافة موظف"
+  "add-employee": "إضافة موظف",
+  "documents":"الوثائق",
+  "available documents":"الوثائق المتاحه",
+  "choose document":"اختر الوثيقة",
+  "show documents":"عرض الوثائق",
+  "There is no available documents yet":"لا يوجد وثائق متاحة بعد",
+  "Add document":"أضف وثيقة"
+
 }
