@@ -92,7 +92,7 @@ export const Settings = ({ title }: SettingsProps_TP) => {
         <BaseInput
           id="digitsCount"
           type="number"
-          value={digitsCount.toString()}
+          value={digitsCount && digitsCount.toString()}
           onChange={changeDigitsCountHandler}
         />
         <Button
