@@ -1,7 +1,6 @@
 /////////// IMPORTS
 ///
 import { Form, Formik, FormikValues } from "formik"
-import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
 import { Button } from "../../components/atoms/buttons/Button"
 import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
@@ -9,8 +8,9 @@ import { Loading } from "../../components/organisms/Loading"
 import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
-import { PermissionGroup } from "./PermissionGroup"
 import { permissionGroup_TP, Permission_TP, schema } from "./types-schemas"
+import { OuterFormLayout } from "../../components/molecules/OuterFormLayout"
+import { PermissonForm } from "../../components/templates/PermissonForm"
 ///
 /////////// Types
 ///
@@ -31,6 +31,7 @@ export const AdministrativeStructure = ({
   /////////// CUSTOM HOOKS
   ///
 
+  //// 
   const {
     data: permissions,
     isError: permissionsError,
@@ -63,10 +64,11 @@ export const AdministrativeStructure = ({
     name: "",
   }
   permissions?.map((permissionsGroup) =>
-    permissionsGroup.permissions.map(
+    permissionsGroup.permissions?.map(
       (perm) => (asyncInitValues[perm.front_key as keyof Permission_TP] = "")
     )
   )
+
 
   ///
   /////////// STATES
@@ -96,13 +98,6 @@ export const AdministrativeStructure = ({
       {permissionsError && <p>{error.message}</p>}
 
       {permissionsSuccess && (
-        <div className="flex flex-col gap-4">
-          <div className="">
-            <h3 className="text-2xl font-bold">
-              {t("administrative-structure")}
-            </h3>
-          </div>
-
           <Formik
             onSubmit={addAdminStructureHandler}
             enableReinitialize={true}
@@ -112,46 +107,13 @@ export const AdministrativeStructure = ({
             {({ values, touched }) => (
               <InnerForm errors={rulePostError?.response.data.data}>
                 <Form>
-                  <div className="flex flex-col gap-6 rounded-xl bg-lightGreen p-6">
-                    <div className="flex flex-col gap-6 mt-4 rounded-xl bg-flatWhite py-6 px-8">
-                      <div className=" grid grid-cols-4 ">
-                        <BaseInputField
-                          placeholder="مدير"
-                          labelProps={{ className: "mb-1" }}
-                          type="text"
-                          id="name"
-                          label="الإسم"
-                          name="name"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <h4 className="flex items-center justify-center text-2xl underline  underline-offset-2 decoration-1 ">
-                          الصلاحيات
-                        </h4>
-
-                        <div className=" flex flex-col gap-2 justify-center ">
-                          {permissions.map(({ id, name, permissions }) => (
-                            <PermissionGroup
-                              key={id}
-                              name={name}
-                              permissions={permissions}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-end justify-end">
-                      <Button type="submit" loading={isMutating}>
-                        تأكيد
-                      </Button>
-                    </div>
-                  </div>
+                 <OuterFormLayout header="الهيكل الإداري">
+                 <PermissonForm permissions={permissions}/>
+                 </OuterFormLayout>
                 </Form>
               </InnerForm>
             )}
           </Formik>
-        </div>
       )}
     </>
   )

@@ -44,7 +44,7 @@ export const PermissionGroup = ({
   return (
     <div className="flex flex-col gap-4">
       <h4 className="flex items-center  text-lg ">{name}</h4>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 gap-5">
         {permissions.map(({ id, name, front_key }) => (
           <div key={id}>
             <CheckBoxField

@@ -65,7 +65,7 @@ export const DateInputField = ({
         onCalendarClose={() => {
           setDateActive(false)
         }}
-        maxDate={maxDate}
+          maxDate={maxDate}
         dateFormat="dd/MM/yyyy"
         minDate={minDate}
         customInput={<DatePickerInput />}
