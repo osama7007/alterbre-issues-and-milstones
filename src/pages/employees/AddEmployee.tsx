@@ -3,11 +3,12 @@
 //import classes from './AddEmployee.module.css'
 import { Form, Formik } from "formik"
 import { Helmet } from "react-helmet-async"
-import { OuterFormLayout } from "../components/molecules"
-import { EmployeeMainData, NationalAddress } from "../components/templates"
-import { InnerForm } from "../utils/utils-components/InnerForm"
-import * as Yup from "yup"
 import { isValidPhoneNumber } from "react-phone-number-input"
+import * as Yup from "yup"
+import { OuterFormLayout } from "../../components/molecules"
+import { EmployeeMainData, NationalAddress } from "../../components/templates"
+import { Documents } from "../../components/templates/Documents"
+import { InnerForm } from "../../utils/utils-components/InnerForm"
 ///
 /////////// Types
 ///
@@ -28,9 +29,8 @@ type InitialValues_TP = {
   resident: string
   jobDegree: string
   nationality: string
-  age: string
-  birth_date: Date
-  hiring_date: Date
+  birthDate: Date
+  hiringDate: Date
   day: string
   email: string
   password: string
@@ -60,9 +60,8 @@ const initialValues: InitialValues_TP = {
   resident: "",
   jobDegree: "",
   nationality: "",
-  age: "",
-  birth_date: new Date(),
-  hiring_date: new Date(),
+  birthDate: new Date(),
+  hiringDate: new Date(),
   day: "",
   email: "",
   password: "",  // national address initial values
@@ -92,7 +91,6 @@ const validatingSchema = Yup.object({
   resident: Yup.string().trim().required("برجاء ملئ هذا الحقل"),
   jobDegree: Yup.date().required("برجاء ملئ هذا الحقل"),
   nationality: Yup.date().required("برجاء ملئ هذا الحقل"),
-  age: Yup.date().required("برجاء ملئ هذا الحقل"),
   birthDate: Yup.date().required("برجاء ملئ هذا الحقل"),
   hiringDate: Yup.date().required("برجاء ملئ هذا الحقل"),
   day: Yup.date().required("برجاء ملئ هذا الحقل"),
@@ -148,6 +146,7 @@ export const AddEmployee = ({ title }: AddEmployeeProps_TP) => {
             <OuterFormLayout header="إضافة موظف">
               <EmployeeMainData title="البيانات الاساسية" />
               <NationalAddress />
+              <Documents/>
             </OuterFormLayout>
           </InnerForm>
         </Form>

@@ -2,15 +2,13 @@
 ///
 import { Form, Formik, FormikValues } from "formik"
 import { Helmet } from "react-helmet-async"
-import { Button } from "../../components/atoms/buttons/Button"
-import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
+import { PermissionForm } from "../../components/PermissionForm"
+import { OuterFormLayout } from "../../components/molecules/OuterFormLayout"
 import { Loading } from "../../components/organisms/Loading"
 import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
-import { permissionGroup_TP, Permission_TP, schema } from "./types-schemas"
-import { OuterFormLayout } from "../../components/molecules/OuterFormLayout"
-import { PermissonForm } from "../../components/templates/PermissonForm"
+import { Permission_TP, permissionGroup_TP, schema } from "./types-schemas"
 ///
 /////////// Types
 ///
@@ -108,7 +106,7 @@ export const AdministrativeStructure = ({
               <InnerForm errors={rulePostError?.response.data.data}>
                 <Form>
                  <OuterFormLayout header="الهيكل الإداري">
-                 <PermissonForm permissions={permissions}/>
+                 <PermissionForm permissions={permissions}/>
                  </OuterFormLayout>
                 </Form>
               </InnerForm>

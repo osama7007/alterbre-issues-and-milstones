@@ -11,5 +11,6 @@ export {
   DateInputField,
   RadioField,
   Select,
-  TextAreaField,
+  TextAreaField
 }
+
