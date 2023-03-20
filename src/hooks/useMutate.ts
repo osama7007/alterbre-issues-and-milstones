@@ -2,7 +2,7 @@ import { MutationFunction, useMutation } from "@tanstack/react-query"
 import { request } from "../utils/axios-util"
 import { AxiosRequestConfig } from "axios";
 import { mutateData } from "../utils/mutateData";
-import { MutateDataParameters_TP, PostedData_TP } from "../types";
+import { CError_TP, MutateDataParameters_TP, PostedData_TP } from "../types";
 
 type AxiosRequestConfig_withoutURL_TP = Omit<AxiosRequestConfig, 'url'>
 
@@ -12,7 +12,7 @@ type Args_TP<T> = {
     // values?: any,
     mutationFn: (comingData: MutateDataParameters_TP) => Promise<T | undefined>,
     onSuccess?: (data: T | undefined) => void | undefined,
-    onError?: (error: Error) => void,
+    onError?: (error: CError_TP) => void,
 }
 
 

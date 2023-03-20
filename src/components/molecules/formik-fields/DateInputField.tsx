@@ -59,7 +59,7 @@ export const DateInputField = ({
         onCalendarClose={() => {
           setDateActive(false)
         }}
-        maxDate={maxDate}
+          maxDate={maxDate}
         minDate={minDate}
         customInput={<BaseInput name={name} placeholder="Select a date" />}
         isClearable={true}
