@@ -3,7 +3,7 @@ import { useIsRTL } from "./useIsRTL"
 import { useLocalStorage } from "./useLocalStorage"
 import { useMutate } from "./useMutate"
 import { default as usePermission } from "./usePermission"
-import { default as useToggle } from "./useToggle"
+import { useToggle } from "./useToggle"
 
 export {
   useFetch,
