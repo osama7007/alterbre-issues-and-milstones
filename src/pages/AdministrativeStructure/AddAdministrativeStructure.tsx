@@ -3,16 +3,17 @@
 import { Form, Formik, FormikValues } from "formik"
 import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
+import { Button } from "../../components/atoms"
 import { OuterFormLayout } from "../../components/molecules"
 import { Loading } from "../../components/organisms/Loading"
-import { PermissionForm } from "../../components/PermissionForm"
+import { PermissionForm } from "../../components/templates/administrativeStructure/PermissionForm"
 import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
 import { InnerForm } from "../../utils/utils-components/InnerForm"
 import {
   addAdministrativeSchema,
   permissionGroup_TP,
-  Permission_TP,
+  Permission_TP
 } from "./types-schemas"
 ///
 /////////// Types
@@ -107,7 +108,18 @@ export const AddAdministrativeStructure = ({
           {({ values, touched }) => (
             <InnerForm errors={rulePostError?.response.data.data}>
               <Form>
-                <OuterFormLayout header={t("add-administrative-structure")}>
+                <OuterFormLayout
+                  submitComponent={
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      className="mr-auto mt-8"
+                    >
+                      {t("confirm")}
+                    </Button>
+                  }
+                  header={t("add-administrative-structure")}
+                >
                   <PermissionForm permissions={permissions} />
                 </OuterFormLayout>
               </Form>
