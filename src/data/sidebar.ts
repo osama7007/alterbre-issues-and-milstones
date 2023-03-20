@@ -3,6 +3,7 @@ import { AiFillGolden } from "react-icons/ai";
 import { BiDiamond } from "react-icons/bi";
 import { CiExport, CiImport, CiSettings } from "react-icons/ci";
 import { GiCutDiamond } from "react-icons/gi";
+import { GrGroup } from "react-icons/gr";
 import { HiUserAdd } from "react-icons/hi";
 import { IoDocumentsOutline } from "react-icons/io5";
 import { IconType } from "react-icons/lib";
@@ -116,9 +117,9 @@ export const sideBarItems: MenuItem_TP[] = [
       },
       {
         id: crypto.randomUUID(),
-        label: t("add-employee"),
-        link: "/add-employee",
-        icon: HiUserAdd,
+        label: t("employees"),
+        link: "/employees",
+        icon: GrGroup,
       }, {
         id: crypto.randomUUID(),
         label: "حجز الذهب ",

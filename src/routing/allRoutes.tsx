@@ -2,15 +2,18 @@ import { t } from "i18next"
 import { Route, Routes } from "react-router-dom"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
 import { Accessories } from "../pages/Accessories"
-import { AddEmployee } from "../pages/AddEmployee"
 import { AdministrativeStructure } from "../pages/AdministrativeStructure/AdministrativeStructure"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { Settings } from "../pages/Settings"
 import { System } from "../pages/System"
 import { Tests } from "../pages/Tests"
+import { AddEmployee } from "../pages/employees/AddEmployee"
 import { ErrorPage } from "./ErrorPage"
 import { Root } from "./Root"
+import { Employees } from "../pages/employees/Employees"
+import { OneEmployee } from "../pages/employees/OneEmployee"
+import { AddAdministrativeStructure } from "../pages/AdministrativeStructure/AddAdministrativeStructure"
 
 export const AllRoutesProvider = () => {
   return (
@@ -30,9 +33,22 @@ export const AllRoutesProvider = () => {
             }
           />
           <Route
+            path="/add-administrative-structure"
+            element={
+              <AddAdministrativeStructure
+                title={t("add-administrative-structure")}
+              />
+            }
+          />
+          <Route
             path="/add-employee"
             element={<AddEmployee title={t("add-employee")} />}
           />
+          <Route
+            path="/employees"
+            element={<Employees title={t("employees")} />}
+          />
+          <Route path="/employees/:employeeID" element={<OneEmployee />} />
           {/* test */}
           <Route
             path="/accessories"

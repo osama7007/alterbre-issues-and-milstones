@@ -2,11 +2,13 @@
 ///
 import { ReactNode } from "react"
 import { TabsIcon } from "../atoms/icons/Tabs"
+import { Button } from "../atoms"
 ///
 /////////// Types
 ///
 type InnerFormLayoutProps_TP = {
-  title?: string
+  title?: string | null
+  leftComponent?: ReactNode
   children: ReactNode
 }
 /////////// HELPER VARIABLES & FUNCTIONS
@@ -16,6 +18,7 @@ type InnerFormLayoutProps_TP = {
 export const InnerFormLayout = ({
   title,
   children,
+  leftComponent,
 }: InnerFormLayoutProps_TP) => {
   /////////// VARIABLES
   ///
@@ -40,12 +43,15 @@ export const InnerFormLayout = ({
     <>
       <div className="p-2 w-full">
         {title && (
-          <div className="flex items-center gap-x-2 mb-5">
-            <TabsIcon />
-            <h2>{title}</h2>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-x-2 mb-5">
+              <TabsIcon />
+              <h2>{title}</h2>
+            </div>
+            {leftComponent && leftComponent}
           </div>
         )}
-        <div className="bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8">
+        <div className="bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8 relative">
           {children}
         </div>
       </div>
