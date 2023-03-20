@@ -6,7 +6,7 @@ type ViewProps_TP = {
 export const View = ({ className, action, ...props }: ViewProps_TP) => {
   return (
     <BsEye
-      className={`cursor-pointer  ${className}`}
+      className={`cursor-pointer ${className}`}
       onClick={action}
       {...props}
     />
