@@ -45,8 +45,11 @@ export const PhoneInput = ({ label, name, placeholder }: PhoneInputs_TP) => {
   ///
   return (
     <>
-      <div className=" relative col-span-1 flex flex-col">
+      <div className="col-span-1">
+        <div className="flex flex-col gap-1">
+
         <Label htmlFor={name}>{label}</Label>
+
         <BasePhoneInput
           onBlur={handleBlur(name)}
           className={phoneInput({
@@ -58,8 +61,9 @@ export const PhoneInput = ({ label, name, placeholder }: PhoneInputs_TP) => {
           onChange={(number: number | string | undefined) => {
             setFieldValue(name, number)
           }}
-          style={{ direction: "ltr" }}
+          style={{ direction: "ltr"  }}
         />
+        </div>
         <FormikError name={name} />
       </div>
     </>

@@ -53,3 +53,9 @@ input:-webkit-autofill:active {
 .react-datepicker__input-container {
   @apply flex;
 }
+.PhoneInputInput {
+  @apply border-0 px-5 py-0;
+}
+[type="tel"] {
+  @apply !shadow-none !ring-0;
+}
