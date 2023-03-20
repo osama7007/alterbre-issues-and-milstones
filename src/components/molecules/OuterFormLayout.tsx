@@ -10,7 +10,7 @@ import { Button } from "../atoms/buttons/Button"
 type OuterFormLayout_TP = {
   children: ReactNode
   header?: string | DefaultTFuncReturn
-  submitText?: string
+  submitComponent?: ReactNode
   leftComponent?: ReactNode
 }
 /////////// HELPER VARIABLES & FUNCTIONS
@@ -20,7 +20,7 @@ type OuterFormLayout_TP = {
 export const OuterFormLayout = ({
   children,
   header,
-  submitText,
+  submitComponent,
   leftComponent,
 }: OuterFormLayout_TP) => {
   /////////// VARIABLES
@@ -51,11 +51,7 @@ export const OuterFormLayout = ({
         </div>
 
         <div className="bg-lightGreen p-4 rounded-lg">{children}</div>
-        {!!submitText && (
-          <Button type="submit" variant="primary" className="mr-auto mt-8">
-            {submitText}
-          </Button>
-        )}
+        {!!submitComponent && submitComponent}
       </div>
     </>
   )
