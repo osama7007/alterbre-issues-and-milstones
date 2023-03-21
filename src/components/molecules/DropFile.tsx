@@ -39,7 +39,6 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   /////////// CUSTOM HOOKS
   ///
   const { setFieldValue, values } = useFormikContext()
-  console.log(`DropFile ~ values:`, values)
 
   ///
   /////////// STATES
@@ -48,7 +47,6 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [manyPdfsOpen, setManyPdfsOpen] = useState(false)
 
-  console.log(`DropFile ~ pdfs:`, pdfs)
   ///
   /////////// SIDE EFFECTS
   ///
@@ -326,7 +324,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
         )}
         {/* lightboxOpen pdfs*/}
         {!!pdfs.length && manyPdfsOpen && (
-          <Modal isOpen={manyPdfsOpen} setIsOpen={setManyPdfsOpen}>
+          <Modal isOpen={manyPdfsOpen} onClose={setManyPdfsOpen}>
             <div className="grid grid-cols-5 gap-2 w-full">
               <div className=" col-span-1 scrollbar ">
                 {pdfs.map((pdf) => (

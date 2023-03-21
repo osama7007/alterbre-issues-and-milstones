@@ -8,9 +8,9 @@ import { Button } from "../atoms"
 ///
 type InnerFormLayoutProps_TP = {
   title?: string | null
-  subTitle?: string | null
-  action?:()=>void
+  leftComponent?: ReactNode
   children: ReactNode
+  customStyle?:string
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -19,8 +19,8 @@ type InnerFormLayoutProps_TP = {
 export const InnerFormLayout = ({
   title,
   children,
-  subTitle,
-  action
+  leftComponent,
+  customStyle
 }: InnerFormLayoutProps_TP) => {
   /////////// VARIABLES
   ///
@@ -50,14 +50,10 @@ export const InnerFormLayout = ({
               <TabsIcon />
               <h2>{title}</h2>
             </div>
-            {subTitle && (
-              <Button variant="primary" type="button" className="mb-3" action={action}>
-                {subTitle}
-              </Button>
-            )}
+            {leftComponent && leftComponent}
           </div>
         )}
-        <div className="bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8 relative">
+        <div className={customStyle ? customStyle : "bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8 relative"}>
           {children}
         </div>
       </div>

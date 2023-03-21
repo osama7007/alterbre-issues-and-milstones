@@ -2,6 +2,7 @@
   "home": "الرئيسية",
   "settings": "الإعدادات",
   "click to upload": "إضغط أو إسحب لرفع الملفات",
+  "submit":"حفظ",
   "administrative-structure": "الهيكل الإداري",
   "required": "هذا الحقل مطلوب",
   "login": "تسجيل دخول",
@@ -11,6 +12,7 @@
   "choose document":"اختر الوثيقة",
   "show documents":"عرض الوثائق",
   "There is no available documents yet":"لا يوجد وثائق متاحة بعد",
-  "Add document":"أضف وثيقة"
-
+  "Add document":"أضف وثيقة",
+  "Add another document":"أضف وثيقة أخرى",
+  "Adding document":"اضافة وثيقة"
 }

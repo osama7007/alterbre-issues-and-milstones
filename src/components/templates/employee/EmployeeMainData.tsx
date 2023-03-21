@@ -2,10 +2,9 @@
 ///
 import { useFormikContext } from "formik"
 import { SingleValue } from "react-select"
-import { useFetch } from "../hooks"
-import { SelectOption_TP } from "../types"
-import { BaseInputField, DateInputField, InnerFormLayout, PhoneInput } from "./molecules"
-import { Select } from "../components/molecules"
+import { useFetch } from "../../../hooks"
+import { SelectOption_TP } from "../../../types"
+import { BaseInputField, DateInputField, InnerFormLayout, PhoneInput, Select } from "../../molecules"
 ///
 /////////// Types
 ///
