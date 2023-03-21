@@ -46,7 +46,7 @@ export const PDFSvg = ({ stroke }: PDFSvg_TP) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_2030_9944)">
+        <g clipPath="url(#clip0_2030_9944)">
           <path
             d="M14.6673 6.66658V9.99992C14.6673 13.3333 13.334 14.6666 10.0007 14.6666H6.00065C2.66732 14.6666 1.33398 13.3333 1.33398 9.99992V5.99992C1.33398 2.66659 2.66732 1.33325 6.00065 1.33325H9.33398"
             stroke={stroke}

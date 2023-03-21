@@ -11,7 +11,7 @@ const boxesData = tv({
   variants: {
     color: {
       primary: "bg-mainGreen",
-      secondary: "bg-mainOrange  ",
+      secondary: "bg-mainOrange",
     },
   },
   compoundVariants: [

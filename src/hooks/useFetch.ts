@@ -14,6 +14,8 @@ type Args_TP<T> = {
     axiosOptions?: AxiosRequestConfig_withoutURL_TP
     refetchInterval?: number
 }
+
+
 export const useFetch = <T>({ ...args }: Args_TP<T>) => {
     const { queryKey,
         endpoint,
