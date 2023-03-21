@@ -50,7 +50,6 @@ export const AuthCtxProvider = ({ children }: { children: ReactNode }) => {
           Cookies.set("auth", data.token)
           setIsLoggedIn(true)
           notify("success", "Welcome")
-          
           navigate("/")
         }
       },
