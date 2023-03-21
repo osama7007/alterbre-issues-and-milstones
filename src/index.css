@@ -61,6 +61,9 @@ input:-webkit-autofill:active {
 }
 
 
+.pdf-no-scroll .rpv-core__inner-pages--vertical{
+  overflow-y: hidden;height: 8rem
+}
 
 table {
   border: 1px solid lightgray;

@@ -16,6 +16,7 @@ import "@react-pdf-viewer/thumbnail/lib/styles/index.css"
 import { pageThumbnailPlugin } from "../../utils/pdf-viewer-custom-plugins"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import "@react-pdf-viewer/core/lib/styles/index.css"
+import { View } from "../atoms/icons/View"
 ///
 /////////// Types
 ///
@@ -63,7 +64,7 @@ export const PdfViewer = ({
     // تعديل الهايت هنا
     <div
       className={`cursor-pointer relative  w-full group ${
-        showControls ? "h-full" : "h-32"
+        showControls ? "h-full" : "h-32 w-full max-h-32 pdf-no-scroll"
       }`}
       onClick={() => action && action()}
     >
@@ -83,8 +84,9 @@ export const PdfViewer = ({
         />
       </Worker>
       {!showControls && (
-        <span className="absolute top-9 left-0 text-[.60rem] text-center bg-black bg-opacity-10 hidden  group-hover:flex  items-center justify-center">
-          Click on file to preview
+      
+        <span className="absolute h-full w-full top-0 left-0  text-center bg-black bg-opacity-10 hidden  group-hover:flex  items-center justify-center">
+          <View className="w-6 h-6 fill-lightBlack" />
         </span>
       )}
     </div>

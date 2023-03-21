@@ -12,11 +12,10 @@ import { PdfViewer } from "./PdfViewer"
 import { Button } from "../atoms/buttons/Button"
 import { SvgDelete } from "../atoms/icons/SvgDelete"
 import { UploadSvg } from "../atoms/icons/UploadSvg"
-import { MdPhotoSizeSelectActual } from "react-icons/md"
-import { BsFiletypePdf } from "react-icons/bs"
 import { AiFillDelete } from "react-icons/ai"
 import { ViewSvg } from "../atoms/icons/ViewSvg"
 import { PDFSvg } from "../atoms/icons/PDFSvg"
+import { View } from "../atoms/icons/View"
 
 ///
 /////////// Types
@@ -258,7 +257,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                     <>
                       <div className="flex flex-col  gap-1 justify-center">
                         <span className="text-[8px] text-gray-700">
-                          عرض الصور
+                          عرض الملف
                         </span>
                         <div className="bg-lightGray rounded-md p-1 relative">
                           <div
@@ -326,8 +325,8 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
         )}
         {/* lightboxOpen pdfs*/}
         {!!pdfs.length && manyPdfsOpen && (
-          <Modal isOpen={manyPdfsOpen} setIsOpen={setManyPdfsOpen}>
-            <div className="grid grid-cols-5 gap-2 w-full">
+          <Modal isOpen={manyPdfsOpen} onClose={setManyPdfsOpen}>
+            <div className="grid grid-cols-5 gap-2 w-full mt-8">
               <div className=" col-span-1 scrollbar ">
                 {pdfs.map((pdf) => (
                   <div key={pdf.id}>
@@ -348,8 +347,13 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
                 ))}
               </div>
 
-              <div className="col-span-4 ">
+              <div className="col-span-4 scrollbar">
                 {activePdf && <PdfViewer file={activePdf} />}
+                {!activePdf && (
+                  <span className=" h-full w-full  text-center flex items-center justify-center text-mainGreen underline">
+                    يرجي اختيار لمف
+                  </span>
+                )}
               </div>
             </div>
           </Modal>

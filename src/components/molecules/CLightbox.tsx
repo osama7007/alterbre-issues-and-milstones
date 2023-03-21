@@ -60,7 +60,7 @@ export const CLightbox = ({
       close={closeHandler}
       slides={editedImages}
       carousel={{ finite: true }}
-      index={Math.round(editedImages.length / 2)}
+      // index={Math.round(editedImages.length / 2)}
       render={{
         thumbnail: ({ slide }: { slide: SlideImageWithId_TP }) => {
           if (slide.id) {
