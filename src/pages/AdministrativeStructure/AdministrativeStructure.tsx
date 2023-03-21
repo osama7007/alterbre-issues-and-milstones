@@ -14,6 +14,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { Modal } from "../../components/molecules/Modal"
+import { SvgDelete } from "../../components/atoms/icons/SvgDelete"
+import { EditIcon, ViewIcon } from "../../components/atoms/icons"
 /////////// Types
 ///
 type AdministrativeStructureProps_TP = {
@@ -27,18 +29,6 @@ type Admin = {
   action: any
 }
 
-const Data: Admin[] = [
-  {
-    id: crypto.randomUUID(),
-    name: "tanner",
-    action: <div>span</div>,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "tanner",
-    action: <div>span</div>,
-  },
-]
 const columnHelper = createColumnHelper<Admin>()
 
 ///
@@ -66,6 +56,18 @@ export const AdministrativeStructure = ({
   //     })
   //     .catch((err) => console.log(err))
   // }, [])
+  const Data: Admin[] = [
+    {
+      id: crypto.randomUUID(),
+      name: "tanner",
+      action: <></>,
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "tanner",
+      action: <></>,
+    },
+  ]
   const [data, setData] = useState(() => [...Data])
   const columns = [
     columnHelper.accessor("name", {
@@ -73,9 +75,19 @@ export const AdministrativeStructure = ({
       header: () => <span>الاسم </span>,
     }),
 
-    columnHelper.accessor((row) => row.action, {
-      id: "action",
-      cell: (info) => <div className="flex items-center gap-4"></div>,
+    columnHelper.accessor("action", {
+      cell: (info) => {
+        return (
+          <div className="flex items-center justify-center gap-4">
+            <EditIcon action={() => console.log("in", info.row.original)} />
+            <SvgDelete
+              action={() => console.log("in", info.row.original)}
+              stroke="#ef4444"
+            />
+            <ViewIcon action={() => console.log("in", info.row.original)} />
+          </div>
+        )
+      },
       header: () => <span>فعاليات</span>,
     }),
   ]
@@ -128,7 +140,7 @@ export const AdministrativeStructure = ({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+              <tr key={row.id} className=" ">
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

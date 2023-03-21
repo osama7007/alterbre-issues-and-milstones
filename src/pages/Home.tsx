@@ -102,7 +102,6 @@ export const Home = ({ title }: HomeProps_TP) => {
             />
             <PhoneInput label='phone' name='phone' placeholder='phone'/>
               <CheckBoxField label="Remember me" name="remember" id="remember" />
-              <DropFile name="files" />
             <Button type="submit" variant="primary">
               Submit
             </Button>

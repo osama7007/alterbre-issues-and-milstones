@@ -4,8 +4,8 @@ import i18n from "../i18n"
 
 // const baseURL = import.meta.env.VITE_BASE_URL || "https://elfatha.alexon.live/"
 // const baseURL = "https://jiovaniaff.com/"
-// const baseURL = "https://elfatha.alexon.live/"
-const baseURL = "http://localhost:3600/"
+const baseURL = "https://elfatha.alexon.live/"
+// const baseURL = "http://localhost:3600/"
 const lang = i18n.language.startsWith("ar") ? "ar" : "en"
 
 const client = axios.create({

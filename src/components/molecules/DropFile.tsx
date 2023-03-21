@@ -15,7 +15,6 @@ import { UploadSvg } from "../atoms/icons/UploadSvg"
 import { AiFillDelete } from "react-icons/ai"
 import { ViewSvg } from "../atoms/icons/ViewSvg"
 import { PDFSvg } from "../atoms/icons/PDFSvg"
-import { View } from "../atoms/icons/View"
 
 ///
 /////////// Types
