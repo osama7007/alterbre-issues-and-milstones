@@ -4,19 +4,17 @@ import { ErrorMessage, useFormikContext } from "formik"
 import { t } from "i18next"
 import { useEffect, useState } from "react"
 import Dropzone from "react-dropzone"
+import { AiFillDelete } from "react-icons/ai"
 import { CFile_TP, CImageFile_TP } from "../../types"
 import { pdfOrImage } from "../../utils/helpers"
+import { Button } from "../atoms/buttons/Button"
+import { PDFSvg } from "../atoms/icons/PDFSvg"
+import { SvgDelete } from "../atoms/icons/SvgDelete"
+import { UploadSvg } from "../atoms/icons/UploadSvg"
+import { ViewSvg } from "../atoms/icons/ViewSvg"
 import { CLightbox } from "./CLightbox"
 import { Modal } from "./Modal"
 import { PdfViewer } from "./PdfViewer"
-import { Button } from "../atoms/buttons/Button"
-import { SvgDelete } from "../atoms/icons/SvgDelete"
-import { UploadSvg } from "../atoms/icons/UploadSvg"
-import { MdPhotoSizeSelectActual } from "react-icons/md"
-import { BsFiletypePdf } from "react-icons/bs"
-import { AiFillDelete } from "react-icons/ai"
-import { ViewSvg } from "../atoms/icons/ViewSvg"
-import { PDFSvg } from "../atoms/icons/PDFSvg"
 
 ///
 /////////// Types
@@ -326,7 +324,7 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
         )}
         {/* lightboxOpen pdfs*/}
         {!!pdfs.length && manyPdfsOpen && (
-          <Modal isOpen={manyPdfsOpen} setIsOpen={setManyPdfsOpen}>
+          <Modal isOpen={manyPdfsOpen} onClose={setManyPdfsOpen}>
             <div className="grid grid-cols-5 gap-2 w-full">
               <div className=" col-span-1 scrollbar ">
                 {pdfs.map((pdf) => (

@@ -8,7 +8,7 @@ import * as Yup from "yup"
 import { OuterFormLayout } from "../../components/molecules"
 import { EmployeeMainData, NationalAddress } from "../../components/templates"
 import { Documents } from "../../components/templates/Documents"
-import { InnerForm } from "../../utils/utils-components/InnerForm"
+import { InnerForm } from "../../utils/utils-components/HandleBackErrors"
 ///
 /////////// Types
 ///

@@ -15,9 +15,8 @@ type Args_TP<T> = {
     onError?: (error: CError_TP) => void,
 }
 
-
 export const useMutate = <T>({ ...args }: Args_TP<T>) => {
-    const { 
+    const {
         mutationKey,
         mutationFn,
         onSuccess,

@@ -16,6 +16,7 @@ import { OneEmployee } from "../pages/employees/OneEmployee"
 import { AddAdministrativeStructure } from "../pages/administrativeStructure/AddAdministrativeStructure"
 
 export const AllRoutesProvider = () => {
+  
   return (
     <PermissionCtxProvider userPermissions={["add.city", "view.cities"]}>
       <Routes>

@@ -5,7 +5,7 @@ import { useEffect } from "react"
 ///
 /////////// Types
 ///
-type InnerFormProps_TP = {
+type HandleBackErrorsProps_TP = {
   children: JSX.Element
   errors?: FormikErrors<{ [key: string]: string[] }> | undefined
 }
@@ -13,7 +13,10 @@ type InnerFormProps_TP = {
 ///
 
 ///
-export const InnerForm = ({ children, errors }: InnerFormProps_TP) => {
+export const HandleBackErrors = ({
+  children,
+  errors,
+}: HandleBackErrorsProps_TP) => {
   /////////// VARIABLES
   ///
 
@@ -36,7 +39,11 @@ export const InnerForm = ({ children, errors }: InnerFormProps_TP) => {
           دلوقتي انا مهندل ان لو رجعلي اراي اوف ايرورز متعلقة بفيلد واحد انا باخد منهم اول ايرور بس
           محتاج اهندل طريقة اني اعرض الباقي
           */
-          setFieldError(key, val[0])
+          if (val.length > 1 && typeof val === "object") {
+            setFieldError(key, val.join("& "))
+          } else {
+            setFieldError(key, val[0])
+          }
         }
       })
     }

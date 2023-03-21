@@ -9,7 +9,7 @@ import { Loading } from "../../components/organisms/Loading"
 import { PermissionForm } from "../../components/templates/administrativeStructure/PermissionForm"
 import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
-import { InnerForm } from "../../utils/utils-components/InnerForm"
+import { InnerForm } from "../../utils/utils-components/HandleBackErrors"
 import {
   addAdministrativeSchema,
   permissionGroup_TP,

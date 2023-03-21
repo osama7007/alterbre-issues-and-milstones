@@ -37,7 +37,6 @@ export const PermissionCtxProvider = ({
         return permissions.every((perm) => userPermissions.includes(perm))
       case "OR":
         return userPermissions.some((perm) => permissions.includes(perm))
-
       default:
         return false
     }

@@ -11,9 +11,9 @@ import {
 import { useIsRTL } from "../../hooks/useIsRTL"
 import { CFile_TP } from "../../types"
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
-import { thumbnailPlugin } from "@react-pdf-viewer/thumbnail"
+// import { thumbnailPlugin } from "@react-pdf-viewer/thumbnail"
 import "@react-pdf-viewer/thumbnail/lib/styles/index.css"
-import { pageThumbnailPlugin } from "../../utils/pdf-viewer-custom-plugins"
+// import { pageThumbnailPlugin } from "../../utils/pdf-viewer-custom-plugins"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import "@react-pdf-viewer/core/lib/styles/index.css"
 ///
@@ -22,6 +22,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css"
 type PdfViewerProps_TP = {
   showControls?: boolean
   file: CFile_TP
+  preview?: boolean
   action?: () => void
 }
 /////////// HELPER VARIABLES & FUNCTIONS
@@ -32,6 +33,7 @@ export const PdfViewer = ({
   file,
   showControls = true,
   action,
+  preview
 }: PdfViewerProps_TP) => {
   /////////// VARIABLES
   ///

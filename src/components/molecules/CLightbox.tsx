@@ -1,16 +1,14 @@
 /////////// IMPORTS
 ///
-import "yet-another-react-lightbox/styles.css"
+import { RiDeleteBin3Fill } from "react-icons/ri"
+import Lightbox, { SlideImage } from "yet-another-react-lightbox"
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen"
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow"
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
-import Zoom from "yet-another-react-lightbox/plugins/zoom"
-// import "yet-another-react-lightbox/plugins/captions.css"
 import "yet-another-react-lightbox/plugins/thumbnails.css"
-import Lightbox, { SlideImage } from "yet-another-react-lightbox"
-import { RiDeleteBin3Fill } from "react-icons/ri"
+import Zoom from "yet-another-react-lightbox/plugins/zoom"
+import "yet-another-react-lightbox/styles.css"
 import { CImageFile_TP } from "../../types"
-import { useState } from "react"
 ///
 /////////// Types
 ///
@@ -60,7 +58,7 @@ export const CLightbox = ({
       close={closeHandler}
       slides={editedImages}
       carousel={{ finite: true }}
-      index={Math.round(editedImages.length / 2)}
+      // index={Math.round(editedImages.length / 2)}
       render={{
         thumbnail: ({ slide }: { slide: SlideImageWithId_TP }) => {
           if (slide.id) {
