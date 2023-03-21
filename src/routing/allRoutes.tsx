@@ -16,6 +16,7 @@ import { ErrorPage } from "./ErrorPage"
 import { Root } from "./Root"
 
 export const AllRoutesProvider = () => {
+  
   return (
     <PermissionCtxProvider userPermissions={["add.city", "view.cities"]}>
       <Routes>

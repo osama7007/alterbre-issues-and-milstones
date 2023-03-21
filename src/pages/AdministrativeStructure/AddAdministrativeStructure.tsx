@@ -9,7 +9,7 @@ import { Loading } from "../../components/organisms/Loading"
 import { PermissionForm } from "../../components/templates/administrativeStructure/PermissionForm"
 import { useFetch, useMutate } from "../../hooks"
 import { mutateData } from "../../utils/mutateData"
-import { InnerForm } from "../../utils/utils-components/InnerForm"
+import { HandleBackErrors } from "../../utils/utils-components/HandleBackErrors"
 import {
   addAdministrativeSchema,
   permissionGroup_TP,
@@ -106,7 +106,7 @@ export const AddAdministrativeStructure = ({
           validationSchema={addAdministrativeSchema()}
         >
           {({ values, touched }) => (
-            <InnerForm errors={rulePostError?.response.data.data}>
+            <HandleBackErrors errors={rulePostError?.response.data.data}>
               <Form>
                 <OuterFormLayout
                   submitComponent={
@@ -123,7 +123,7 @@ export const AddAdministrativeStructure = ({
                   <PermissionForm permissions={permissions} />
                 </OuterFormLayout>
               </Form>
-            </InnerForm>
+            </HandleBackErrors>
           )}
         </Formik>
       )}

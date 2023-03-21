@@ -2,14 +2,14 @@
 ///
 //import classes from './AddEmployee.module.css'
 import { Form, Formik } from "formik"
+import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { isValidPhoneNumber } from "react-phone-number-input"
 import * as Yup from "yup"
 import { EmployeeMainData, NationalAddress } from ".."
-import { InnerForm } from "../../../utils/utils-components/InnerForm"
+import { HandleBackErrors } from "../../../utils/utils-components/HandleBackErrors"
 import { OuterFormLayout } from "../../molecules"
 import { Documents } from "../Documents"
-import {useState} from "react"
 ///
 /////////// Types
 ///
@@ -157,13 +157,13 @@ export const AddEmployee = ({ title }: AddEmployeeProps_TP) => {
         //validationSchema={validatingSchema}
       >
         <Form>
-          <InnerForm>
+          <HandleBackErrors>
             <OuterFormLayout header="إضافة موظف">
               <EmployeeMainData title="البيانات الاساسية" />
               <NationalAddress />
               <Documents setDocsFormValues={setDocsFormValues}/>
             </OuterFormLayout>
-          </InnerForm>
+          </HandleBackErrors>
         </Form>
       </Formik>
     </>

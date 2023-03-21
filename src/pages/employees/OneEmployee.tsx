@@ -1,12 +1,17 @@
 /////////// IMPORTS
 ///
+import { Form, Formik } from "formik"
 import { t } from "i18next"
 import { Helmet } from "react-helmet-async"
 import { useParams } from "react-router-dom"
 import blankPerson from "../../assets/blank-person-image.png"
+import { InnerFormLayout, OuterFormLayout } from "../../components/molecules"
+import { DropFile } from "../../components/molecules/DropFile"
 import { TextLine } from "../../components/templates/employees/TextLine"
 import { useFetch } from "../../hooks"
+import { HandleBackErrors } from "../../utils/utils-components/HandleBackErrors"
 import { Employee_TP } from "./employees-types"
+import {Button} from "../../components/atoms/buttons/Button"
 ///
 /////////// Types
 ///
@@ -72,31 +77,60 @@ export const OneEmployee = ({ title }: OneEmployeeProps_TP) => {
     <>
       <Helmet>
         {/* Employee name */}
-        <title>{title}</title>
+        <title>{employee?.name || "معلومات موظف"}</title>
       </Helmet>
       {isSuccess && (
-        <div>
+        <div className="flex gap-8">
           {/* Right column */}
           <div>
             <img
               src={employee.img || blankPerson}
               alt={`employee ${employee.name}`}
             />
-            <TextLine boldText={t("the-name")} lightString={employee.name} />
-            <TextLine
-              boldText={t("the-branch")}
-              lightString={employee.branch}
-            />
+            {employee.name && (
+              <TextLine boldText={t("the-name")} lightString={employee.name} />
+            )}
+
+            {employee.branch && (
+              <TextLine
+                boldText={t("the-branch")}
+                lightString={employee.branch}
+              />
+            )}
           </div>
 
           {/* The rest */}
           <div>
-            <TextLine
-              boldText={t("phone-number")}
-              lightString={employee.phone}
-            />
+            {employee.phone && (
+              <TextLine
+                boldText={t("phone-number")}
+                lightString={employee.phone}
+              />
+            )}
             {/* ⬇️⬇️⬇️ وهكذا */}
           </div>
+
+          <Formik
+            initialValues={{ files: [] }}
+            onSubmit={(values) => {
+              console.log("values", values)
+            }}
+          >
+            {({ values, dirty }) => (
+              <HandleBackErrors>
+                <Form>
+                  <OuterFormLayout submitComponent={
+                    <Button>
+                          fvkj
+                    </Button>
+                  }>
+                    
+                  </OuterFormLayout>
+                  <DropFile name="files" />
+                </Form>
+              </HandleBackErrors>
+            )}
+          </Formik>
         </div>
       )}
     </>
