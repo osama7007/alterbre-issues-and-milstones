@@ -147,9 +147,9 @@ export const SelectComp = ({
 
   return (
     <>
-      <div className="col-span-1 flex w-full flex-col gap-2">
+      <div className="col-span-1">
+        <div className="flex flex-col gap-1">
         {label && <Label htmlFor={id}>{label}</Label>}
-        <div className="relative col-span-1 flex flex-col">
           {creatable ? (
             <>
               <CreatableSelect
@@ -181,8 +181,8 @@ export const SelectComp = ({
           ) : (
             <Select {...selectProps} />
           )}
-          <FormikError name={name as string} />
         </div>
+          <FormikError name={name as string} />
       </div>
     </>
   )

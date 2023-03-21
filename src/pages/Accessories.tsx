@@ -136,13 +136,11 @@ export const Accessories = ({ title }: Stone_TP) => {
           viewHandler={() => {
             console.log("ssss")
           }}
-          addButton={false}
           variant={"secondary"}
           headerColor={"secondary"}
         />
         <Card
           header="تاسيس شركه "
-          addButton={false}
           viewLabel="عرض"
           viewHandler={() => {
             console.log("ssss")

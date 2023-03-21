@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import { AddEmployee } from "../components/templates/employee/AddEmployee"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
 import { Accessories } from "../pages/Accessories"
-import { AdministrativeStructure } from "../pages/AdministrativeStructure/AdministrativeStructure"
+import { AdministrativeStructure } from "../pages/administrativeStructure/AdministrativeStructure"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { Settings } from "../pages/Settings"
@@ -13,6 +13,7 @@ import { Employees } from "../pages/employees/Employees"
 import { OneEmployee } from "../pages/employees/OneEmployee"
 import { ErrorPage } from "./ErrorPage"
 import { Root } from "./Root"
+import { AddAdministrativeStructure } from "../pages/administrativeStructure/AddAdministrativeStructure"
 
 export const AllRoutesProvider = () => {
   return (
@@ -29,6 +30,14 @@ export const AllRoutesProvider = () => {
             path="/administrative-structure"
             element={
               <AdministrativeStructure title={t("administrative-structure")} />
+            }
+          />
+          <Route
+            path="/add-administrative-structure"
+            element={
+              <AddAdministrativeStructure
+                title={t("add-administrative-structure")}
+              />
             }
           />
           <Route

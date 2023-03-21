@@ -3,9 +3,8 @@
 
 import { useFormikContext } from "formik"
 import { ChangeEvent } from "react"
-import { BaseInputField } from "../../components/molecules/formik-fields/BaseInputField"
-import { CheckBoxField } from "../../components/molecules/formik-fields/CheckBoxField"
-import { Permission_TP } from "./types-schemas"
+import { Permission_TP } from "../../../pages/administrativeStructure/types-schemas"
+import { CheckBoxField } from "../../molecules/formik-fields/CheckBoxField"
 
 ///
 /////////// Types

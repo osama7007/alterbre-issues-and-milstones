@@ -41,10 +41,10 @@ export const Tests = () => {
       </Helmet>
       <Formik
         initialValues={{
-          select: "1",
+          select: ""
         }}
         validationSchema={Yup.object().shape({
-          select: Yup.array().of(Yup.string()),
+          select: Yup.array().of(Yup.string()).min(1),
         })}
         onSubmit={(values) => {
           console.log(values)

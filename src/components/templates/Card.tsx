@@ -10,8 +10,7 @@ type Card_TP = {
   variant?: "primary" | "secondary"
   addHandler?: () => void
   viewHandler: () => void
-  addButton?: boolean
-  showButton?: boolean
+
 }
 ///
 
@@ -31,8 +30,7 @@ export const Card = ({
   variant,
   viewHandler,
   addHandler,
-  addButton = true,
-  showButton = true,
+
 }: Card_TP) => {
   /////////// VARIABLES
   ///
@@ -58,8 +56,8 @@ export const Card = ({
       <div className="col-span-1  w-full  rounded-md p-3 shadow  ">
         <div className=" grid grid-flow-col grid-rows-3 gap-4">
           <CardHeader header={header} headerColor={headerColor} />
-          {addButton && <AddButton addLabel={addLabel} action={addHandler} />}
-          {showButton && (
+          {addLabel && <AddButton addLabel={addLabel} action={addHandler} />}
+          {viewLabel && (
             <ShowButton
               viewLabel={viewLabel}
               action={viewHandler}

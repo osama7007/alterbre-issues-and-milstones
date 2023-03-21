@@ -1,5 +1,6 @@
 /////////// IMPORTS
 ///
+import { useFormikContext } from "formik"
 import { t } from "i18next"
 import {
   InnerFormLayout,
@@ -14,6 +15,7 @@ import { CiFolderOn } from "react-icons/ci"
 import { EmployeeDocsData } from "./employee/EmployeeDocsData"
 import { Edit } from "../atoms/icons/Edit"
 import { Delete } from "../atoms/icons/Delete"
+
 ///
 /////////// Types
 ///
@@ -67,6 +69,7 @@ export const Documents = ({setDocsFormValues}:any) => {
       <InnerFormLayout
         title={t("documents")}
         leftComponent={
+
            allDocs.length > 0 ?
           <Button action={handleAddDoc} bordered >
           {t("Add another document")}
@@ -77,6 +80,7 @@ export const Documents = ({setDocsFormValues}:any) => {
           </Button>
         }
         customStyle={ !(allDocs.length > 0) ? 'bg-transparent' : ""}
+
       >
         {allDocs.length > 0 && (
           <div className="col-span-4">
@@ -111,6 +115,7 @@ export const Documents = ({setDocsFormValues}:any) => {
       
       <Modal isOpen={showEmployee} onClose={setShowEmployee.bind(null, false)}>
             <EmployeeDocsData employeeDocsData={employeeDocsData}/>
+
       </Modal>
     </>
   )

@@ -21,6 +21,7 @@ export const InnerFormLayout = ({
   children,
   leftComponent,
   customStyle
+
 }: InnerFormLayoutProps_TP) => {
   /////////// VARIABLES
   ///
