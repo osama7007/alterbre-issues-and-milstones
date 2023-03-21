@@ -10,6 +10,7 @@ type InnerFormLayoutProps_TP = {
   title?: string | null
   leftComponent?: ReactNode
   children: ReactNode
+  customStyle?:string
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -19,6 +20,8 @@ export const InnerFormLayout = ({
   title,
   children,
   leftComponent,
+  customStyle
+
 }: InnerFormLayoutProps_TP) => {
   /////////// VARIABLES
   ///
@@ -51,7 +54,7 @@ export const InnerFormLayout = ({
             {leftComponent && leftComponent}
           </div>
         )}
-        <div className="bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8 relative">
+        <div className={customStyle ? customStyle : "bg-flatWhite rounded-lg p-4 grid grid-cols-4 gap-x-4 gap-y-8 relative"}>
           {children}
         </div>
       </div>

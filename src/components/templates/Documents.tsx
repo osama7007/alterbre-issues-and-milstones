@@ -2,11 +2,20 @@
 ///
 import { useFormikContext } from "formik"
 import { t } from "i18next"
-import { useState } from "react"
-import { useFetch } from "../../hooks"
-import { SelectOption_TP } from "../../types"
+import {
+  InnerFormLayout,
+} from "../molecules"
 import { Button } from "../atoms"
-import { BaseInputField, CheckBoxField, InnerFormLayout, Modal, Select } from "../molecules"
+import { SelectOption_TP } from "../../types"
+import { useFetch, useMutate } from "../../hooks"
+import { Modal } from "../molecules"
+import { useState } from "react"
+import { DocumentForm } from "./DocumentForm"
+import { CiFolderOn } from "react-icons/ci"
+import { EmployeeDocsData } from "./employee/EmployeeDocsData"
+import { Edit } from "../atoms/icons/Edit"
+import { Delete } from "../atoms/icons/Delete"
+
 ///
 /////////// Types
 ///
@@ -15,138 +24,98 @@ import { BaseInputField, CheckBoxField, InnerFormLayout, Modal, Select } from ".
 ///
 
 ///
-export const Documents = () => {
+export const Documents = ({setDocsFormValues}:any) => {
   /////////// VARIABLES
   ///
 
   ///
   /////////// CUSTOM HOOKS
   ///
-  const { setFieldValue } = useFormikContext<any>()
-  // get documents
-  const {
-    data: documents,
-    isError: documentsError,
-    isLoading: documentsLoading,
-    refetch,
-  } = useFetch<SelectOption_TP[]>({
-    endpoint: "http://localhost:3600/docs",
-    queryKey: ["documents"],
-    enabled: false,
-  })
 
-  // get identity
-  const {
-    data: identity,
-    isError: identityError,
-    isLoading: identityLoading,
-  } = useFetch<SelectOption_TP[]>({
-    endpoint: "http://localhost:3600/identity",
-    queryKey: ["identity"],
-    select: (identities) =>
-      identities.map((identity: any) => ({
-        value: identity.name,
-        label: identity.name,
-      })),
-  })
+
   ///
   /////////// STATES
   ///
-  const [addDoc, setAddDoc] = useState(false)
+  const [addDocPopup, setAddDocPopup] = useState(false)
+  const [allDocs, setAllDocs] = useState([])
+  const [showEmployee, setShowEmployee] = useState(false)
+  const [employeeDocsData, setEmployeeDocsData] = useState()
+  const [editableEmployeeData, setEditableEmployeeData] = useState({})
+  
   ///
   /////////// SIDE EFFECTS
   ///
-
   /////////// FUNCTIONS | EVENTS | IF CASES
   ///
-  function handleFetch() {
-    refetch()
-  }
   function handleAddDoc() {
-    console.log("gfg")
-    setAddDoc(true)
+    setAddDocPopup(true)
+    setEditableEmployeeData({
+      docName:"",
+      docNumber:"",
+      files:[],
+      docType:[],
+      reminder:""
+    })
   }
+ 
+  function deleteDocHandler(id:string){
+    setAllDocs((prev)=> prev.filter(doc=> doc.id !== id))
+  }
+ 
+
   ///
   return (
     <>
       <InnerFormLayout
         title={t("documents")}
         leftComponent={
-          <Button
-            variant="primary"
-            type="button"
-            className="mb-3"
-            action={handleFetch}
-          >
-            {t("show documents")}
+
+           allDocs.length > 0 ?
+          <Button action={handleAddDoc} bordered >
+          {t("Add another document")}
+        </Button>
+           :
+            <Button action={handleAddDoc} bordered >
+            {t("Add document")}
           </Button>
         }
+        customStyle={ !(allDocs.length > 0) ? 'bg-transparent' : ""}
+
       >
-        {documents && documents.length > 0 ? (
-          <div>
-            <h2 className="mb-2">•{t("available documents")}</h2>
-            <h4 className="mr-5">{t("choose document")}</h4>
-            <div>
-              {documents.map((item) => (
-                <CheckBoxField
-                  label={item.name}
-                  id={item.id}
-                  name={item.name}
-                />
+        {allDocs.length > 0 && (
+          <div className="col-span-4">
+            <h2 className="mb-8 text-center">{t("available documents")}</h2>
+            <div className="max-h-96 overflow-y-auto scrollbar flex flex-wrap justify-center items-center">
+              {allDocs.map((item) => (
+                <div  className="w-1/4  flex justify-center items-center flex-col my-5" key={item.id} >
+                  <div className="flex gap-x-4 items-center" >
+                    <Edit action={()=>{
+                      setAddDocPopup(true)
+                      setEditableEmployeeData(item)
+                    }
+                      } />
+                    <Delete action={()=>deleteDocHandler(item.id)} />
+                  </div>
+                 <CiFolderOn className="text-[4rem] text-mainGreen cursor-pointer mx-5  " onClick={()=>{
+                   // console.log(item)
+                     setEmployeeDocsData(item) // one employee docs data 
+                     setShowEmployee(true)
+                 } } />
+                <span>{item?.docName}</span> 
+                </div>
               ))}
-              <Button action={handleAddDoc} bordered>
-                {t("Add document")}
-              </Button>
             </div>
           </div>
-        ) : (
-          documents && <h2>{t("There is no available documents yet")}</h2>
         )}
       </InnerFormLayout>
 
-      <Modal isOpen={addDoc} onClose={setAddDoc.bind(null, false)}>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1">
-            {/* id type start */}
-            <Select
-              id="management"
-              label="نوع الهوية"
-              name="management"
-              placeholder="جدة"
-              loadingPlaceholder="جاري التحميل"
-              options={identity}
-              //@ts-ignore
-              onChange={(option: SingleValue<SelectOption_TP>) =>
-                setFieldValue("management", option?.id)
-              }
-              loading={identityLoading}
-            />
-            {/* id type end */}
-          </div>
-          <div className="col-span-4">
-            <div className="col-span-1">
-              {/* name start */}
-              <BaseInputField
-                id="name"
-                label="الاسم"
-                name="name"
-                type="text"
-                placeholder="الاسم"
-              />
-              {/* name end */}
-            </div>
+      <Modal isOpen={addDocPopup} onClose={setAddDocPopup.bind(null, false)}>
+            <DocumentForm setDocsFormValues={setDocsFormValues} setAllDocs={setAllDocs} setAddDocPopup={setAddDocPopup} editableEmployeeData={editableEmployeeData} />
+      </Modal>
+      
+      <Modal isOpen={showEmployee} onClose={setShowEmployee.bind(null, false)}>
+            <EmployeeDocsData employeeDocsData={employeeDocsData}/>
 
-            {/* number start */}
-            <BaseInputField
-              id="number"
-              label="الرقم"
-              name="number"
-              type="number"
-              placeholder="الرقم"
-            />
-            {/* number end */}
-          </div>
-        </div>
       </Modal>
     </>
   )

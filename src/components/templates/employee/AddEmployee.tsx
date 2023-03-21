@@ -5,10 +5,11 @@ import { Form, Formik } from "formik"
 import { Helmet } from "react-helmet-async"
 import { isValidPhoneNumber } from "react-phone-number-input"
 import * as Yup from "yup"
-import { OuterFormLayout } from "../../components/molecules"
-import { EmployeeMainData, NationalAddress } from "../../components/templates"
-import { Documents } from "../../components/templates/Documents"
-import { InnerForm } from "../../utils/utils-components/InnerForm"
+import { EmployeeMainData, NationalAddress } from ".."
+import { InnerForm } from "../../../utils/utils-components/InnerForm"
+import { OuterFormLayout } from "../../molecules"
+import { Documents } from "../Documents"
+import {useState} from "react"
 ///
 /////////// Types
 ///
@@ -43,6 +44,13 @@ type InitialValues_TP = {
   street_number: string
   sub_number: string
   postal_number: string
+  // document type
+  docType:string
+  docName:string
+  docNumber:string
+  endDate:Date
+  reminder:string
+  files:any
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
@@ -72,6 +80,13 @@ const initialValues: InitialValues_TP = {
   street_number: "",
   sub_number: "",
   postal_number: "",
+   // docs data initial values
+   docType: "",
+   docName: "",
+   docNumber: "",
+   endDate: new Date(),
+   reminder: "",
+   files: [],
 }
 const validatingSchema = Yup.object({
   // employee main data validation
@@ -115,7 +130,7 @@ export const AddEmployee = ({ title }: AddEmployeeProps_TP) => {
   ///
   /////////// CUSTOM HOOKS
   ///
-
+  const [docsFormValues, setDocsFormValues] = useState()
   ///
   /////////// STATES
   ///
@@ -137,16 +152,16 @@ export const AddEmployee = ({ title }: AddEmployeeProps_TP) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          console.log(values)
+          console.log(values , docsFormValues)
         }}
-        validationSchema={validatingSchema}
+        //validationSchema={validatingSchema}
       >
         <Form>
           <InnerForm>
             <OuterFormLayout header="إضافة موظف">
               <EmployeeMainData title="البيانات الاساسية" />
               <NationalAddress />
-              <Documents/>
+              <Documents setDocsFormValues={setDocsFormValues}/>
             </OuterFormLayout>
           </InnerForm>
         </Form>
