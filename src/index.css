@@ -59,7 +59,9 @@ input:-webkit-autofill:active {
   @apply !shadow-none !ring-0;
 }
 
-
+.pdf-no-scroll .rpv-core__inner-pages--vertical {
+  overflow-y: hidden;
+}
 
 table {
   border: 1px solid lightgray;

@@ -9,6 +9,7 @@ import { CheckBoxField } from "../components/molecules/formik-fields/CheckBoxFie
 import { PhoneInput } from "../components/molecules/phone-input/PhoneInput"
 import * as Yup from "yup"
 import { isValidPhoneNumber } from "react-phone-number-input"
+import { DropFile } from "../components/molecules/DropFile"
 
 ///
 /////////// Types
@@ -70,7 +71,7 @@ export const Home = ({ title }: HomeProps_TP) => {
       <div className="flex flex-col items-center justify-center h-screen gap-3">
         <h1 className="text-4xl font-bold">Home</h1>
         <Formik
-          initialValues={{ email: "", password: "", name: "", remember: false , phone:"" }}
+          initialValues={{ email: "", password: "", name: "", remember: false , phone:"", files: [] }}
           onSubmit={(values) => {
             console.log(values)
           }}
@@ -100,7 +101,7 @@ export const Home = ({ title }: HomeProps_TP) => {
               placeholder="Password"
             />
             <PhoneInput label='phone' name='phone' placeholder='phone'/>
-            <CheckBoxField label="Remember me" name="remember" id="remember" />
+              <CheckBoxField label="Remember me" name="remember" id="remember" />
             <Button type="submit" variant="primary">
               Submit
             </Button>
