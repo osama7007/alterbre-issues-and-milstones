@@ -2,7 +2,7 @@ import { t } from "i18next"
 import { Route, Routes } from "react-router-dom"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
 import { Accessories } from "../pages/Accessories"
-import { AdministrativeStructure } from "../pages/AdministrativeStructure/AdministrativeStructure"
+import { AdministrativeStructure } from "../pages/administrativeStructure/AdministrativeStructure"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
 import { Settings } from "../pages/Settings"
@@ -13,7 +13,7 @@ import { ErrorPage } from "./ErrorPage"
 import { Root } from "./Root"
 import { Employees } from "../pages/employees/Employees"
 import { OneEmployee } from "../pages/employees/OneEmployee"
-import { AddAdministrativeStructure } from "../pages/AdministrativeStructure/AddAdministrativeStructure"
+import { AddAdministrativeStructure } from "../pages/administrativeStructure/AddAdministrativeStructure"
 
 export const AllRoutesProvider = () => {
   return (

@@ -4,7 +4,7 @@
 import { Helmet } from "react-helmet-async"
 import { useFetch } from "../../hooks"
 import { Employee_TP } from "./employees-types"
-import { useNavigate } from "react-router-dom"
+import { EmployeeCard } from "../../components/templates/employees/EmployeeCard"
 ///
 /////////// Types
 ///
@@ -18,7 +18,7 @@ type EmployeesProps_TP = {
 export const Employees = ({ title }: EmployeesProps_TP) => {
   /////////// VARIABLES
   ///
-  const navigate = useNavigate()
+
   ///
   /////////// CUSTOM HOOKS
   ///
@@ -45,8 +45,8 @@ export const Employees = ({ title }: EmployeesProps_TP) => {
         <title>{title}</title>
       </Helmet>
       {isSuccess &&
-        employees.map(({ id, name }) => (
-          <div key={id} onClick={() => navigate(`${id}`)}>{name}</div>
+        employees.map(({ id, name, img }) => (
+          <EmployeeCard id={id} name={name} img={img} key={id} />
         ))}
     </>
   )
