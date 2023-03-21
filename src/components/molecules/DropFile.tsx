@@ -37,7 +37,6 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   /////////// CUSTOM HOOKS
   ///
   const { setFieldValue, values } = useFormikContext()
-  console.log(`DropFile ~ values:`, values)
 
   ///
   /////////// STATES
@@ -46,7 +45,6 @@ export const DropFile = ({ name }: DropFileProps_TP) => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [manyPdfsOpen, setManyPdfsOpen] = useState(false)
 
-  console.log(`DropFile ~ pdfs:`, pdfs)
   ///
   /////////// SIDE EFFECTS
   ///

@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 import { tv, type VariantProps } from "tailwind-variants"
 import { Spinner } from "../"
+import { FormikValues } from "formik"
 
 const buttonVars = tv({
   base: "relative active:top-[1px] py-2 px-8 font-bold rounded-md text-white",
@@ -50,7 +51,7 @@ interface ButtonProps_TP extends ButtonVariants_TP {
   children: ReactNode
   className?: string
   disabled?: boolean
-  action?: () => void
+  action?: (param:FormikValues) => void
   variant?: "primary" | "danger"
   loading?: boolean
   type?: "button" | "submit" | "reset"

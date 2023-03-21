@@ -1,5 +1,6 @@
 import { t } from "i18next"
 import { Route, Routes } from "react-router-dom"
+import { AddEmployee } from "../components/templates/employee/AddEmployee"
 import { PermissionCtxProvider } from "../context/auth-and-perm/permissions"
 import { Accessories } from "../pages/Accessories"
 import { Home } from "../pages/Home"
@@ -7,13 +8,12 @@ import { Login } from "../pages/Login"
 import { Settings } from "../pages/Settings"
 import { System } from "../pages/System"
 import { Tests } from "../pages/Tests"
-import { AddEmployee } from "../pages/employees/AddEmployee"
-import { ErrorPage } from "./ErrorPage"
-import { Root } from "./Root"
 import { Employees } from "../pages/employees/Employees"
 import { OneEmployee } from "../pages/employees/OneEmployee"
 import { AddAdministrativeStructure } from "../pages/AdministrativeStructure/AddAdministrativeStructure"
 import { AdministrativeStructure } from "../pages/AdministrativeStructure/AdministrativeStructure"
+import { ErrorPage } from "./ErrorPage"
+import { Root } from "./Root"
 
 export const AllRoutesProvider = () => {
   return (
